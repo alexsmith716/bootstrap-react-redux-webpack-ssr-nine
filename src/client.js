@@ -17,7 +17,7 @@ import { AppContainer as HotEnabler } from 'react-hot-loader';
 
 import routes from './routes';
 
-import createBrowserHistory from 'history/createBrowserHistory';
+import {createBrowserHistory} from 'history';
 
 import './js/app';
 

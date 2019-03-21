@@ -20,8 +20,8 @@ class AboutTwo extends Component {
 
   render() {
 
-    const aboutImageMain = require('../../assets/images/about-750-450.png');
-    const aboutImageOurCustomers = require('../../assets/images/about-500-300.png');
+    const aboutImageMain = require('../../theme/images/about-750-450.png');
+    const aboutImageOurCustomers = require('../../theme/images/about-500-300.png');
     const styles = require('./scss/AboutTwo.scss');
 
     return (
