@@ -125,7 +125,7 @@ const dest = document.getElementById('content');
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest4: ', dest.firstChild.attributes['data-reactroot']);
 
     if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-reactroot']) {
-      console.error('Server-side React render was discarded.' + 'Make sure that your initial render does not contain any client-side code.');
+      console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
     }
   }
 

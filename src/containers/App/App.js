@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { push } from 'connected-react-router';
 
-import renderRoutes from 'react-router-config/renderRoutes';
+import { renderRoutes } from 'react-router-config';
 
 // import { provideHooks } from 'redial';
 // import { connect } from 'react-redux';
