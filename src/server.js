@@ -29,6 +29,7 @@ import { renderRoutes } from 'react-router-config';
 
 // ----------------------------------
 import ReactDOM from 'react-dom/server';
+import {renderToString} from 'react-dom/server';
 // ----------------------------------
 
 // ----------------------------------
@@ -39,7 +40,7 @@ import ReactDOM from 'react-dom/server';
 // import initialState from './initialState';
 // ----------------------------------
 
-import createMemoryHistory from 'history/createMemoryHistory';
+import {createMemoryHistory} from 'history';
 
 import routes from './routes';
 
@@ -233,7 +234,7 @@ export default ({ clientStats }) => async (req, res) => {
       </StaticRouter>
     );
   
-    const content = ReactDOM.renderToString(component);
+    const content = renderToString(component);
 
     // ------------------------------------------------------------------------------------------------------
 
@@ -290,8 +291,8 @@ export default ({ clientStats }) => async (req, res) => {
     console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== content: ', content);
 
     const html = <Html assets={assets} content={content} />;
-    const ssrHtml = `<!doctype html>${ReactDOM.renderToString(html)}`;
-    console.log('>>>>>>>>>>>>>>>> SERVER > APP LOADER > RESPOND TO CLIENT !! > ReactDOM.renderToString(html):', ssrHtml);
+    const ssrHtml = `<!doctype html>${renderToString(html)}`;
+    console.log('>>>>>>>>>>>>>>>> SERVER > APP LOADER > RESPOND TO CLIENT !! > renderToString(html):', ssrHtml);
 
     res.status(200).send(ssrHtml);
     // res.status(200).send('SERVER > Response Ended For Testing!!!!!!! Status 200!!!!!!!!!');

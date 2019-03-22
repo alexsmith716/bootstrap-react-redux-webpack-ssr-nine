@@ -39,36 +39,45 @@ Destructuring is basically a convenient way of breaking the data structure into 
 
 'Array.from()' loops over the values accessing numerically the name properties
 
-{
-  "current_user_url": "https://api.github.com/user",
-  "current_user_authorizations_html_url": "https://github.com/settings/connections/applications{/client_id}",
-  "authorizations_url": "https://api.github.com/authorizations",
-  "code_search_url": "https://api.github.com/search/code?q={query}{&page,per_page,sort,order}",
-  "commit_search_url": "https://api.github.com/search/commits?q={query}{&page,per_page,sort,order}",
-  "emails_url": "https://api.github.com/user/emails",
-  "emojis_url": "https://api.github.com/emojis",
-  "events_url": "https://api.github.com/events",
-  "feeds_url": "https://api.github.com/feeds",
-  "followers_url": "https://api.github.com/user/followers",
-  "following_url": "https://api.github.com/user/following{/target}",
-  "gists_url": "https://api.github.com/gists{/gist_id}",
-  "hub_url": "https://api.github.com/hub",
-  "issue_search_url": "https://api.github.com/search/issues?q={query}{&page,per_page,sort,order}",
-  "issues_url": "https://api.github.com/issues",
-  "keys_url": "https://api.github.com/user/keys",
-  "notifications_url": "https://api.github.com/notifications",
-  "organization_repositories_url": "https://api.github.com/orgs/{org}/repos{?type,page,per_page,sort}",
-  "organization_url": "https://api.github.com/orgs/{org}",
-  "public_gists_url": "https://api.github.com/gists/public",
-  "rate_limit_url": "https://api.github.com/rate_limit",
-  "repository_url": "https://api.github.com/repos/{owner}/{repo}",
-  "repository_search_url": "https://api.github.com/search/repositories?q={query}{&page,per_page,sort,order}",
-  "current_user_repositories_url": "https://api.github.com/user/repos{?type,page,per_page,sort}",
-  "starred_url": "https://api.github.com/user/starred{/owner}{/repo}",
-  "starred_gists_url": "https://api.github.com/gists/starred",
-  "team_url": "https://api.github.com/teams",
-  "user_url": "https://api.github.com/users/{user}",
-  "user_organizations_url": "https://api.github.com/user/orgs",
-  "user_repositories_url": "https://api.github.com/users/{user}/repos{?type,page,per_page,sort}",
-  "user_search_url": "https://api.github.com/search/users?q={query}{&page,per_page,sort,order}"
-}
+@babel/runtime-corejs2/core-js/array/from.js]
+@babel/runtime-corejs2/core-js/array/is-array.js]
+@babel/runtime-corejs2/core-js/get-iterator.js]
+@babel/runtime-corejs2/core-js/is-iterable.js]
+@babel/runtime-corejs2/core-js/number/is-integer.js]
+@babel/runtime-corejs2/core-js/number/is-nan.js]
+@babel/runtime-corejs2/core-js/object/assign.js]
+@babel/runtime-corejs2/core-js/object/create.js]
+@babel/runtime-corejs2/core-js/object/define-property.js]
+@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js]
+@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js]
+@babel/runtime-corejs2/core-js/object/get-prototype-of.js]
+@babel/runtime-corejs2/core-js/object/keys.js]
+@babel/runtime-corejs2/core-js/object/set-prototype-of.js]
+@babel/runtime-corejs2/core-js/object/values.js]
+@babel/runtime-corejs2/core-js/parse-float.js]
+@babel/runtime-corejs2/core-js/promise.js]
+@babel/runtime-corejs2/core-js/symbol.js]
+@babel/runtime-corejs2/core-js/symbol/iterator.js]
+@babel/runtime-corejs2/helpers/arrayWithHoles.js]
+@babel/runtime-corejs2/helpers/arrayWithoutHoles.js]
+@babel/runtime-corejs2/helpers/assertThisInitialized.js]
+@babel/runtime-corejs2/helpers/asyncToGenerator.js]
+@babel/runtime-corejs2/helpers/classCallCheck.js]
+@babel/runtime-corejs2/helpers/createClass.js]
+@babel/runtime-corejs2/helpers/defineProperty.js]
+@babel/runtime-corejs2/helpers/extends.js]
+@babel/runtime-corejs2/helpers/getPrototypeOf.js]
+@babel/runtime-corejs2/helpers/inherits.js]
+@babel/runtime-corejs2/helpers/iterableToArray.js]
+@babel/runtime-corejs2/helpers/iterableToArrayLimit.js]
+@babel/runtime-corejs2/helpers/nonIterableRest.js]
+@babel/runtime-corejs2/helpers/nonIterableSpread.js]
+@babel/runtime-corejs2/helpers/objectSpread.js]
+@babel/runtime-corejs2/helpers/objectWithoutProperties.js]
+@babel/runtime-corejs2/helpers/objectWithoutPropertiesLoose.js]
+@babel/runtime-corejs2/helpers/possibleConstructorReturn.js]
+@babel/runtime-corejs2/helpers/setPrototypeOf.js]
+@babel/runtime-corejs2/helpers/slicedToArray.js]
+@babel/runtime-corejs2/helpers/toConsumableArray.js]
+@babel/runtime-corejs2/helpers/typeof.js]
+@babel/runtime-corejs2/regenerator/index.js]
