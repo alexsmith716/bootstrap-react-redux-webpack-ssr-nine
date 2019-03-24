@@ -1,7 +1,7 @@
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
-import rootReducer from '../reducers'
+import rootReducer from '../reducers';
 
 const configureStore = ({preloadedState}) => {
 
@@ -13,17 +13,17 @@ const configureStore = ({preloadedState}) => {
     applyMiddleware(thunk)
   )
 
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      store.replaceReducer(rootReducer)
-    })
-  }
+  // if (module.hot) {
+  //   // Enable Webpack hot module replacement for reducers
+  //   module.hot.accept('../reducers', () => {
+  //     store.replaceReducer(rootReducer)
+  //   })
+  // }
 
-  return store
-}
+  return store;
+};
 
-export default configureStore
+export default configureStore;
 
 
 // <script charset="UTF-8">window.__PRELOADED__=true;window.__data={"device":{"isMobile":false},"randomInteger":{"randomInteger":27}};</script>

@@ -7,9 +7,9 @@ import randomInteger from './sharedReducers';
 const rootReducer = combineReducers({
   device,
   randomInteger
-})
+});
 
-export default rootReducer
+export default rootReducer;
 
 // https://redux.js.org/api/createstore#createstorereducer-preloadedstate-enhancer
 

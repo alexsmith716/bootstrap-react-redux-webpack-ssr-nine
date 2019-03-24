@@ -89,14 +89,12 @@ const getRandomInt = (min, max) => (
 //   }
 // })
 
-// export default ({ clientStats }) => async (req, res) => {
-export default ({ clientStats }) => (req, res) => {
+export default ({ clientStats }) => async (req, res) => {
 
   console.log('>>>>>>>>>>>>>>>>> SERVER > __CLIENT__ ?: ', __CLIENT__);
   console.log('>>>>>>>>>>>>>>>>> SERVER > __SERVER__ ?: ', __SERVER__);
 
-  // req.randomInteger = getRandomInt(1, 100);
-  req.randomInteger = 27;
+  req.randomInteger = getRandomInt(1, 100);
   req.isMobile = isMobile(req.headers['user-agent']);
   req.isBot = isBot(req.headers['user-agent']);
   req.isDesktop = isDesktop(req.headers['user-agent']);
