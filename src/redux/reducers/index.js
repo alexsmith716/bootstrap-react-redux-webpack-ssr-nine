@@ -1,12 +1,25 @@
 import { combineReducers } from 'redux';
 
-// import sharedReducers from './sharedReducers';
 import device from './sharedReducers';
 import randomInteger from './sharedReducers';
+import auth from './sharedReducers';
+import notifs from './sharedReducers';
+import info from './sharedReducers';
+import internet from './sharedReducers';
+import online from './sharedReducers';
+import initialStateObjTestOne from './sharedReducers';
+import initialStateListTest from './sharedReducers';
 
 const rootReducer = combineReducers({
   device,
-  randomInteger
+  randomInteger,
+  auth,
+  notifs,
+  info,
+  internet,
+  online,
+  initialStateObjTestOne,
+  initialStateListTest,
 });
 
 export default rootReducer;

@@ -25,8 +25,38 @@ const configureStore = ({preloadedState}) => {
 
 export default configureStore;
 
+// ------------------------------------------------------------------------
 
-// <script charset="UTF-8">window.__PRELOADED__=true;window.__data={"device":{"isMobile":false},"randomInteger":{"randomInteger":27}};</script>
+// <script charset="UTF-8">window.__PRELOADED__=true;window.__data=
+//   {
+//       "device": {
+//           "isMobile": false
+//       },
+//       "randomInteger": {
+//           "randomInteger": 52
+//       },
+//       "auth": {
+//           "loaded": false,
+//           "user": null
+//       },
+//       "notifs": {},
+//       "info": {
+//           "loaded": false
+//       },
+//       "internet": {
+//           "connected": false
+//       },
+//       "online": function online() {
+//           var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+//           return v;
+//       },
+//       "initialStateObjTestOne": {
+//           "text": "",
+//           "type": ""
+//       },
+//       "initialStateListTest": []
+//   };
+// </script>
 
 // https://redux.js.org/api/createstore#createstorereducer-preloadedstate-enhancer
 
