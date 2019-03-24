@@ -1,15 +1,32 @@
-import { combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
-// import sharedReducers from './sharedReducers';
-import device from './sharedReducers';
-import randomInteger from './sharedReducers';
+import rootReducer from '../reducers'
 
-const rootReducer = combineReducers({
-  device,
-  randomInteger
-})
+const configureStore = ({preloadedState}) => {
 
-export default rootReducer
+  console.log('>>>>>>>>>>>>>>>>> configureStore > preloadedState:', preloadedState);
+
+  const store = createStore(
+    rootReducer,
+    preloadedState,
+    applyMiddleware(thunk)
+  )
+
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../reducers', () => {
+      store.replaceReducer(rootReducer)
+    })
+  }
+
+  return store
+}
+
+export default configureStore
+
+
+// <script charset="UTF-8">window.__PRELOADED__=true;window.__data={"device":{"isMobile":false},"randomInteger":{"randomInteger":27}};</script>
 
 // https://redux.js.org/api/createstore#createstorereducer-preloadedstate-enhancer
 
@@ -65,4 +82,3 @@ export default rootReducer
 //   Just remember that your reducer should return some kind of initial state if the state given to it as the first argument is undefined, and you're all set.
 
 // * To apply multiple store enhancers, you may use compose().
-
