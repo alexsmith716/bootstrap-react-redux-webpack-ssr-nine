@@ -10,6 +10,7 @@ import { CookieStorage, NodeCookiesWrapper } from 'redux-persist-cookie-storage'
 // ------------------------------------------------------------------------+
 
 import React from 'react';
+import { Provider } from 'react-redux';
 
 // ----------------------------------
 import asyncMatchRoutes from './utils/asyncMatchRoutes';
@@ -34,10 +35,15 @@ import {renderToString} from 'react-dom/server';
 
 // ----------------------------------
 // Redux Store
-// import configureStore from '../shared/redux/configureStore';
+// import configureStore from './redux/configureStore';
+import configureStore from './redux/store/configureStore';
 
 // Initial State
-// import initialState from './initialState';
+import initialState from './redux/initialState';
+// ----------------------------------
+
+// Device Detection Utils
+import { isDesktop, isMobile, isBot } from './utils/device';
 // ----------------------------------
 
 import {createMemoryHistory} from 'history';
@@ -65,6 +71,10 @@ const proxy = httpProxy.createProxyServer({
   // ws: true
 });
 
+const getRandomInt = (min, max) => (
+  Math.floor(Math.random() * (max - min)) + min
+)
+
 // ------------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------------
 
@@ -79,10 +89,22 @@ const proxy = httpProxy.createProxyServer({
 //   }
 // })
 
-export default ({ clientStats }) => async (req, res) => {
+// export default ({ clientStats }) => async (req, res) => {
+export default ({ clientStats }) => (req, res) => {
 
   console.log('>>>>>>>>>>>>>>>>> SERVER > __CLIENT__ ?: ', __CLIENT__);
   console.log('>>>>>>>>>>>>>>>>> SERVER > __SERVER__ ?: ', __SERVER__);
+
+  // req.randomInteger = getRandomInt(1, 100);
+  req.randomInteger = 27;
+  req.isMobile = isMobile(req.headers['user-agent']);
+  req.isBot = isBot(req.headers['user-agent']);
+  req.isDesktop = isDesktop(req.headers['user-agent']);
+
+  console.log('>>>>>>>>>>>>>>>>> SERVER > req.randomInteger ?: ', req.randomInteger);
+  console.log('>>>>>>>>>>>>>>>>> SERVER > req.isMobile ?: ', req.isMobile);
+  console.log('>>>>>>>>>>>>>>>>> SERVER > req.isBot ?: ', req.isBot);
+  console.log('>>>>>>>>>>>>>>>>> SERVER > req.isDesktop ?: ', req.isDesktop);
 
   // progressive app manifest
   // https://www.w3.org/TR/appmanifest/
@@ -203,37 +225,43 @@ export default ({ clientStats }) => async (req, res) => {
   //   pull the state out of store;
   //   and then pass the state along to the client.
 
-  // Configure Redux Store
-  // const store = configureStore(initialState(req));
+  console.log('>>>>>>>>>>>>>>>> SERVER > initialState(req): ', initialState(req));
 
+  const preloadedState = initialState(req);
+
+  const store = configureStore({preloadedState});
+
+  console.log('>>>>>>>>>>>>>>>> SERVER > store: ', store);
 
   try {
 
-    const { components, match, params } = await asyncMatchRoutes(routes, req.path);
+    // const { components, match, params } = await asyncMatchRoutes(routes, req.path);
 
-    console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > components: ', components);
-    console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > match: ', match);
-    console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > params: ', params);
+    // console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > components: ', components);
+    // console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > match: ', match);
+    // console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > params: ', params);
 
-    const locals = {
-      match,
-      params,
-      history,
-      location: history.location
-    };
+    // const locals = {
+    //   match,
+    //   params,
+    //   history,
+    //   location: history.location
+    // };
 
-    await trigger( 'fetch', components, locals);
+    // await trigger( 'fetch', components, locals);
 
     const context = {};
 
     const component = (
-      <StaticRouter location={req.originalUrl} context={context}>
-        <ReduxAsyncConnect routes={routes} >
-          {renderRoutes(routes)}
-        </ReduxAsyncConnect>
-      </StaticRouter>
+      <Provider store={store} >
+        <StaticRouter location={req.originalUrl} context={context}>
+          <ReduxAsyncConnect routes={routes} >
+            {renderRoutes(routes)}
+          </ReduxAsyncConnect>
+        </StaticRouter>
+      </Provider>
     );
-  
+
     const content = renderToString(component);
 
     // ------------------------------------------------------------------------------------------------------
@@ -288,11 +316,12 @@ export default ({ clientStats }) => async (req, res) => {
 
     // ------------------------------------------------------------------------------------------------------
 
-    console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== content: ', content);
+    // console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== content: ', content);
+    console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== STORE!!: ', store);
 
-    const html = <Html assets={assets} content={content} />;
+    const html = <Html assets={assets} store={store} content={content} />;
     const ssrHtml = `<!doctype html>${renderToString(html)}`;
-    console.log('>>>>>>>>>>>>>>>> SERVER > APP LOADER > RESPOND TO CLIENT !! > renderToString(html):', ssrHtml);
+    // console.log('>>>>>>>>>>>>>>>> SERVER > APP LOADER > RESPOND TO CLIENT !! > renderToString(html):', ssrHtml);
 
     res.status(200).send(ssrHtml);
     // res.status(200).send('SERVER > Response Ended For Testing!!!!!!! Status 200!!!!!!!!!');
