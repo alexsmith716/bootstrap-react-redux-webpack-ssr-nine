@@ -34,12 +34,11 @@ import {renderToString} from 'react-dom/server';
 // ----------------------------------
 
 // ----------------------------------
-// Redux Store
 // import configureStore from './redux/configureStore';
 import configureStore from './redux/store/configureStore';
 
-// Initial State
-import initialState from './redux/initialState';
+// import initialState from './redux/reducers/initialState';
+import initialState from './redux/reducers/initial-state';
 // ----------------------------------
 
 // Device Detection Utils
