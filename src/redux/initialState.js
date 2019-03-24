@@ -4,5 +4,5 @@ export default req => ({
   },
   randomInteger: {
     randomInteger: req.randomInteger
-  }
+  },
 });
