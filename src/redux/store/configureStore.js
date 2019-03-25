@@ -1,14 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import rootReducer from '../reducers';
+import reducers from '../reducers';
 
 const configureStore = ({preloadedState}) => {
 
   console.log('>>>>>>>>>>>>>>>>> configureStore > preloadedState:', preloadedState);
 
   const store = createStore(
-    rootReducer,
+    reducers,
     preloadedState,
     applyMiddleware(thunk)
   )
@@ -27,36 +27,35 @@ export default configureStore;
 
 // ------------------------------------------------------------------------
 
-// <script charset="UTF-8">window.__PRELOADED__=true;window.__data=
-//   {
-//       "device": {
-//           "isMobile": false
-//       },
-//       "randomInteger": {
-//           "randomInteger": 52
-//       },
-//       "auth": {
-//           "loaded": false,
-//           "user": null
-//       },
-//       "notifs": {},
-//       "info": {
-//           "loaded": false
-//       },
-//       "internet": {
-//           "connected": false
-//       },
-//       "online": function online() {
-//           var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-//           return v;
-//       },
-//       "initialStateObjTestOne": {
-//           "text": "",
-//           "type": ""
-//       },
-//       "initialStateListTest": []
-//   };
-// </script>
+// {
+//     "device": {
+//         "isMobile": false
+//     },
+//     "counter": {
+//         "counter": 87
+//     },
+//     "auth": {
+//         "loaded": false,
+//         "user": null
+//     },
+//     "notifs": {},
+//     "info": {
+//         "loaded": false
+//     },
+//     "internet": {
+//         "connected": false
+//     },
+//     "online": function online() {
+//         var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+//         return v;
+//     },
+//     "objectTestOne": {
+//         "text": "",
+//         "type": ""
+//     },
+//     "listTestOne": []
+// }
+
 
 // https://redux.js.org/api/createstore#createstorereducer-preloadedstate-enhancer
 

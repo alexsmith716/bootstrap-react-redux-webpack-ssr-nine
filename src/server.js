@@ -37,8 +37,7 @@ import {renderToString} from 'react-dom/server';
 // import configureStore from './redux/configureStore';
 import configureStore from './redux/store/configureStore';
 
-// import initialState from './redux/reducers/initialState';
-import initialState from './redux/reducers/initial-state';
+import initialStateServer from './redux/reducers/initial-state-server';
 // ----------------------------------
 
 // Device Detection Utils
@@ -93,12 +92,12 @@ export default ({ clientStats }) => async (req, res) => {
   console.log('>>>>>>>>>>>>>>>>> SERVER > __CLIENT__ ?: ', __CLIENT__);
   console.log('>>>>>>>>>>>>>>>>> SERVER > __SERVER__ ?: ', __SERVER__);
 
-  req.randomInteger = getRandomInt(1, 100);
+  req.counter = getRandomInt(1, 100);
   req.isMobile = isMobile(req.headers['user-agent']);
   req.isBot = isBot(req.headers['user-agent']);
   req.isDesktop = isDesktop(req.headers['user-agent']);
 
-  console.log('>>>>>>>>>>>>>>>>> SERVER > req.randomInteger ?: ', req.randomInteger);
+  console.log('>>>>>>>>>>>>>>>>> SERVER > req.counter ?: ', req.counter);
   console.log('>>>>>>>>>>>>>>>>> SERVER > req.isMobile ?: ', req.isMobile);
   console.log('>>>>>>>>>>>>>>>>> SERVER > req.isBot ?: ', req.isBot);
   console.log('>>>>>>>>>>>>>>>>> SERVER > req.isDesktop ?: ', req.isDesktop);
@@ -222,9 +221,9 @@ export default ({ clientStats }) => async (req, res) => {
   //   pull the state out of store;
   //   and then pass the state along to the client.
 
-  console.log('>>>>>>>>>>>>>>>> SERVER > initialState(req): ', initialState(req));
+  console.log('>>>>>>>>>>>>>>>> SERVER > initialStateServer(req): ', initialStateServer(req));
 
-  const preloadedState = initialState(req);
+  const preloadedState = initialStateServer(req);
 
   const store = configureStore({preloadedState});
 
