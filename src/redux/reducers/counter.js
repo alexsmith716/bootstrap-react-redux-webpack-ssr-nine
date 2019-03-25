@@ -1,8 +1,4 @@
-const initialState = {
-  counter: {
-    counter: null
-  },
-};
+import initialState from './initial-state';
 
 import types from '../actions/action-types';
 
