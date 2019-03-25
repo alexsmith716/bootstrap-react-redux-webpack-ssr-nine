@@ -1,30 +1,32 @@
 import { combineReducers } from 'redux';
 
-import device from './sharedReducers';
-import randomInteger from './sharedReducers';
-import auth from './sharedReducers';
-import notifs from './sharedReducers';
-import info from './sharedReducers';
-import internet from './sharedReducers';
-import online from './sharedReducers';
-import initialStateObjTestOne from './sharedReducers';
-import initialStateListTest from './sharedReducers';
+import device from './device';
+import counter from './counter';
+import auth from './auth';
+import notifs from './notifs';
+import info from './info';
+import internet from './internet';
+import online from './online';
+import objectTestOne from './objectTestOne';
+import listTestOne from './listTestOne';
 
 const rootReducer = combineReducers({
   device,
-  randomInteger,
+  counter,
   auth,
   notifs,
   info,
   internet,
   online,
-  initialStateObjTestOne,
-  initialStateListTest,
+  objectTestOne,
+  listTestOne,
 });
 
 export default rootReducer;
 
+// https://redux.js.org/recipes/structuring-reducers/initializing-state
 // https://redux.js.org/api/createstore#createstorereducer-preloadedstate-enhancer
+// https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape
 
 // createStore(reducer, [preloadedState], [enhancer])
 // =================================================================================
