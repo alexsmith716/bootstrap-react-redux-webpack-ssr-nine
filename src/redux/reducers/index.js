@@ -10,6 +10,8 @@ import online from './online';
 import objectTestOne from './objectTestOne';
 import listTestOne from './listTestOne';
 
+export { default as initialState } from './initial-state';
+
 const rootReducer = combineReducers({
   device,
   counter,

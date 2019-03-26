@@ -15,7 +15,10 @@ export default {
     user: null
   },
 
-  notifs: {},
+  notifs: {
+    text: '',
+    type: '',
+  },
 
   info: {
     loaded: false

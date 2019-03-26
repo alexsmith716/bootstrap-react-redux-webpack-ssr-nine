@@ -17,3 +17,11 @@
 //   listTestOne,
 //   types,
 // };
+
+import notifs from './notifs';
+import types from './action-types';
+
+export default {
+  notifs,
+  types,
+};

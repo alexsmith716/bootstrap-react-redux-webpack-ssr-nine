@@ -57,6 +57,9 @@ import { flushFiles } from 'webpack-flush-chunks';
 
 import Html from './helpers/Html';
 
+import actions from './redux/actions';
+import {message} from './shared/constants';
+
 // ----------------------------------
 
 // import apiClient from './utils/apiClient';
@@ -178,49 +181,6 @@ export default ({ clientStats }) => async (req, res) => {
 
   console.log('>>>>>>>>>>>>>>>>>>> SERVER.JS > APP LOADER > history: ', history)
 
-  // ------------------------------------------------------------------------+
-  // const cookieJar = new NodeCookiesWrapper(new Cookies(req, res)); // node module for getting and setting HTTP cookies
-
-  // type PersistConfig:
-  // {
-  //   key: string, // the key for the persist
-  //   storage: Object, // the storage adapter, following the AsyncStorage api
-  //   version?: number, // the state version as an integer (defaults to -1)
-  //   blacklist?: Array<string>, // do not persist these keys
-  //   whitelist?: Array<string>, // only persist these keys
-  //   migrate?: (Object, number) => Promise<Object>,
-  //   transforms?: Array<Transform>,
-  //   throttle?: number, // ms to throttle state writes
-  //   keyPrefix?: string, // will be prefixed to the storage key
-  //   debug?: boolean, // true -> verbose logs
-  //   stateReconciler?: false | StateReconciler, // false -> do not automatically reconcile state
-  //   serialize?: boolean, // false -> do not call JSON.parse & stringify when setting & getting from storage
-  //   writeFailHandler?: Function, // will be called if the storage engine fails during setItem()
-  // }
-
-  // const persistConfig = {
-  //   key: 'root',
-  //   storage: new CookieStorage(cookieJar),
-  //   stateReconciler: (inboundState, originalState) => originalState,
-  //   whitelist: ['auth', 'info',]
-  // };
-
-  // let preloadedState;
-
-  // try {
-  //   // Returns a promise of restored state (getStoredState())
-  //   preloadedState = await getStoredState(persistConfig);
-  // } catch (e) {
-  //   preloadedState = {};
-  // }
-  // ------------------------------------------------------------------------+
-
-  // To send the data down to the client (SSR):
-  //   create a fresh, new Redux store instance on every request;
-  //   optionally dispatch some actions;
-  //   pull the state out of store;
-  //   and then pass the state along to the client.
-
   console.log('>>>>>>>>>>>>>>>> SERVER > initialStateServer(req): ', initialStateServer(req));
 
   const preloadedState = initialStateServer(req);
@@ -228,6 +188,8 @@ export default ({ clientStats }) => async (req, res) => {
   const store = configureStore({preloadedState});
 
   console.log('>>>>>>>>>>>>>>>> SERVER > store: ', store);
+
+  store.dispatch(actions.notifs.send({ text: 'Dispatched Message action from server...', type: message.types.success }));
 
   try {
 
