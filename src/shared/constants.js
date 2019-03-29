@@ -4,6 +4,7 @@ export const message = {
     error: 'error',
     success: 'success',
     warning: 'warning',
+    info: 'info',
   },
 };
 

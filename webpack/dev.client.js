@@ -109,7 +109,6 @@ const webpackConfig = {
             loader:ExtractCssChunks.loader,
             options: {
               hot: true,
-              modules: true,
               reloadAll: true,
             }
           },
@@ -129,7 +128,7 @@ const webpackConfig = {
                   return generatedIdent(name, localName, loaderContext.resourcePath);
                 }
               },
-              importLoaders: 2,
+              // importLoaders: 2,
               sourceMap: true,
             }
           },
@@ -172,7 +171,6 @@ const webpackConfig = {
             loader:ExtractCssChunks.loader,
             options: {
               hot: true,
-              modules: true,
               reloadAll: true,
             }
           },
@@ -189,7 +187,7 @@ const webpackConfig = {
                   return generatedIdent(name, localName, loaderContext.resourcePath);
                 }
               },
-              importLoaders: 1,
+              // importLoaders: 1,
               sourceMap: true
             }
           },
@@ -260,9 +258,9 @@ const webpackConfig = {
 
     new ExtractCssChunks({
       filename: '[name].[contenthash].css',
-      // chunkFilename: '[name].[contenthash].chunk.css',
-      // chunkFilename: '[name]-[hash:8].css',
-      // orderWarning: true
+      // filename: "[name].css",
+      // chunkFilename: "[id].css",
+      orderWarning: true // Disable to remove warnings about conflicting order between imports
     }),
 
     new webpack.NamedModulesPlugin(),

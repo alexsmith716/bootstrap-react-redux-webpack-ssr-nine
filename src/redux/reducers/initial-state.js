@@ -28,8 +28,6 @@ export default {
     connected: false
   },
 
-  online: (v = true) => v,
-
   objectTestOne: {
     text: '',
     type: '',

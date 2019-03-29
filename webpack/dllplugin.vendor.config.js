@@ -86,7 +86,9 @@ module.exports = {
       'react-final-form',
       'react-helmet',
       'react-hot-loader',
+      'react-redux',
       'react-router',
+      'redux',
       'serialize-javascript',
       'socket.io-client'
     ]

@@ -135,7 +135,6 @@ class App extends Component {
     const stylesCss = require('./css/AppCss1.css');
 
     console.log('>>>>>>>>>>>>>>>> APP > render() <<<<<<<<<<<<<< !!STORE!!: ', this.props.store);
-    // <div data-reactroot="" className={styles.app}>
 
     return (
 
