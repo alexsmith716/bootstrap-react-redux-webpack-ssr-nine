@@ -6,9 +6,9 @@ import config from '../../config/config';
 
 const Html = ({ assets, store, content }) => {
 
-  console.log('>>>>>> HTML.JS > assets: ', assets);
-  // console.log('>>>>>> HTML.JS > assets.styles length: ', Object.keys(assets.styles).length);
-  console.log('>>>>>> HTML.JS > store: ', store);
+  //  console.log('>>>>>> HTML.JS > assets: ', assets);
+  //  console.log('>>>>>> HTML.JS > assets.styles length: ', Object.keys(assets.styles).length);
+  //  console.log('>>>>>> HTML.JS > store: ', store);
   console.log('>>>>>> HTML.JS > content: ', content);
 
   const head = Helmet.renderStatic();
@@ -50,8 +50,10 @@ const Html = ({ assets, store, content }) => {
 
       <body>
 
+
         {/* (>>>>>>> CONTENT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
         <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
+
 
         {/* (>>>>>>> STORE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
         {store && (
@@ -61,14 +63,17 @@ const Html = ({ assets, store, content }) => {
           />
         )}
 
-        {/* (will be present only in development mode) */}
+
+        {/* (>>>>>>> DEV DLLS  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
         { __DLLS__ && <script key="dlls__vendor" src="/dlls/dll__vendor.js" charSet="UTF-8" /> }
+
 
         {/* (>>>>>>> SCRIPTS  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
         {assets.scripts 
           && Object.keys(assets.scripts).map(key => (
             <script key={key} src={`${assets.publicPath}/${assets.scripts[key]}`} charSet="UTF-8" />
           ))}
+
 
       </body>
     </html>

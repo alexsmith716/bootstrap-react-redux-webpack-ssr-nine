@@ -27,36 +27,6 @@ export default configureStore;
 
 // ------------------------------------------------------------------------
 
-// {
-//     "device": {
-//         "isMobile": false
-//     },
-//     "counter": {
-//         "counter": 87
-//     },
-//     "auth": {
-//         "loaded": false,
-//         "user": null
-//     },
-//     "notifs": {},
-//     "info": {
-//         "loaded": false
-//     },
-//     "internet": {
-//         "connected": false
-//     },
-//     "online": function online() {
-//         var v = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-//         return v;
-//     },
-//     "objectTestOne": {
-//         "text": "",
-//         "type": ""
-//     },
-//     "listTestOne": []
-// }
-
-
 // https://redux.js.org/api/createstore#createstorereducer-preloadedstate-enhancer
 
 // createStore(reducer, [preloadedState], [enhancer])

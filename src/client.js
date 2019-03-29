@@ -25,7 +25,8 @@ import './js/app';
 
 // =====================================================================
 
-const dest = document.getElementById('content');
+// const dest = document.getElementById('content');
+const dest = document.querySelector('#content');;
 
 // =====================================================================
 
@@ -40,8 +41,7 @@ const dest = document.getElementById('content');
   const history = createBrowserHistory();
   //console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > history: ', history);
   
-  // const hydrate = async _routes => {
-  const hydrate = _routes => {
+  const hydrate = async _routes => {
   
     // const { components, match, params } = await asyncMatchRoutes(_routes, history.location.pathname);
   
@@ -98,8 +98,9 @@ const dest = document.getElementById('content');
     // }
     // await trigger('defer', components, triggerLocals);
     const preloadedState = window.__PRELOADED__;
+    delete window.__PRELOADED__;
     const store = configureStore(preloadedState);
-  
+
     ReactDOM.hydrate(
       <HotEnabler>
         <Provider store={store} >
@@ -111,7 +112,7 @@ const dest = document.getElementById('content');
         </Provider>
       </HotEnabler>,
       dest
-    );
+    )
   };
 
   await hydrate(routes);
@@ -134,15 +135,23 @@ const dest = document.getElementById('content');
   // ==============================================================================================
 
   // Server-side rendering check
+  // https://reactjs.org/docs/rendering-elements.html
+  // https://reactjs.org/docs/react-dom.html
+  // React expects that the rendered content is identical between the server and the client
+  // React can patch up differences in text content, but treat mismatches as bugs and fix them
+  // In development mode, React warns about mismatches during hydration
+  // There are no guarantees that attribute differences will be patched up in case of mismatches
+  // React 16 does patch up in some cases (such as text content) but it will not attempt to patch up attributes. 
+  // Text content is an exception here because it is often different from the server due to, for example, timestamps
   if (process.env.NODE_ENV !== 'production') {
-    window.React = React; // enable debugger
+    window.React = React; // enable debugger >>> expose React globally in client (*** calls to React.createElement ***)
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest1: ', dest);
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest2: ', dest.firstChild);
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest3: ', dest.firstChild.attributes);
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest4: ', dest.firstChild.attributes['data-reactroot']);
 
     if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-reactroot']) {
-      console.error('Server-side React render was discarded.' + 'Make sure that your initial render does not contain any client-side code.');
+      // console.error('Server-side React render was discarded.' + 'Make sure that your initial render does not contain any client-side code.');
     }
   }
 

@@ -30,7 +30,7 @@ import { renderRoutes } from 'react-router-config';
 
 // ----------------------------------
 import ReactDOM from 'react-dom/server';
-import {renderToString} from 'react-dom/server';
+// import {renderToString} from 'react-dom/server';
 // ----------------------------------
 
 // ----------------------------------
@@ -220,7 +220,7 @@ export default ({ clientStats }) => async (req, res) => {
       </Provider>
     );
 
-    const content = renderToString(component);
+    const content = ReactDOM.renderToString(component);
 
     // ------------------------------------------------------------------------------------------------------
 
@@ -274,12 +274,13 @@ export default ({ clientStats }) => async (req, res) => {
 
     // ------------------------------------------------------------------------------------------------------
 
-    // console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== content: ', content);
-    console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== STORE!!: ', store);
+    console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== content: ', content);
+    // console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== STORE!!: ', store);
 
     const html = <Html assets={assets} store={store} content={content} />;
-    const ssrHtml = `<!doctype html>${renderToString(html)}`;
-    // console.log('>>>>>>>>>>>>>>>> SERVER > APP LOADER > RESPOND TO CLIENT !! > renderToString(html):', ssrHtml);
+    const ssrHtml = `<!doctype html>${ReactDOM.renderToString(html)}`;
+
+    console.log('>>>>>>>>>>>>>>>> SERVER > APP LOADER > RESPOND TO CLIENT !! > renderToString(html):', ssrHtml);
 
     res.status(200).send(ssrHtml);
     // res.status(200).send('SERVER > Response Ended For Testing!!!!!!! Status 200!!!!!!!!!');
