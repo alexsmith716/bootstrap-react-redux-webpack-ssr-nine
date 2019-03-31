@@ -39,45 +39,103 @@ Destructuring is basically a convenient way of breaking the data structure into 
 
 'Array.from()' loops over the values accessing numerically the name properties
 
-@babel/runtime-corejs2/core-js/array/from.js]
-@babel/runtime-corejs2/core-js/array/is-array.js]
-@babel/runtime-corejs2/core-js/get-iterator.js]
-@babel/runtime-corejs2/core-js/is-iterable.js]
-@babel/runtime-corejs2/core-js/number/is-integer.js]
-@babel/runtime-corejs2/core-js/number/is-nan.js]
-@babel/runtime-corejs2/core-js/object/assign.js]
-@babel/runtime-corejs2/core-js/object/create.js]
-@babel/runtime-corejs2/core-js/object/define-property.js]
-@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js]
-@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js]
-@babel/runtime-corejs2/core-js/object/get-prototype-of.js]
-@babel/runtime-corejs2/core-js/object/keys.js]
-@babel/runtime-corejs2/core-js/object/set-prototype-of.js]
-@babel/runtime-corejs2/core-js/object/values.js]
-@babel/runtime-corejs2/core-js/parse-float.js]
-@babel/runtime-corejs2/core-js/promise.js]
-@babel/runtime-corejs2/core-js/symbol.js]
-@babel/runtime-corejs2/core-js/symbol/iterator.js]
-@babel/runtime-corejs2/helpers/arrayWithHoles.js]
-@babel/runtime-corejs2/helpers/arrayWithoutHoles.js]
-@babel/runtime-corejs2/helpers/assertThisInitialized.js]
-@babel/runtime-corejs2/helpers/asyncToGenerator.js]
-@babel/runtime-corejs2/helpers/classCallCheck.js]
-@babel/runtime-corejs2/helpers/createClass.js]
-@babel/runtime-corejs2/helpers/defineProperty.js]
-@babel/runtime-corejs2/helpers/extends.js]
-@babel/runtime-corejs2/helpers/getPrototypeOf.js]
-@babel/runtime-corejs2/helpers/inherits.js]
-@babel/runtime-corejs2/helpers/iterableToArray.js]
-@babel/runtime-corejs2/helpers/iterableToArrayLimit.js]
-@babel/runtime-corejs2/helpers/nonIterableRest.js]
-@babel/runtime-corejs2/helpers/nonIterableSpread.js]
-@babel/runtime-corejs2/helpers/objectSpread.js]
-@babel/runtime-corejs2/helpers/objectWithoutProperties.js]
-@babel/runtime-corejs2/helpers/objectWithoutPropertiesLoose.js]
-@babel/runtime-corejs2/helpers/possibleConstructorReturn.js]
-@babel/runtime-corejs2/helpers/setPrototypeOf.js]
-@babel/runtime-corejs2/helpers/slicedToArray.js]
-@babel/runtime-corejs2/helpers/toConsumableArray.js]
-@babel/runtime-corejs2/helpers/typeof.js]
-@babel/runtime-corejs2/regenerator/index.js]
+* ===========================================================================================
+* ========================================== REVIEW =========================================
+* ===========================================================================================
+
+* =============== SPA BASIC RENDER PROCESS ===============
+
+- The server generates a skeleton HTML page with an empty div-tag, and the Javascript bundle with the React components in a script-tag
+- When the page is loaded on the client, React generates HTML from the React components, and puts it inside the div-ta
+
+* =============== SSR BASIC RENDER PROCESS ===============
+
+- With SSR, the server generates an HTML page as with SPA
+  But this time the server also renders the React component and injects it into the div-tag before sending it to the client
+
+- When the page is loaded on the client, the React component is already there
+  Client side React renders the components anyway, and puts it inside the div tag again
+
+* =============== SSR WARNING MESSAGES (react-dom.development.js) ===============
+
+- Warning: Text content did not match. Server: "some text .... " Client: "some text ... "
+- Warning: Expected server HTML to contain a matching `<p>` in `div>`.
+
+
+* ==========================================================================================
+
+* The 'ReactDOMServer' object enables you to render components to static markup
+* The 'ReactDOMServer' object is Typically used on a Node server (SSR)
+
+* =============== OVERVIEW =============== 
+
+* The following methods can be used in both the server and browser environments:
+
+- renderToString()
+- renderToStaticMarkup()
+
+
+* ========================== REFERENCE ====================================
+
+* ====================== ReactDOMServer ==================
+
+* ReactDOMServer.renderToString(element):
+
+- Render a React element to its initial HTML.
+  React will return an HTML string.
+  You can use this method to generate HTML on the server and send the markup down on the initial request for faster page loads and to allow search engines to crawl your pages for SEO purposes.
+
+- If you call 'ReactDOM.hydrate()' on a node that already has this server-rendered markup, 
+  React will preserve it and >>>> only attach event handlers <<<<<, allowing you to have a very performant first-load experience.
+
+
+* ReactDOMServer.renderToStaticMarkup(element):
+
+- Similar to 'renderToString', except this doesn't create extra DOM attributes that React uses internally, such as 'data-reactroot'. 
+  This is useful if you want to use React as a simple static page generator, as stripping away the extra attributes can save some bytes.
+
+- If you plan to use React on the client to >>>> make the markup interactive <<<<<, do not use this method. 
+  Instead, use 'renderToString' on the server and 'ReactDOM.hydrate()' on the client.
+
+* ReactDOMServer.renderToNodeStream(element):
+
+- Render a React element to its initial HTML. 
+  Returns a Readable stream that outputs an HTML string. 
+  The HTML output by this stream is exactly equal to what ReactDOMServer.renderToString would return. 
+  You can use this method to generate HTML on the server and send the markup down on the initial request 
+  for faster page loads and to allow search engines to crawl your pages for SEO purposes.
+
+- If you call 'ReactDOM.hydrate()' on a node that already has this server-rendered markup, 
+  React will preserve it and >>>> only attach event handlers <<<<<, allowing you to have a very performant first-load experience.
+  >>>>>>>>>>>>>>> SAME AS WITH 'ReactDOMServer.renderToString(element)' <<<<<<<<<<<<<<<<<<
+
+* ========================= ReactDOM =======================
+
+* ReactDOM.hydrate(element, container[, callback]):
+
+- Same as 'render()', but is used to hydrate a container whose HTML contents were rendered by 'ReactDOMServer'. 
+  React will attempt to >>>>>>> attach event listeners to the existing markup <<<<<<<<<<.
+
+* =============== SSR WARNING MESSAGES (react-dom.development.js) ===============
+
+- Warning: Text content did not match. Server: "some text .... " Client: "some text ... "
+- Warning: Expected server HTML to contain a matching `<p>` in `div>`.
+
+- React expects that the rendered content is identical between the server and the client. 
+  It can patch up differences in text content, but you should treat mismatches as bugs and fix them. 
+  In development mode, React warns about mismatches during hydration. 
+  There are no guarantees that attribute differences will be patched up in case of mismatches. 
+  This is important for performance reasons because in most apps, mismatches are rare, and so validating all markup would be prohibitively expensive.
+
+- If a single element's attribute or text content is unavoidably different between the server and the client (for example, a timestamp), 
+  you may silence the warning by adding suppressHydrationWarning={true} to the element. 
+  It only works one level deep, and is intended to be an escape hatch. 
+  Don't overuse it. 
+  Unless it's text content, React still won't attempt to patch it up, so it may remain inconsistent until future updates.
+
+- If you intentionally need to render something different on the server and the client, you can do a two-pass rendering. 
+  Components that render something different on the client can read a state variable like this.state.isClient, 
+  which you can set to true in componentDidMount(). 
+  This way the initial render pass will render the same content as the server, avoiding mismatches, 
+  but an additional pass will happen synchronously right after hydration. 
+  Note that this approach will make your components slower because they have to render twice, so use it with caution.

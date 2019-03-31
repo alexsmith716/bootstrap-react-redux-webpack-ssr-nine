@@ -22,7 +22,7 @@ class ReduxAsyncConnect extends Component {
 
   componentDidMount() {
     console.log('>>>>>>>>>>>>>>>> ReduxAsyncConnect > componentDidMount() <<<<<<<<<<<<<<');
-    NProgress.configure({ trickleSpeed: 200 });
+    // NProgress.configure({ trickleSpeed: 200 });
   }
 
   static getDerivedStateFromProps(props, state) {

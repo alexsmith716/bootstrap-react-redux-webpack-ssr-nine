@@ -26,7 +26,8 @@ import './js/app';
 // =====================================================================
 
 // const dest = document.getElementById('content');
-const dest = document.querySelector('#content');;
+const dest = document.querySelector('#content');
+// const dest = document.querySelector('.react-container');
 
 // =====================================================================
 
@@ -111,7 +112,7 @@ const dest = document.querySelector('#content');;
           </Router>
         </Provider>
       </HotEnabler>,
-      dest
+      document.querySelector('.react-container')
     )
   };
 
@@ -134,17 +135,8 @@ const dest = document.querySelector('#content');;
 
   // ==============================================================================================
 
-  // Server-side rendering check
-  // https://reactjs.org/docs/rendering-elements.html
-  // https://reactjs.org/docs/react-dom.html
-  // React expects that the rendered content is identical between the server and the client
-  // React can patch up differences in text content, but treat mismatches as bugs and fix them
-  // In development mode, React warns about mismatches during hydration
-  // There are no guarantees that attribute differences will be patched up in case of mismatches
-  // React 16 does patch up in some cases (such as text content) but it will not attempt to patch up attributes. 
-  // Text content is an exception here because it is often different from the server due to, for example, timestamps
   if (process.env.NODE_ENV !== 'production') {
-    window.React = React; // enable debugger >>> expose React globally in client (*** calls to React.createElement ***)
+    window.React = React;
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest1: ', dest);
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest2: ', dest.firstChild);
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest3: ', dest.firstChild.attributes);
