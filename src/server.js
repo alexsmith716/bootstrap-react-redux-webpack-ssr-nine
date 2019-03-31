@@ -30,7 +30,6 @@ import { renderRoutes } from 'react-router-config';
 
 // ----------------------------------
 import ReactDOM from 'react-dom/server';
-// import {renderToString} from 'react-dom/server';
 // ----------------------------------
 
 // ----------------------------------
@@ -57,8 +56,8 @@ import { flushFiles } from 'webpack-flush-chunks';
 
 import Html from './helpers/Html';
 
-import actions from './redux/actions';
-import {message} from './shared/constants';
+// import actions from './redux/actions';
+// import {message} from './shared/constants';
 
 // ----------------------------------
 
@@ -189,7 +188,7 @@ export default ({ clientStats }) => async (req, res) => {
 
   console.log('>>>>>>>>>>>>>>>> SERVER > store: ', store);
 
-  store.dispatch(actions.notifs.send({ text: 'Dispatched Message action from server...', type: message.types.success }));
+  // store.dispatch(actions.notifs.send({ text: 'Dispatched Message action from server...', type: message.types.success }));
 
   try {
 
@@ -256,7 +255,7 @@ export default ({ clientStats }) => async (req, res) => {
 
     function hydrate() {
       res.write('<!doctype html>');
-      ReactDOM.renderToNodeStream(<Html assets={assets} />).pipe(res);
+      ReactDOM.renderToNodeStream(<Html assets={assets} store={store} />).pipe(res);
     }
 
     if (__DISABLE_SSR__) {
@@ -274,7 +273,7 @@ export default ({ clientStats }) => async (req, res) => {
 
     // ------------------------------------------------------------------------------------------------------
 
-    console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== content: ', content);
+    // console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== content: ', content);
     // console.log('>>>>>>>>>>>>>>>> SERVER > SSR ==================== STORE!!: ', store);
 
     const html = <Html assets={assets} store={store} content={content} />;

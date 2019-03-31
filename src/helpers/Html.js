@@ -11,16 +11,17 @@ const Html = ({ assets, store, content }) => {
   //  console.log('>>>>>> HTML.JS > store: ', store);
   console.log('>>>>>> HTML.JS > content: ', content);
 
-  const head = Helmet.renderStatic();
+  const helmet = Helmet.renderStatic();
 
   return (
     <html lang="en-US">
       <head>
-        {head.base.toComponent()}
-        {head.title.toComponent()}
-        {head.meta.toComponent()}
-        {head.link.toComponent()}
-        {head.script.toComponent()}
+
+        {helmet.base.toComponent()}
+        {helmet.title.toComponent()}
+        {helmet.meta.toComponent()}
+        {helmet.link.toComponent()}
+        {helmet.script.toComponent()}
 
         <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -52,7 +53,7 @@ const Html = ({ assets, store, content }) => {
 
 
         {/* (>>>>>>> CONTENT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
-        <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
+        <div role="main" class="react-container" id="content" dangerouslySetInnerHTML={{ __html: content }} />
 
 
         {/* (>>>>>>> STORE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
