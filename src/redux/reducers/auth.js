@@ -11,3 +11,5 @@ export default (state = initialState.auth, action) => {
       return state;
   }
 };
+
+// store configuration

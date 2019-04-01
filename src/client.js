@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import { ConnectedRouter } from 'connected-react-router';
+
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { renderRoutes } from 'react-router-config';
@@ -25,8 +27,8 @@ import './js/app';
 
 // =====================================================================
 
-// const dest = document.getElementById('content');
-const dest = document.querySelector('#content');
+const dest = document.getElementById('content');
+// const dest = document.querySelector('#content');
 // const dest = document.querySelector('.react-container');
 
 // =====================================================================
@@ -39,9 +41,15 @@ const dest = document.querySelector('#content');
   // ######## ----------- CREATE BROWSER HISTORY OBJECT ----------------- ######
   // ###########################################################################
 
+  console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > window.__PRELOADED__ ??: ', window.__PRELOADED__)
+  const preloadedState = window.__PRELOADED__;
+
   const history = createBrowserHistory();
+
+  const store = configureStore({history, preloadedState});
+
   //console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > history: ', history);
-  
+
   const hydrate = async _routes => {
   
     // const { components, match, params } = await asyncMatchRoutes(_routes, history.location.pathname);
@@ -89,7 +97,6 @@ const dest = document.querySelector('#content');
     // 'ReactDOM.hydrate()' preserves server-sent server-rendered markup
     // (allows for a very performant first-load experience)
   
-    console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > window.__PRELOADED__ ??: ', window.__PRELOADED__)
     // if (window.__PRELOADED__) {
     //   // Delete initial data so that subsequent data fetches can occur:
     //   delete window.__PRELOADED__;
@@ -98,21 +105,18 @@ const dest = document.querySelector('#content');
     //   await trigger('fetch', components, triggerLocals);
     // }
     // await trigger('defer', components, triggerLocals);
-    const preloadedState = window.__PRELOADED__;
-    delete window.__PRELOADED__;
-    const store = configureStore(preloadedState);
 
     ReactDOM.hydrate(
       <HotEnabler>
         <Provider store={store} >
-          <Router>
+          <ConnectedRouter history={history}>
             <ReduxAsyncConnect routes={_routes}>
               {renderRoutes(_routes)}
             </ReduxAsyncConnect>
-          </Router>
+          </ConnectedRouter>
         </Provider>
       </HotEnabler>,
-      document.querySelector('.react-container')
+      dest
     )
   };
 
@@ -156,7 +160,7 @@ const dest = document.querySelector('#content');
   //   const DevTools = require('./containers/DevTools/DevTools').default;
 
   //   ReactDOM.hydrate(
-  //     <Provider store={store} {...providers}>
+  //     <Provider store={store}>
   //       <DevTools />
   //     </Provider>,
   //     devToolsDest

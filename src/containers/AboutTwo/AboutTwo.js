@@ -1,22 +1,44 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-// import { provideHooks } from 'redial';
-// import MiniInfoBar from 'components/MiniInfoBar/MiniInfoBar';
-// import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
+
+// import { withStore } from '../../../hoc';
+
+import TemperatureCalculator from '../../components/widgets/LiftingStateUp/TemperatureCalculator';
+
+// --------------------------------------------------------------------------
+
+// @withStore
 
 class AboutTwo extends Component {
 
-  UNSAFE_componentWillMount() {
-    console.log('>>>>>>>>>>>>>>>> ABOUT-TWO > UNSAFE_componentWillMount() <<<<<<<<<<<<<<');
+  constructor(props) {
+    super(props);
+
+    // this. = this..bind(this);
+
+    // this.state = {
+    //
+    // };
   }
 
+  // static propTypes = {
+  //
+  // };
+
+  // static defaultProps = {};
+
   componentDidMount() {
-    console.log('>>>>>>>>>>>>>>>> ABOUT-TWO > componentDidMount() <<<<<<<<<<<<<<');
+    console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidMount() <<<<<<<<<<<<<<');
   }
 
   componentWillUnmount() {
-    console.log('>>>>>>>>>>>>>>>> ABOUT-TWO > componentWillUnmount() <<<<<<<<<<<<<<');
+    console.log('>>>>>>>>>>>>>>>> AboutTwo > componentWillUnmount() <<<<<<<<<<<<<<');
   }
+
+  // static contextTypes = {
+  //   store: PropTypes.objectOf(PropTypes.any).isRequired
+  // };
 
   render() {
 
@@ -28,7 +50,46 @@ class AboutTwo extends Component {
 
       <div className="container">
 
-        <h1 className={`mt-4 mb-3 ${styles.uniqueColor}`}>About Two</h1>
+        <Helmet title="About Two" />
+
+        <h1 className={styles.uniqueColor}>About Two</h1>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis?</p>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Most Basic Counter?
+                </h5>
+
+                <div className="cardBodyContainer">
+
+                  <div className="cardBodyContent">
+
+                    <TemperatureCalculator />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
 
         <div className="row">
           <div className="col-lg-6">
@@ -109,7 +170,6 @@ class AboutTwo extends Component {
         </div>
 
       </div>
-
     );
   }
 }

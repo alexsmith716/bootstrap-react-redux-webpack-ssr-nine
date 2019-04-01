@@ -206,7 +206,7 @@ class App extends Component {
         <div className={styles.footer}>
           <div className="container h-100">
             <div className={`h-100 d-flex flex-column justify-content-center align-items-center ${styles.flexContainer}`}>
-              <div>Copyright &copy; 2018 · Election App 2018</div>
+              <div>Copyright &copy; 2019 · Election App 2019</div>
               <div><span className={`fas fa-headphones fa-padding ${styles.colorGoldLocal}`}></span><span className={`font-norwester ${styles.colorGoldLocal}`}>Footer Headphones!</span></div>
             </div>
           </div>

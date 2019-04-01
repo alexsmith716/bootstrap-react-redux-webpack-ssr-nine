@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 
 import device from './device';
 import counter from './counter';
@@ -12,19 +13,37 @@ import listTestOne from './listTestOne';
 
 export { default as initialState } from './initial-state';
 
-const rootReducer = combineReducers({
-  device,
-  counter,
-  auth,
-  notifs,
-  info,
-  internet,
-  // online,
-  objectTestOne,
-  listTestOne,
-});
+export default function rootReducer(history) {
+  return combineReducers({
+    router: connectRouter(history),
+    device,
+    counter,
+    auth,
+    notifs,
+    info,
+    internet,
+    // online,
+    objectTestOne,
+    listTestOne
+  });
+}
 
-export default rootReducer;
+// const rootReducer = combineReducers({
+//   router: connectRouter(history),
+//   device,
+//   counter,
+//   auth,
+//   notifs,
+//   info,
+//   internet,
+//   // online,
+//   objectTestOne,
+//   listTestOne,
+// });
+// 
+// export default rootReducer;
+
+// store configuration
 
 // https://redux.js.org/recipes/structuring-reducers/initializing-state
 // https://redux.js.org/api/createstore#createstorereducer-preloadedstate-enhancer

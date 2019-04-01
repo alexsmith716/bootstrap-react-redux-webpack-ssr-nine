@@ -92,7 +92,7 @@ const webpackConfig = {
     // publicPath: '/dist/'
   },
 
-  cache: false,
+  // cache: false,
 
   module: {
     rules: [
@@ -270,7 +270,7 @@ const webpackConfig = {
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: false
+      __DEVTOOLS__: true
     }),
 
     // new webpack.NamedModulesPlugin(),

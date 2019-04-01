@@ -11,3 +11,5 @@ export default (state = initialState.info, action) => {
       return state;
   }
 };
+
+// store configuration

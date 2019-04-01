@@ -11,3 +11,5 @@ export default (state = initialState.listTestOne, action) => {
       return state;
   }
 };
+
+// store configuration

@@ -33,7 +33,7 @@ class Home extends Component {
 
           <div className="container">
 
-            <h1>App 2018</h1>
+            <h1>App 2019</h1>
 
             <h2>The Midterms are almost here!</h2>
 
