@@ -12,6 +12,8 @@ import { CookieStorage, NodeCookiesWrapper } from 'redux-persist-cookie-storage'
 import React from 'react';
 import { Provider } from 'react-redux';
 
+import { ConnectedRouter } from 'connected-react-router';
+
 // ----------------------------------
 import asyncMatchRoutes from './utils/asyncMatchRoutes';
 // ----------------------------------
@@ -33,10 +35,9 @@ import ReactDOM from 'react-dom/server';
 // ----------------------------------
 
 // ----------------------------------
-// import configureStore from './redux/configureStore';
 import configureStore from './redux/store/configureStore';
 
-import initialStateServer from './redux/reducers/initial-state-server';
+import initialStateHttp from './redux/reducers/initial-state-http';
 // ----------------------------------
 
 // Device Detection Utils
@@ -180,11 +181,11 @@ export default ({ clientStats }) => async (req, res) => {
 
   console.log('>>>>>>>>>>>>>>>>>>> SERVER.JS > APP LOADER > history: ', history)
 
-  console.log('>>>>>>>>>>>>>>>> SERVER > initialStateServer(req): ', initialStateServer(req));
+  console.log('>>>>>>>>>>>>>>>> SERVER > initialStateHttp(req): ', initialStateHttp(req));
 
-  const preloadedState = initialStateServer(req);
+  const preloadedState = initialStateHttp(req);
 
-  const store = configureStore({preloadedState});
+  const store = configureStore({history, preloadedState});
 
   console.log('>>>>>>>>>>>>>>>> SERVER > store: ', store);
 
@@ -192,11 +193,11 @@ export default ({ clientStats }) => async (req, res) => {
 
   try {
 
-    // const { components, match, params } = await asyncMatchRoutes(routes, req.path);
+    const { components, match, params } = await asyncMatchRoutes(routes, req.path);
 
-    // console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > components: ', components);
-    // console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > match: ', match);
-    // console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > params: ', params);
+    console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > components: ', components);
+    console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > match: ', match);
+    console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > params: ', params);
 
     // const locals = {
     //   match,
@@ -211,11 +212,13 @@ export default ({ clientStats }) => async (req, res) => {
 
     const component = (
       <Provider store={store} >
-        <StaticRouter location={req.originalUrl} context={context}>
-          <ReduxAsyncConnect routes={routes} >
-            {renderRoutes(routes)}
-          </ReduxAsyncConnect>
-        </StaticRouter>
+        <ConnectedRouter history={history}>
+          <StaticRouter location={req.originalUrl} context={context}>
+            <ReduxAsyncConnect routes={routes} >
+              {renderRoutes(routes)}
+            </ReduxAsyncConnect>
+          </StaticRouter>
+        </ConnectedRouter>
       </Provider>
     );
 

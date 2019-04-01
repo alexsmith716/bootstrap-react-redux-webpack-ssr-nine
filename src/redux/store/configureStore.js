@@ -1,29 +1,37 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+// import { reduxBatch } from '@manaflair/redux-batch';
 
-import reducers from '../reducers';
+import rootReducer from '../reducers/index';
 
-const configureStore = ({preloadedState}) => {
+const configureStore = ({history, preloadedState}) => {
 
   console.log('>>>>>>>>>>>>>>>>> configureStore > preloadedState:', preloadedState);
 
   const store = createStore(
-    reducers,
+    rootReducer(history),
     preloadedState,
+    // reduxBatch,
     applyMiddleware(thunk)
   )
 
-  // if (module.hot) {
-  //   // Enable Webpack hot module replacement for reducers
-  //   module.hot.accept('../reducers', () => {
-  //     store.replaceReducer(rootReducer)
-  //   })
-  // }
+  if (__DEVELOPMENT__ && module.hot) {
+    console.log('>>>>>>>>>>>>>>>>>>> configureStore > MODULE.HOT! <<<<<<<<<<<<<<<<<');
+    module.hot.accept('../reducers', () => {
+      let reducer = require('../reducers');
+      // store.replaceReducer(reducer);
+      store.replaceReducer(rootReducer(history));
+    });
+  } else {
+    console.log('>>>>>>>>>>>>>>>>>>> configureStore > NO MODULE.HOT! <<<<<<<<<<<<<<');
+  }
 
   return store;
 };
 
 export default configureStore;
+
+// store configuration
 
 // ------------------------------------------------------------------------
 

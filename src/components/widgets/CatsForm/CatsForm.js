@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import CatInputs from './catInputs';
+import CatInputs from './CatInputs';
 
 
 class CatsForm extends Component {

@@ -10,3 +10,5 @@ export default (state = initialState.counter, action) => {
       return state;
   }
 };
+
+// store configuration

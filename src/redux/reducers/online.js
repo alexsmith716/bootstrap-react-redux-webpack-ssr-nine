@@ -11,3 +11,5 @@ export default (state = initialState.online, action) => {
       return state;
   }
 };
+
+// store configuration

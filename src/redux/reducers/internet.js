@@ -11,3 +11,5 @@ export default (state = initialState.internet, action) => {
       return state;
   }
 };
+
+// store configuration

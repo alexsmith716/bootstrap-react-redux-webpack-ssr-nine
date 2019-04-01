@@ -153,6 +153,20 @@ hr.light {
   display: flex;
 }
 
+.cardBodyContainer {
+  padding: calculate-rem(2px);
+  border: calculate-rem(1px) solid #d8dee2;
+  border-radius: calculate-rem(6px);
+  // background-color: #F4F4F4;
+}
+
+.cardBodyContent {
+  padding: calculate-rem(5px);
+  border: calculate-rem(1px) solid #d8dee2;
+  border-radius: calculate-rem(3px);
+  // background-color: #FFFFF0;
+}
+
 .boundingbox {
   position: absolute;
   box-shadow: 0 0 0 3px #333333 inset;

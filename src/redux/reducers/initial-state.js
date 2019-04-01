@@ -37,6 +37,8 @@ export default {
 
 };
 
+// store configuration
+
 // https://redux.js.org/recipes/structuring-reducers/initializing-state
 // https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape
 

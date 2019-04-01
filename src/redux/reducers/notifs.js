@@ -10,3 +10,5 @@ export default (state = initialState.notifs, action) => {
       return state;
   }
 };
+
+// store configuration

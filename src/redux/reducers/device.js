@@ -11,3 +11,5 @@ export default (state = initialState.device, action) => {
       return state;
   }
 };
+
+// store configuration

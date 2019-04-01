@@ -46,7 +46,7 @@ Destructuring is basically a convenient way of breaking the data structure into 
 * =============== SPA BASIC RENDER PROCESS ===============
 
 - The server generates a skeleton HTML page with an empty div-tag, and the Javascript bundle with the React components in a script-tag
-- When the page is loaded on the client, React generates HTML from the React components, and puts it inside the div-ta
+- When the page is loaded on the client, React generates HTML from the React components, and puts it inside the div-tag
 
 * =============== SSR BASIC RENDER PROCESS ===============
 
