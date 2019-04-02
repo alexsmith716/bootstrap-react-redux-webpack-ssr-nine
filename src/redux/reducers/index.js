@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
 import device from './device';
@@ -14,7 +13,7 @@ import listTestOne from './listTestOne';
 export { default as initialState } from './initial-state';
 
 export default function rootReducer(history) {
-  return combineReducers({
+  return {
     router: connectRouter(history),
     device,
     counter,
@@ -22,26 +21,10 @@ export default function rootReducer(history) {
     notifs,
     info,
     internet,
-    // online,
     objectTestOne,
     listTestOne
-  });
+  };
 }
-
-// const rootReducer = combineReducers({
-//   router: connectRouter(history),
-//   device,
-//   counter,
-//   auth,
-//   notifs,
-//   info,
-//   internet,
-//   // online,
-//   objectTestOne,
-//   listTestOne,
-// });
-// 
-// export default rootReducer;
 
 // store configuration
 
