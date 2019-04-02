@@ -7,37 +7,14 @@ import { push } from 'connected-react-router';
 
 import { renderRoutes } from 'react-router-config';
 
-// import { provideHooks } from 'redial';
-// import { connect } from 'react-redux';
-
 import Helmet from 'react-helmet';
 import qs from 'qs';
 
 import { Link } from 'react-router-dom';
 
-// import { isLoaded as isAuthLoaded, load as loadAuth, logout } from '../../redux/modules/auth';
-// import { isLoaded as isInfoLoaded, load as loadInfo } from '../../redux/modules/info';
-
-// import { Notifs, InfoBar } from '../../components';
 import config from '../../../config/config';
 
 // import { withStore } from '../../../hoc';
-
-// @provideHooks({
-//   fetch: async ( { store: { dispatch, getState } } ) => {
-//     // access state 'getState()' of 'info'
-//     if (!isInfoLoaded(getState())) {
-//       await dispatch(loadInfo()).catch(() => null);
-//     }
-//   }
-// })
-// 
-// @connect(
-//   state => ({
-//     notifs: state.notifs
-//   }),
-//   { pushState: push }
-// )
 
 // --------------------------------------------------------------------------
 // HOC: apply HOCs outside the component definition so that the resulting component is created only once. 

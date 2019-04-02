@@ -199,14 +199,13 @@ export default ({ clientStats }) => async (req, res) => {
     console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > match: ', match);
     console.log('>>>>>>>>>>>>>>>> SERVER > await asyncMatchRoutes > params: ', params);
 
-    // const locals = {
-    //   match,
-    //   params,
-    //   history,
-    //   location: history.location
-    // };
-
-    // await trigger( 'fetch', components, locals);
+    await trigger('fetch', components, {
+      store,
+      match,
+      params,
+      history,
+      location: history.location
+    });
 
     const context = {};
 
@@ -272,6 +271,12 @@ export default ({ clientStats }) => async (req, res) => {
 
     if (context.url) {
       return res.redirect(301, context.url);
+    }
+
+    const locationState = store.getState().router.location;
+
+    if (decodeURIComponent(req.originalUrl) !== decodeURIComponent(locationState.pathname + locationState.search)) {
+      return res.redirect(301, locationState.pathname);
     }
 
     // ------------------------------------------------------------------------------------------------------
