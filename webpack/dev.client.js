@@ -60,6 +60,20 @@ const handler = (percentage, message, ...args) => {
 
 // ==============================================================================================
 
+// Other Configuration Options Supported by webpack
+//  -----------------------------------------------------------------------------------------------
+//  cache: false        * Cache the generated webpack modules and chunks to improve build speed
+//                      * Caching is enabled by default while in watch mode
+
+//  cache: SharedCache  * If an object is passed, webpack will use this object for cachin
+//                      * Keeping a reference to this object will allow one to share the same cache between compiler calls
+
+// Watch and WatchOptions (webpack can watch files and recompile whenever they change)
+//  ----------------------------------------------------------------------------------------------
+//  watch: true         * after the initial build, webpack will continue to watch for changes in any of the resolved files
+//                      * In 'webpack-dev-server' and 'webpack-dev-middleware' watch mode is enabled by default
+// ==============================================================================================
+
 const webpackConfig = {
 
   context: path.resolve(__dirname, '..'),
@@ -75,6 +89,7 @@ const webpackConfig = {
 
   entry: {
     main: [
+      'react-devtools',
       `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr`,
       // 'webpack-hot-middleware/client?reload=true',
       // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
@@ -92,7 +107,7 @@ const webpackConfig = {
     // publicPath: '/dist/'
   },
 
-  // cache: false,
+  cache: false,
 
   module: {
     rules: [
