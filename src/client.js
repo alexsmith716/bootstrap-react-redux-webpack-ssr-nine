@@ -42,7 +42,7 @@ const dest = document.getElementById('content');
   // ###########################################################################
 
   console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > window.__PRELOADED__ ??: ', window.__PRELOADED__)
-  const preloadedState = window.__PRELOADED__;
+  const preloadedState = window.__data;
 
   const history = createBrowserHistory();
 

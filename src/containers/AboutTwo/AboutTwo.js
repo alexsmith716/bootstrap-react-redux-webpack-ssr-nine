@@ -6,6 +6,18 @@ import Helmet from 'react-helmet';
 
 import TemperatureCalculator from '../../components/widgets/LiftingStateUp/TemperatureCalculator';
 
+async function init() {
+  const decks = await shared.api.decks.getAll();
+  const api = await shared.api.configs.getByName('api');
+  const stories = await shared.api.configs.getByName('stories');
+  const online = await shared.api.configs.getByName('online');
+
+  store.dispatch(actions.decks.update(decks));
+  store.dispatch(actions.configs.update({ api, stories, online }));
+
+  shared.socket.setup(store);
+}
+
 // --------------------------------------------------------------------------
 
 // @withStore
@@ -28,8 +40,13 @@ class AboutTwo extends Component {
 
   // static defaultProps = {};
 
+  testSetTimeout(m) {
+    console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidMount() > async testStoreDispatch: ', m);
+  }
+
   componentDidMount() {
     console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidMount() <<<<<<<<<<<<<<');
+    setTimeout( () => this.testSetTimeout('testSetTimeout Message from AboutTwo...'), 4000 );
   }
 
   componentWillUnmount() {
@@ -71,7 +88,7 @@ class AboutTwo extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Most Basic Counter?
+                  Most Basic Counter!!
                 </h5>
 
                 <div className="cardBodyContainer">
