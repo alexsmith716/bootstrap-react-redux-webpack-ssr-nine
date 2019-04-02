@@ -8,9 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "npm-run-all --parallel start:dev",
-    "dev:tools": "npm-run-all --parallel start:dev:tools",
-    "start:dev": "concurrently \"yarn start:dev:server\" \"yarn start:dev:api\"",
-    "start:dev:tools": "concurrently \"yarn start:dev:server\" \"yarn start:dev:api\" \"react-devtools\"",
+    "start:dev": "concurrently \"yarn start:dev:server\" \"yarn start:dev:api\" \"react-devtools\"",
     "start:dev:server": "NODE_ENV=development WEBPACK_DLLS=1 PORT=3000 node ./bin/server.js --watch ./server --watch ./build/static/dist/server --no-update-notifier",
     "start:dev:api": "NODE_PATH=api  NODE_ENV=development BABEL_DISABLE_CACHE=1 APIPORT=3030 node ./bin/api.js",
     "react-devtools": "react-devtools",

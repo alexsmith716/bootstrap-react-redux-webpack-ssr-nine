@@ -23,8 +23,8 @@ const configureStore = ({history, preloadedState}) => {
     console.log('>>>>>>>>>>>>>>>>>>> configureStore > MODULE.HOT! <<<<<<<<<<<<<<<<<');
     module.hot.accept('../reducers/index', () => {
       let reducer = require('../reducers/index');
-      reducer = combine((reducer.__esModule ? reducer.default : reducer))
-      store.replaceReducer(reducer(history));
+      reducer = combine(reducer(history));
+      store.replaceReducer(reducer);
     });
   } else {
     console.log('>>>>>>>>>>>>>>>>>>> configureStore > NO MODULE.HOT! <<<<<<<<<<<<<<');
