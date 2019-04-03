@@ -10,29 +10,17 @@ export default {
     counter: null
   },
 
-  auth: {
-    loaded: false,
-    user: null
+  temperature_calculator: {
+    temperature: '',
+    scale: 'c'
   },
-
-  notifs: {
-    text: '',
-    type: '',
-  },
-
-  info: {
-    loaded: false
-  },
-
-  online: {
-    connected: false
-  },
-
-  objectTestOne: {
-    text: '',
-    type: '',
-  },
-
-  listTestOne: new List(),
 
 };
+
+// Counter:
+
+// CatsForm
+// Clock
+// TemperatureCalculator
+// IncorporationForm
+// RandomBootstrapAlert

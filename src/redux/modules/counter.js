@@ -10,8 +10,6 @@ export default function reducer(state = initialState.counter, action) {
 
     case INCREMENT_COUNTER: {
       const { counter } = state;
-      console.log('>>>>>>>>>>>>>>>> MODULES.Counter > INCREMENT_COUNTER111: ', state);
-      console.log('>>>>>>>>>>>>>>>> MODULES.Counter > INCREMENT_COUNTER222: ', counter);
       return {
         counter: counter + 1
       };
@@ -19,8 +17,6 @@ export default function reducer(state = initialState.counter, action) {
 
     case DECREMENT_COUNTER: {
       const { counter } = state;
-      console.log('>>>>>>>>>>>>>>>> MODULES.Counter > DECREMENT_COUNTER111: ', state);
-      console.log('>>>>>>>>>>>>>>>> MODULES.Counter > DECREMENT_COUNTER222: ', counter);
       return {
         counter: counter - 1
       };
@@ -32,14 +28,12 @@ export default function reducer(state = initialState.counter, action) {
 }
 
 export function increment() {
-  console.log('>>>>>>>>>>>>>>>> MODULES.Counter > export function increment()');
   return {
     type: INCREMENT_COUNTER
   };
 }
 
 export function decrement() {
-  console.log('>>>>>>>>>>>>>>>> MODULES.Counter > export function decrement()');
   return {
     type: DECREMENT_COUNTER
   };

@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import * as counterActions from '../../../redux/modules/counter';
 
 @connect(
-  (state) => ({ counter: state.counter.counter }),
+  (state) => ({ counterX: state.counter.counter }),
   (dispatch) => bindActionCreators(counterActions, dispatch)
 )
 
 class Counter extends Component {
 
   static propTypes = {
-    counter: PropTypes.number.isRequired,
+    counterX: PropTypes.number.isRequired,
     increment: PropTypes.func.isRequired,
     decrement: PropTypes.func.isRequired,
   };
@@ -36,9 +36,9 @@ class Counter extends Component {
   render() {
 
     // const styles = require('./scss/Counter.scss');
-    const { counter, increment, decrement } = this.props;
+    const { counterX, increment, decrement } = this.props;
 
-    console.log('>>>>>>>>>>>>>>>> Counter > render() > this.props.counter: ', counter);
+    console.log('>>>>>>>>>>>>>>>> Counter > render() > this.props.counter: ', counterX);
 
     return (
 
@@ -48,7 +48,7 @@ class Counter extends Component {
           <div className="container-flex bg-color-ivory container-padding-border-radius-2">
             <div className="width-400">
 
-              <p>Counter Clicked: {counter} times</p>
+              <p>Counter Clicked: {counterX} times</p>
 
                 <div className="form-row">
                   <div className="form-group col-md-6">

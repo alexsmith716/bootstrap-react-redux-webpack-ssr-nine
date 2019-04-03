@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
-// import { reduxBatch } from '@manaflair/redux-batch';
+import { reduxBatch } from '@manaflair/redux-batch';
 import rootReducer from '../reducers/index';
 
 // ----------------------------------------------------------------------
@@ -33,7 +33,6 @@ const configureStore = ({history, preloadedState}) => {
   // ----------------------------------------------------------------------
 
   if (__CLIENT__ && __DEVTOOLS__) {
-    console.log('>>>>>>>>>>>>>>>>>>> CreateStore > __CLIENT__ && __DEVTOOLS__ <<<<<<<<<<<<<<<<<<');
     const { persistState } = require('redux-devtools');
     const DevTools = require('../../containers/DevTools/DevTools').default;
 
