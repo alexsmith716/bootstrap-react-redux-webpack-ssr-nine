@@ -1,14 +1,14 @@
 import { connectRouter } from 'connected-react-router';
+import multireducer from 'multireducer';
 
-import device from './device';
-import counter from '../actions/counter';
-import auth from './auth';
-import notifs from './notifs';
-import info from './info';
-import internet from './internet';
-// import online from './online';
-import objectTestOne from './objectTestOne';
-import listTestOne from './listTestOne';
+import device from '../modules/device';
+import counter from '../modules/counter';
+import auth from '../modules/auth';
+import notifs from '../modules/notifs';
+import info from '../modules/info';
+import online from '../modules/online';
+import objectTestOne from '../modules/objectTestOne';
+import listTestOne from '../modules/listTestOne';
 
 export { default as initialState } from './initial-state';
 
@@ -20,10 +20,8 @@ export default function rootReducer(history) {
     auth,
     notifs,
     info,
-    internet,
+    online,
     objectTestOne,
     listTestOne
   };
 }
-
-// store configuration

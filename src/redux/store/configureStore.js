@@ -34,5 +34,3 @@ const configureStore = ({history, preloadedState}) => {
 };
 
 export default configureStore;
-
-// store configuration

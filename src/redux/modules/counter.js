@@ -1,19 +1,7 @@
-// import setCounter from './setCounter';
-// import incrementCounter from './incrementCounter';
-// import decrementCounter from './decrementCounter';
-// 
-// 
-// export default {
-//   setCounter,
-//   incrementCounter,
-//   decrementCounter,
-// };
-
-const SET_COUNTER = 'redux-example/counter/SET_COUNTER';
 const INCREMENT_COUNTER = 'redux-example/counter/INCREMENT_COUNTER';
 const DECREMENT_COUNTER = 'redux-example/counter/DECREMENT_COUNTER';
 
-import initialState from '../../reducers/initial-state';
+import initialState from '../reducers/initial-state';
 
 
 export default function reducer(state = initialState.counter, action) {
