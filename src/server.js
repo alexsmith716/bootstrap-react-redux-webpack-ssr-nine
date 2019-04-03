@@ -5,8 +5,15 @@ import httpProxy from 'http-proxy';
 
 // ------------------------------------------------------------------------+
 import Cookies from 'cookies';
-import { getStoredState } from 'redux-persist'; // https://github.com/rt2zz/redux-persist
-import { CookieStorage, NodeCookiesWrapper } from 'redux-persist-cookie-storage'; // https://github.com/abersager/redux-persist-cookie-storage
+import { getStoredState } from 'redux-persist'; 
+// Persist and rehydrate a redux store
+// https://github.com/rt2zz/redux-persist
+import { CookieStorage, NodeCookiesWrapper } from 'redux-persist-cookie-storage'; 
+// Redux Persist storage adapter for cookies 
+// https://github.com/abersager/redux-persist-cookie-storage
+import { trigger } from 'redial';
+// Universal data fetching and route lifecycle management for React
+// https://github.com/markdalgleish/redial
 // ------------------------------------------------------------------------+
 
 import React from 'react';
@@ -47,8 +54,6 @@ import { isDesktop, isMobile, isBot } from './utils/device';
 import {createMemoryHistory} from 'history';
 
 import routes from './routes';
-
-import { trigger } from 'redial';
 
 // holds a global cache of all the universal components that are rendered and makes them available via flushChunkNames
 import { flushChunkNames } from 'react-universal-component/server';

@@ -3,12 +3,13 @@ import multireducer from 'multireducer';
 
 import device from '../modules/device';
 import counter from '../modules/counter';
-import auth from '../modules/auth';
-import notifs from '../modules/notifs';
-import info from '../modules/info';
-import online from '../modules/online';
-import objectTestOne from '../modules/objectTestOne';
-import listTestOne from '../modules/listTestOne';
+import temperatureCalculator from '../modules/temperatureCalculator';
+// import auth from '../modules/auth';
+// import notifs from '../modules/notifs';
+// import info from '../modules/info';
+// import online from '../modules/online';
+// import objectTestOne from '../modules/objectTestOne';
+// import listTestOne from '../modules/listTestOne';
 
 export { default as initialState } from './initial-state';
 
@@ -17,11 +18,12 @@ export default function rootReducer(history) {
     router: connectRouter(history),
     device,
     counter,
-    auth,
-    notifs,
-    info,
-    online,
-    objectTestOne,
-    listTestOne
+    temperatureCalculator,
+    // auth,
+    // notifs,
+    // info,
+    // online,
+    // objectTestOne,
+    // listTestOne
   };
 }
