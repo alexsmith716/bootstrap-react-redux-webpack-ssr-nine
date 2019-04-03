@@ -153,19 +153,19 @@ const dest = document.getElementById('content');
 
   // ==============================================================================================
 
-  // if (__DEVTOOLS__ && !window.devToolsExtension) {
-  //   console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > __DEVTOOLS__ <<<<<<<<<<<<<<<<<<<<<<');
-  //   const devToolsDest = document.createElement('div');
-  //   window.document.body.insertBefore(devToolsDest, null);
-  //   const DevTools = require('./containers/DevTools/DevTools').default;
+  if (__DEVTOOLS__ && !window.devToolsExtension) {
+    console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > __DEVTOOLS__ <<<<<<<<<<<<<<<<<<<<<<');
+    const devToolsDest = document.createElement('div');
+    window.document.body.insertBefore(devToolsDest, null);
+    const DevTools = require('./containers/DevTools/DevTools').default;
 
-  //   ReactDOM.hydrate(
-  //     <Provider store={store}>
-  //       <DevTools />
-  //     </Provider>,
-  //     devToolsDest
-  //   );
-  // }
+    ReactDOM.hydrate(
+      <Provider store={store}>
+        <DevTools />
+      </Provider>,
+      devToolsDest
+    );
+  }
 
   if (!__DEVELOPMENT__) {
     console.log('>>>>>>>>>>>>>>>>>>>>>>>> CLIENT.JS > !__DEVELOPMENT__ NO <<<<<<<<<<<<<');
