@@ -12,6 +12,7 @@ import { toCelsius, toFahrenheit, tryConvert } from './stateHelpers';
   (state, { multireducerKey: key }) => ({ 
     temperature: state.temperatureCalculator[key].temperature,
     scale: state.temperatureCalculator[key].scale,
+    counterX: state.counter.counter,
   }),
   (dispatch, { multireducerKey: key }) => bindActionCreators(temperatureCalculatorActions, dispatch, [key])
 )
@@ -20,8 +21,9 @@ import { toCelsius, toFahrenheit, tryConvert } from './stateHelpers';
 class TemperatureCalculator extends Component {
 
   static propTypes = {
-    scale: PropTypes.string.isRequired,
+    counterX: PropTypes.number.isRequired,
     temperature: PropTypes.string.isRequired,
+    scale: PropTypes.string.isRequired,
     celsiusChange: PropTypes.func.isRequired,
     fahrenheitChange: PropTypes.func.isRequired,
   };
@@ -58,7 +60,7 @@ class TemperatureCalculator extends Component {
 
     // const scale = this.state.scale;
     // const temperature = this.state.temperature;
-    const { scale, temperature, celsiusChange, fahrenheitChange } = this.props;
+    const { counterX, scale, temperature, celsiusChange, fahrenheitChange } = this.props;
 
     const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
     const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
@@ -77,6 +79,7 @@ class TemperatureCalculator extends Component {
     // 'onTemperatureChange' of the 'Celsius' 'TemperatureInput' is this component's 'handleCelsiusChange' method
     // 'onTemperatureChange' of the 'Fahrenheit' 'TemperatureInput' is this component's 'handleFahrenheitChange' method
 
+    console.log('>>>>>>>>>>>>>>>> TemperatureCalculator > RENDER !!!!!! > counterX: ', counterX);
     console.log('>>>>>>>>>>>>>>>> TemperatureCalculator > RENDER !!!!!! > temperature: ', temperature , ' > scale: ', scale);
 
     return (
