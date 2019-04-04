@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'multireducer';
 import { connect } from 'react-redux';
 import * as temperatureCalculatorActions from '../../../redux/modules/temperatureCalculator';
 
@@ -9,11 +9,11 @@ import TemperatureInput from './TemperatureInput';
 import { toCelsius, toFahrenheit, tryConvert } from './stateHelpers';
 
 @connect(
-  (state) => ({ 
-    temperature: state.temperatureCalculator.temperature,
-    scale: state.temperatureCalculator.scale,
+  (state, { multireducerKey: key }) => ({ 
+    temperature: state.temperatureCalculator[key].temperature,
+    scale: state.temperatureCalculator[key].scale,
   }),
-  (dispatch) => bindActionCreators(temperatureCalculatorActions, dispatch)
+  (dispatch, { multireducerKey: key }) => bindActionCreators(temperatureCalculatorActions, dispatch, [key])
 )
 
 

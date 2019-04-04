@@ -18,7 +18,10 @@ export default function rootReducer(history) {
     router: connectRouter(history),
     device,
     counter,
-    temperatureCalculator,
+    temperatureCalculator: multireducer({
+      temperatureCalculator1: temperatureCalculator,
+      temperatureCalculator2: temperatureCalculator,
+    }),
     // auth,
     // notifs,
     // info,
