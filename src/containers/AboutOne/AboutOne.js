@@ -350,7 +350,7 @@ class AboutOne extends Component {
 
                   <div className="cardBodyContent">
 
-                    <TemperatureCalculator />
+                    <TemperatureCalculator multireducerKey="temperatureCalculator1"/>
 
                   </div>
 
@@ -383,7 +383,7 @@ class AboutOne extends Component {
 
                   <div className="cardBodyContent">
 
-                    <TemperatureCalculator />
+                    <TemperatureCalculator multireducerKey="temperatureCalculator2"/>
 
                   </div>
 

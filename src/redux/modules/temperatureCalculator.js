@@ -7,6 +7,8 @@ import initialState from '../reducers/initial-state';
 
 export default function reducer(state = initialState.temperature_calculator, action) {
 
+  const v = {...state}
+
   switch (action.type) {
 
     case CELSIUS_CHANGE: {
