@@ -21,7 +21,7 @@ import routes from './routes';
 
 import {createBrowserHistory} from 'history';
 
-import configureStore from './redux/store/configureStore';
+import configureStore from './redux/configureStore';
 
 import './js/app';
 

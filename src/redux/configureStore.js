@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { reduxBatch } from '@manaflair/redux-batch';
-import rootReducer from '../reducers/index';
+import createRootReducer from './reducers';
+// import notify from 'redux-notify';
+// import events from './events';
 
 // ----------------------------------------------------------------------
 
@@ -18,6 +20,7 @@ const configureStore = ({history, preloadedState}) => {
   console.log('>>>>>>>>>>>>>>>>> configureStore > preloadedState:', preloadedState);
 
   // ----------------------------------------------------------------------
+  // middleware.push(notify(events));
 
   // logger must be the last middleware in chain
   // collapsed: (takes a Boolean or optionally a Function that receives 'getState' 
@@ -34,7 +37,7 @@ const configureStore = ({history, preloadedState}) => {
 
   if (__CLIENT__ && __DEVTOOLS__) {
     const { persistState } = require('redux-devtools');
-    const DevTools = require('../../containers/DevTools/DevTools').default;
+    const DevTools = require('../containers/DevTools/DevTools').default;
 
     Array.prototype.push.apply(enhancers, [
       window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument(),
@@ -47,7 +50,7 @@ const configureStore = ({history, preloadedState}) => {
   // ----------------------------------------------------------------------
 
   const store = createStore(
-    combine(rootReducer(history)),
+    combine(createRootReducer(history)),
     preloadedState,
     // reduxBatch,
     finalEnhancer
@@ -57,8 +60,8 @@ const configureStore = ({history, preloadedState}) => {
 
   if (__DEVELOPMENT__ && module.hot) {
     console.log('>>>>>>>>>>>>>>>>>>> configureStore > MODULE.HOT! <<<<<<<<<<<<<<<<<');
-    module.hot.accept('../reducers/index', () => {
-      let reducer = require('../reducers/index').default;
+    module.hot.accept('./reducers', () => {
+      let reducer = require('./reducers').default;
       reducer = combine(reducer(history));
       store.replaceReducer(reducer);
     });

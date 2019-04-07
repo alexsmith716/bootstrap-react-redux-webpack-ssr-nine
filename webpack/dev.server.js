@@ -85,19 +85,24 @@ module.exports = {
                   return generatedIdent(name, localName, loaderContext.resourcePath);
                 }
               },
-              // importLoaders: 2
+              importLoaders: 2,
+              sourceMap: true,
+            }
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              // debug: true,
             }
           },
           {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
               config: {
                 path: 'postcss.config.js'
               }
             }
-          },
-          {
-            loader: 'resolve-url-loader'
           },
           {
             loader: 'sass-loader',
@@ -137,12 +142,20 @@ module.exports = {
                   return generatedIdent(name, localName, loaderContext.resourcePath);
                 }
               },
-              // importLoaders: 1
+              importLoaders: 2,
+              sourceMap: true,
+            }
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              // debug: true,
             }
           },
           {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
               config: {
                 path: 'postcss.config.js'
               }

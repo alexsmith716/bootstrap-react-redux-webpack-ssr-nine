@@ -1,6 +1,6 @@
 
-// global.__CLIENT__ = true;
-// global.__SERVER__ = false;
+global.__CLIENT__ = true;
+global.__SERVER__ = false;
 
 const path = require('path');
 const webpack = require('webpack');
@@ -95,16 +95,19 @@ module.exports = {
             }
           },
           {
+            loader: 'resolve-url-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
               config: {
                 path: 'postcss.config.js'
               }
             }
-          },
-          {
-            loader: 'resolve-url-loader',
-            // options: {}
           },
           {
             loader: 'sass-loader',
@@ -148,12 +151,19 @@ module.exports = {
                   return generatedIdent(name, localName, loaderContext.resourcePath);
                 }
               },
-              importLoaders: 1
+              importLoaders: 2
             }
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              sourceMap: true,
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
               config: {
                 path: 'postcss.config.js'
               }
