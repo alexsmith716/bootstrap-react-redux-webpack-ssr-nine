@@ -1,5 +1,5 @@
 
-import initialState from '../reducers/initial-state';
+import initialState from '../initial-state';
 
 
 export default function reducer(state = initialState.objectTestOne, action) {

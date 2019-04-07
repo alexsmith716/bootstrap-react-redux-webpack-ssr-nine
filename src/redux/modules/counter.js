@@ -1,7 +1,7 @@
 const INCREMENT_COUNTER = 'redux-example/counter/INCREMENT_COUNTER';
 const DECREMENT_COUNTER = 'redux-example/counter/DECREMENT_COUNTER';
 
-import initialState from '../reducers/initial-state';
+import initialState from '../initial-state';
 
 // specify the initial state
 export default function reducer(state = initialState.counter, action) {

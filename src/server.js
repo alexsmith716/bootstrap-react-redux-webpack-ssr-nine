@@ -42,9 +42,9 @@ import ReactDOM from 'react-dom/server';
 // ----------------------------------
 
 // ----------------------------------
-import configureStore from './redux/store/configureStore';
+import configureStore from './redux/configureStore';
 
-import initialStateHttp from './redux/reducers/initial-state-http';
+import initialStateHttp from './redux/initial-state-http';
 // ----------------------------------
 
 // Device Detection Utils

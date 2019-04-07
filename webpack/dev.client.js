@@ -143,8 +143,14 @@ const webpackConfig = {
                   return generatedIdent(name, localName, loaderContext.resourcePath);
                 }
               },
-              // importLoaders: 2,
+              importLoaders: 2,
               sourceMap: true,
+            }
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              // debug: true,
             }
           },
           {
@@ -155,9 +161,6 @@ const webpackConfig = {
                 path: 'postcss.config.js'
               }
             }
-          },
-          {
-            loader: 'resolve-url-loader'
           },
           {
             loader: 'sass-loader',
@@ -202,8 +205,14 @@ const webpackConfig = {
                   return generatedIdent(name, localName, loaderContext.resourcePath);
                 }
               },
-              // importLoaders: 1,
-              sourceMap: true
+              importLoaders: 2,
+              sourceMap: true,
+            }
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              // debug: true,
             }
           },
           {
