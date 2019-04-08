@@ -1,5 +1,7 @@
 import { List } from 'immutable';
 
+// defines state shape
+
 export default {
 
   device: {

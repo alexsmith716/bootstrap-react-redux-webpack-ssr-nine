@@ -9,6 +9,7 @@ import createRootReducer from './reducers';
 
 const middleware = [thunk];
 
+// state shape
 function combine(reducers) {
   return combineReducers(reducers);
 };

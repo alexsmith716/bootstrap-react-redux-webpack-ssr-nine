@@ -127,10 +127,16 @@ const dest = document.getElementById('content');
   if (module.hot) {
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > MODULE.HOT! <<<<<<<<<<<<<<<<<');
     module.hot.accept('./routes', () => {
-      const nextRoutes = require('./routes').default;
+      // const nextRoutes = require('./routes').default;
+      // console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > MODULE.HOT! > nextRoutes: ', nextRoutes);
+      // hydrate(nextRoutes).catch(err => {
+      //   console.error('>>>>>>>>>>>>>>>>>>> Error on routes reload:', err);
+      // });
+      const nextRoutes = require('./routes');
       console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > MODULE.HOT! > nextRoutes: ', nextRoutes);
-      hydrate(nextRoutes).catch(err => {
-        console.error('>>>>>>>>>>>>>>>>>>> Error on routes reload:', err);
+      hydrate(nextRoutes.__esModule ? nextRoutes.default : nextRoutes).catch(err => {
+        console.error('Error on routes reload:', err);
+        console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > MODULE.HOT! > ERROR: ', err);
       });
     });
   } else {
@@ -141,10 +147,10 @@ const dest = document.getElementById('content');
 
   if (process.env.NODE_ENV !== 'production') {
     window.React = React;
-    console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest1: ', dest);
-    console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest2: ', dest.firstChild);
-    console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest3: ', dest.firstChild.attributes);
-    console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest4: ', dest.firstChild.attributes['data-reactroot']);
+    // console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest1: ', dest);
+    // console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest2: ', dest.firstChild);
+    // console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest3: ', dest.firstChild.attributes);
+    // console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > Server-side rendering check <<<<<<<<<<<<<<<<<<<<<< dest4: ', dest.firstChild.attributes['data-reactroot']);
 
     if (!dest || !dest.firstChild || !dest.firstChild.attributes || !dest.firstChild.attributes['data-reactroot']) {
       // console.error('Server-side React render was discarded.' + 'Make sure that your initial render does not contain any client-side code.');

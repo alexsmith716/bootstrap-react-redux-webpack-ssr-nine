@@ -4,6 +4,7 @@
 module.exports = ({ file }) => ({
   plugins: {
     'postcss-import': { root: file.dirname },
+    'postcss-flexbugs-fixes': {},
     'postcss-preset-env': { 
       browsers: ['last 2 version'],
     },
