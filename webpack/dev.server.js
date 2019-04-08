@@ -11,7 +11,6 @@ const config = require('../config/config');
 // const loaderUtils = require('loader-utils').stringifyRequest;
 
 const rootPath = path.resolve(__dirname, '..');
-const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const generatedIdent = (name, localName, lr) => {
   const r = Buffer.from(lr).toString('base64');
@@ -222,7 +221,6 @@ module.exports = {
     // https://webpack.js.org/plugins/limit-chunk-count-plugin/
     // After compiling some chunks are too small - creating larger HTTP overhead
     // post-process chunks by merging them
-    new WriteFilePlugin(),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
     }),

@@ -8,7 +8,6 @@ const webpack = require('webpack');
 const dllHelpers = require('./dllreferenceplugin');
 const config = require('../config/config');
 
-const WriteFilePlugin = require('write-file-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -90,9 +89,7 @@ const webpackConfig = {
   entry: {
     main: [
       'react-devtools',
-      `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr`,
-      // 'webpack-hot-middleware/client?reload=true',
-      // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
+      `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr&timeout=20000&reload=true`,
       path.resolve(__dirname, '../src/theme/scss/bootstrap/bootstrap.global.scss'),
       'bootstrap',
       path.resolve(__dirname, '../src/client.js'),
@@ -103,7 +100,7 @@ const webpackConfig = {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     path: assetsPath,
-    publicPath: `http://${host}:${port}/dist/`
+    publicPath: `http://${host}:${port}/dist/`,
     // publicPath: '/dist/'
   },
 
@@ -276,18 +273,19 @@ const webpackConfig = {
   plugins: [
 
     // new webpack.ProgressPlugin(handler),
-    new WriteFilePlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
 
+
+    // by default [name].css is used when process.env.NODE_ENV === 'development' and [name].[contenthash].css during production, 
+    //    so you can likely forget about having to pass anything.
     new ExtractCssChunks({
-      filename: '[name].[contenthash].css',
-      // filename: "[name].css",
-      // chunkFilename: "[id].css",
+      // filename: '[name].[contenthash].css',
+      filename: '[name].css',
+      chunkFilename: '[id].css',
       orderWarning: true // Disable to remove warnings about conflicting order between imports
     }),
-
-    new webpack.NamedModulesPlugin(),
 
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('development') },

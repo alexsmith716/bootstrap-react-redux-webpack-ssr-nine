@@ -14,6 +14,7 @@ import temperatureCalculator from './modules/temperatureCalculator';
 
 export { default as initialState } from './initial-state';
 
+// state shape
 export default function rootReducer(history) {
   return {
     router: connectRouter(history),
