@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const dllHelpers = require('./dllreferenceplugin');
 const config = require('../config/config');
 
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -89,7 +90,8 @@ const webpackConfig = {
   entry: {
     main: [
       'react-devtools',
-      `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr&timeout=20000&reload=true`,
+      `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr`,
+      // `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr&timeout=20000&reload=true`,
       path.resolve(__dirname, '../src/theme/scss/bootstrap/bootstrap.global.scss'),
       'bootstrap',
       path.resolve(__dirname, '../src/client.js'),
@@ -117,13 +119,14 @@ const webpackConfig = {
       {
         test: /\.(scss)$/,
         use: [
-          {
-            loader:ExtractCssChunks.loader,
-            options: {
-              hot: true,
-              reloadAll: true,
-            }
-          },
+          ExtractCssChunks.loader,
+          // {
+          //   loader:ExtractCssChunks.loader,
+          //   options: {
+          //     hot: true,
+          //     reloadAll: true,
+          //   }
+          // },
           {
             loader: 'css-loader',
             options: {
@@ -182,13 +185,14 @@ const webpackConfig = {
       {
         test: /\.(css)$/,
         use: [
-          {
-            loader:ExtractCssChunks.loader,
-            options: {
-              hot: true,
-              reloadAll: true,
-            }
-          },
+          ExtractCssChunks.loader,
+          // {
+          //   loader:ExtractCssChunks.loader,
+          //   options: {
+          //     hot: true,
+          //     reloadAll: true,
+          //   }
+          // },
           {
             loader : 'css-loader',
             options: {
@@ -273,10 +277,7 @@ const webpackConfig = {
   plugins: [
 
     // new webpack.ProgressPlugin(handler),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-
+    new WriteFilePlugin(),
 
     // by default [name].css is used when process.env.NODE_ENV === 'development' and [name].[contenthash].css during production, 
     //    so you can likely forget about having to pass anything.
@@ -286,6 +287,10 @@ const webpackConfig = {
       chunkFilename: '[id].css',
       orderWarning: true // Disable to remove warnings about conflicting order between imports
     }),
+
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
 
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify('development') },

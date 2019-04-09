@@ -7,8 +7,7 @@
   "author": "dev",
   "license": "MIT",
   "scripts": {
-    "dev": "npm-run-all --parallel start:dev",
-    "start:dev": "concurrently \"yarn start:dev:server\" \"yarn start:dev:api\" \"react-devtools\"",
+    "dev": "concurrently --kill-others \"yarn start:dev:server\" \"yarn start:dev:api\" \"react-devtools\"",
     "start:dev:server": "NODE_ENV=development WEBPACK_DLLS=1 PORT=3000 node ./bin/server.js --no-update-notifier",
     "start:dev:api": "NODE_PATH=api  NODE_ENV=development BABEL_DISABLE_CACHE=1 APIPORT=3030 node ./bin/api.js",
     "react-devtools": "react-devtools",
@@ -205,12 +204,13 @@
     "typescript": "^3.3.3",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
-    "webpack-bundle-analyzer": "^3.1.0",
+    "webpack-bundle-analyzer": "^3.2.0",
     "webpack-cli": "^3.3.0",
     "webpack-dev-middleware": "^3.6.2",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-hot-server-middleware": "^0.6.0",
-    "webpack-pwa-manifest": "^4.0.0"
+    "webpack-pwa-manifest": "^4.0.0",
+    "write-file-webpack-plugin": "^4.5.0"
   },
   "husky": {
     "hooks": {

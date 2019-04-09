@@ -11,6 +11,7 @@ const config = require('../config/config');
 // const loaderUtils = require('loader-utils').stringifyRequest;
 
 const rootPath = path.resolve(__dirname, '..');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const generatedIdent = (name, localName, lr) => {
   const r = Buffer.from(lr).toString('base64');
@@ -213,6 +214,7 @@ module.exports = {
   },
 
   plugins: [
+    new WriteFilePlugin(),
     // new webpack.ProgressPlugin(handler),
     // https://webpack.js.org/plugins/module-concatenation-plugin/
     // new webpack.optimize.ModuleConcatenationPlugin(),
