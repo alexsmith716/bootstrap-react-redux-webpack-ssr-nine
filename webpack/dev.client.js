@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const dllHelpers = require('./dllreferenceplugin');
 const config = require('../config/config');
 
-const WriteFilePlugin = require('write-file-webpack-plugin');
+// const WriteFilePlugin = require('write-file-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -85,12 +85,12 @@ const webpackConfig = {
   // devtool: false, // disables default devtool configuration
   // devtool: 'eval-source-map',  // best quality SourceMaps for development
   // devtool: 'source-map',       // A full SourceMap is emitted as a separate file
-  devtool: 'inline-source-map',   // A SourceMap is added as a DataUrl to the bundle
+  devtool: 'source-map',   // A SourceMap is added as a DataUrl to the bundle
 
   entry: {
     main: [
       'react-devtools',
-      `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr`,
+      `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false`,
       // `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr&timeout=20000&reload=true`,
       path.resolve(__dirname, '../src/theme/scss/bootstrap/bootstrap.global.scss'),
       'bootstrap',
@@ -102,11 +102,11 @@ const webpackConfig = {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     path: assetsPath,
-    publicPath: `http://${host}:${port}/dist/`,
-    // publicPath: '/dist/'
+    // publicPath: `http://${host}:${port}/dist/`,
+    publicPath: '/dist/'
   },
 
-  cache: false,
+  // cache: false,
 
   module: {
     rules: [
@@ -119,14 +119,14 @@ const webpackConfig = {
       {
         test: /\.(scss)$/,
         use: [
-          ExtractCssChunks.loader,
-          // {
-          //   loader:ExtractCssChunks.loader,
-          //   options: {
-          //     hot: true,
-          //     reloadAll: true,
-          //   }
-          // },
+          // ExtractCssChunks.loader,
+          {
+            loader:ExtractCssChunks.loader,
+            options: {
+              hot: true,
+              reloadAll: true,
+            }
+          },
           {
             loader: 'css-loader',
             options: {
@@ -150,6 +150,7 @@ const webpackConfig = {
           {
             loader: 'resolve-url-loader',
             options: {
+              sourceMap: true,
               // debug: true,
             }
           },
@@ -185,14 +186,14 @@ const webpackConfig = {
       {
         test: /\.(css)$/,
         use: [
-          ExtractCssChunks.loader,
-          // {
-          //   loader:ExtractCssChunks.loader,
-          //   options: {
-          //     hot: true,
-          //     reloadAll: true,
-          //   }
-          // },
+          // ExtractCssChunks.loader,
+          {
+            loader:ExtractCssChunks.loader,
+            options: {
+              hot: true,
+              reloadAll: true,
+            }
+          },
           {
             loader : 'css-loader',
             options: {
@@ -213,6 +214,7 @@ const webpackConfig = {
           {
             loader: 'resolve-url-loader',
             options: {
+              sourceMap: true,
               // debug: true,
             }
           },
@@ -270,14 +272,14 @@ const webpackConfig = {
   },
 
   resolve: {
-    modules: [ 'client', 'node_modules' ],
-    extensions: ['.json', '.js', '.jsx'],
+    // modules: [ 'client', 'node_modules' ],
+    extensions: ['.json', '.js', '.jsx', '.scss'],
   },
 
   plugins: [
 
     // new webpack.ProgressPlugin(handler),
-    new WriteFilePlugin(),
+    // new WriteFilePlugin(),
 
     // by default [name].css is used when process.env.NODE_ENV === 'development' and [name].[contenthash].css during production, 
     //    so you can likely forget about having to pass anything.

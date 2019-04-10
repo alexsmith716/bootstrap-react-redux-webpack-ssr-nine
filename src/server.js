@@ -112,10 +112,10 @@ export default ({ clientStats }) => async (req, res) => {
 
   // progressive app manifest
   // https://www.w3.org/TR/appmanifest/
-  if (req.url == '/manifest.json') {
-    console.log('>>>>>>>>>>>>>>>>> SERVER > manifest.json <<<<<<<<<<<<<<<<<<<<<<<');
-    return res.sendFile(path.join(__dirname, '..', 'build', 'static', 'manifest.json'));
-  }
+  //  if (req.url == '/manifest.json') {
+  //    console.log('>>>>>>>>>>>>>>>>> SERVER > manifest.json <<<<<<<<<<<<<<<<<<<<<<<');
+  //    return res.sendFile(path.join(__dirname, '..', 'build', 'static', 'manifest.json'));
+  //  }
 
   // if (req.url == '/dist/service-worker.js') {
   //   console.log('>>>>>>>>>>>>>>>>> SERVER > service-worker <<<<<<<<<<<<<<<<<<<<<<<');

@@ -45,10 +45,6 @@ import config from '../../../config/config';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   static propTypes = {
     route: PropTypes.objectOf(PropTypes.any).isRequired,
     location: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -111,7 +107,7 @@ class App extends Component {
     const styles = require('./styles/App.scss');
     const stylesCss = require('./css/AppCss1.css');
 
-    console.log('>>>>>>>>>>>>>>>> APP > render() <<<<<<<<<<<<<< !!STORE!!: ', this.props.store);
+    // console.log('>>>>>>>>>>>>>>>> APP > render() <<<<<<<<<<<<<< !!STORE!!: ', this.props.store);
 
     return (
 

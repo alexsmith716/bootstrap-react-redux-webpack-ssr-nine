@@ -11,7 +11,7 @@ const config = require('../config/config');
 // const loaderUtils = require('loader-utils').stringifyRequest;
 
 const rootPath = path.resolve(__dirname, '..');
-const WriteFilePlugin = require('write-file-webpack-plugin');
+// const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const generatedIdent = (name, localName, lr) => {
   const r = Buffer.from(lr).toString('base64');
@@ -92,6 +92,7 @@ module.exports = {
           {
             loader: 'resolve-url-loader',
             options: {
+              sourceMap: true,
               // debug: true,
             }
           },
@@ -149,6 +150,7 @@ module.exports = {
           {
             loader: 'resolve-url-loader',
             options: {
+              sourceMap: true,
               // debug: true,
             }
           },
@@ -210,11 +212,11 @@ module.exports = {
 
   resolve: {
     // modules: [ 'client', 'node_modules' ],
-    extensions: ['.json', '.js', '.jsx'],
+    extensions: ['.json', '.js', '.jsx', '.scss'],
   },
 
   plugins: [
-    new WriteFilePlugin(),
+    // new WriteFilePlugin(),
     // new webpack.ProgressPlugin(handler),
     // https://webpack.js.org/plugins/module-concatenation-plugin/
     // new webpack.optimize.ModuleConcatenationPlugin(),
@@ -223,6 +225,9 @@ module.exports = {
     // https://webpack.js.org/plugins/limit-chunk-count-plugin/
     // After compiling some chunks are too small - creating larger HTTP overhead
     // post-process chunks by merging them
+
+    // LimitChunkCountPlugin with 'maxChunks: 1' insures only one file is generated 
+    //    for server bundle so it can be run synchronously
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1
     }),
