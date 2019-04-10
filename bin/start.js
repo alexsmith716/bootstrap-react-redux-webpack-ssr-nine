@@ -1,3 +1,4 @@
+require('colors');
 const path = require('path');
 const express = require('express');
 // const helmet = require('helmet');
@@ -70,11 +71,23 @@ const port = normalizePort(__DEVELOPMENT__ ? portNum : portNum);
 // https://github.com/webpack/webpack.js.org/blob/master/src/content/configuration/dev-server.md
 // https://github.com/webpack/webpack-dev-middleware
 // https://webpack.js.org/configuration/stats/#stats
+// https://webpack.js.org/concepts/hot-module-replacement/
+// https://github.com/gaearon/react-hot-loader
+// https://github.com/webpack/webpack-dev-server
+// https://github.com/webpack-contrib/webpack-hot-middleware
+
+// watchOptions: {
+//   aggregateTimeout: 300,
+//   poll: true
+// },
+
+const { publicPath } = clientConfigDev.output;
+
 const serverOptions = {
   lazy: false,
-  stats: 'normal',
+  stats: { colors: true },
   serverSideRender: true,
-  publicPath: clientConfigDev.output.publicPath,
+  publicPath,
   headers: { 'Access-Control-Allow-Origin': '*' }
 };
 
