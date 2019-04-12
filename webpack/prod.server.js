@@ -37,7 +37,7 @@ const handler = (percentage, message, ...args) => {
 
 module.exports = {
 
-  // context: path.resolve(__dirname, '..'),
+  context: path.resolve(__dirname, '..'),
 
   name: 'server',
   target: 'node',
@@ -46,7 +46,7 @@ module.exports = {
   // devtool: 'hidden-source-map',
 
   // entry: './server/server.js',
-  entry: path.resolve(__dirname, '../src/server.js'),
+  entry: './src/server.js',
 
   output: {
     path: path.resolve('./build/server'),

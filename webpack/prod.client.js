@@ -35,7 +35,7 @@ const handler = (percentage, message, ...args) => {
 
 module.exports = {
 
-  // context: path.resolve(__dirname, '..'),
+  context: path.resolve(__dirname, '..'),
   // the home directory for webpack
   // the entry and module.rules.loader option is resolved relative to this directory
 
@@ -48,9 +48,9 @@ module.exports = {
 
   entry: {
     main: [
-      path.resolve(__dirname, '../src/theme/scss/bootstrap/bootstrap.global.scss'),
+      './src/theme/scss/bootstrap/bootstrap.global.scss',
       'bootstrap',
-      path.resolve(__dirname, '../src/client.js')
+      './src/client.js',
     ]
   },
 
@@ -362,7 +362,7 @@ module.exports = {
     }),
 
     new SWPrecacheWebpackPlugin({
-      cacheId: 'bootstrap-react-redux-webpack-ssr-four',
+      cacheId: 'bootstrap-react-redux-webpack-ssr-nine',
       filename: 'service-worker.js',
       maximumFileSizeToCacheInBytes: 8388608,
 
