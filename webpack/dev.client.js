@@ -8,7 +8,7 @@ const webpack = require('webpack');
 const dllHelpers = require('./dllreferenceplugin');
 const config = require('../config/config');
 
-// const WriteFilePlugin = require('write-file-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
@@ -81,20 +81,20 @@ const webpackConfig = {
   name: 'client',
   target: 'web',
   mode: 'development',
-  // devtool: 'eval', // Each module is executed with eval() and //@ sourceURL
-  // devtool: false, // disables default devtool configuration
+  // devtool: 'eval',             // Each module is executed with eval() and //@ sourceURL
+  // devtool: false,              // disables default devtool configuration
   // devtool: 'eval-source-map',  // best quality SourceMaps for development
   // devtool: 'source-map',       // A full SourceMap is emitted as a separate file
-  devtool: 'source-map',   // A SourceMap is added as a DataUrl to the bundle
+  devtool: 'inline-source-map',   // A SourceMap is added as a DataUrl to the bundle
 
   entry: {
     main: [
       'react-devtools',
-      `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false`,
+      `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr&timeout=20000&reload=true`,
       // `webpack-hot-middleware/client?path=http://${host}:${port}/__webpack_hmr&timeout=20000&reload=true`,
-      path.resolve(__dirname, '../src/theme/scss/bootstrap/bootstrap.global.scss'),
+      './src/theme/scss/bootstrap/bootstrap.global.scss',
       'bootstrap',
-      path.resolve(__dirname, '../src/client.js'),
+      './src/client.js'
     ]
   },
 
@@ -102,8 +102,8 @@ const webpackConfig = {
     filename: '[name].js',
     chunkFilename: '[name].chunk.js',
     path: assetsPath,
-    // publicPath: `http://${host}:${port}/dist/`,
-    publicPath: '/dist/'
+    publicPath: `http://${host}:${port}/dist/`,
+    // publicPath: '/dist/'
   },
 
   // cache: false,
@@ -144,13 +144,13 @@ const webpackConfig = {
                 }
               },
               importLoaders: 2,
-              sourceMap: true,
+              // sourceMap: true,
             }
           },
           {
             loader: 'resolve-url-loader',
             options: {
-              sourceMap: true,
+              // sourceMap: true,
               // debug: true,
             }
           },
@@ -167,13 +167,14 @@ const webpackConfig = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              sourceMapContents: true,
+              sourceMapContents: false,
               outputStyle: 'expanded',
             }
           },
           {
             loader: 'sass-resources-loader',
             options: {
+              sourceMap: true,
               resources: [
                 path.resolve(rootPath, 'src/theme/scss/app/functions.scss'),
                 path.resolve(rootPath, 'src/theme/scss/app/variables.scss'),
@@ -208,13 +209,13 @@ const webpackConfig = {
                 }
               },
               importLoaders: 2,
-              sourceMap: true,
+              // sourceMap: true,
             }
           },
           {
             loader: 'resolve-url-loader',
             options: {
-              sourceMap: true,
+              // sourceMap: true,
               // debug: true,
             }
           },

@@ -1,8 +1,6 @@
 require('colors');
 const path = require('path');
 const express = require('express');
-// const helmet = require('helmet');
-// const headers = require('../server/utils/headers');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
@@ -88,7 +86,9 @@ const serverOptions = {
   stats: { colors: true },
   serverSideRender: true,
   publicPath,
-  headers: { 'Access-Control-Allow-Origin': '*' }
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  }
 };
 
 // app.set('port', port);
@@ -158,7 +158,6 @@ if (config.port) {
   if (__DEVELOPMENT__) {
     const compiler = webpack([clientConfigDev, serverConfigDev]);
     const clientCompiler = compiler.compilers[0];
-    // const serverOptions = { publicPath, stats: { colors: true } };
     const devMiddleware = webpackDevMiddleware(compiler, serverOptions);
 
     // console.error('>>>>>>>> BIN > START > WEBPACK COMPILE > DEV > compiler: ', compiler);

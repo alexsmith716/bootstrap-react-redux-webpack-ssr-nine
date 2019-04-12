@@ -112,10 +112,10 @@ export default ({ clientStats }) => async (req, res) => {
 
   // progressive app manifest
   // https://www.w3.org/TR/appmanifest/
-  //  if (req.url == '/manifest.json') {
-  //    console.log('>>>>>>>>>>>>>>>>> SERVER > manifest.json <<<<<<<<<<<<<<<<<<<<<<<');
-  //    return res.sendFile(path.join(__dirname, '..', 'build', 'static', 'manifest.json'));
-  //  }
+  if (req.url == '/manifest.json') {
+    console.log('>>>>>>>>>>>>>>>>> SERVER > manifest.json <<<<<<<<<<<<<<<<<<<<<<<');
+    return res.sendFile(path.join(__dirname, '..', 'build', 'static', 'manifest.json'));
+  }
 
   // if (req.url == '/dist/service-worker.js') {
   //   console.log('>>>>>>>>>>>>>>>>> SERVER > service-worker <<<<<<<<<<<<<<<<<<<<<<<');
@@ -124,14 +124,14 @@ export default ({ clientStats }) => async (req, res) => {
   //   return;
   // }
 
-  if (req.url == '/dlls/:dllName.js') {
-    console.log('>>>>>>>>>>>>>>>>> SERVER > /dlls/:dllName.js <<<<<<<<<<<<<<<<<<<<<<<');
-    return fs.access(
-      path.join(__dirname, '..', 'build', 'static', 'dist', 'dlls', `${req.params.dllName}.js`),
-      fs.constants.R_OK,
-      err => (err ? res.send(`console.log('No dll file found (${req.originalUrl})')`) : null)
-    );
-  };
+  // if (req.url == '/dlls/:dllName.js') {
+  //   console.log('>>>>>>>>>>>>>>>>> SERVER > /dlls/:dllName.js <<<<<<<<<<<<<<<<<<<<<<<');
+  //   return fs.access(
+  //     path.join(__dirname, '..', 'build', 'static', 'dist', 'dlls', `${req.params.dllName}.js`),
+  //     fs.constants.R_OK,
+  //     err => (err ? res.send(`console.log('No dll file found (${req.originalUrl})')`) : null)
+  //   );
+  // };
 
   res.setHeader('X-Forwarded-For', req.ip);
 
@@ -253,7 +253,8 @@ export default ({ clientStats }) => async (req, res) => {
     // ===============================================================================
     // ===============================================================================
 
-    // leaving '__DISABLE_SSR__' hydration here for requirement of 'https://github.com/faceyspacey/webpack-flush-chunks':
+    console.log('>>>>>>>>>>>>>>>>> SERVER > REQ.urlXXXXXX ++++++++++++++++++: ', req.url);
+
     // It offers 2 functions flushChunks and flushFiles, which you call immediately after ReactDOMServer.renderToString. 
     // They are used in server-rendering to extract the minimal amount of chunks to send to the client, 
     // thereby solving a missing piece for code-splitting: server-side rendering.

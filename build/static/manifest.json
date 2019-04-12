@@ -1,6 +1,6 @@
 {
-  "short_name": "ElectionApp2018!",
-  "name": "Bootstrap React Redux Webpack SSR five",
+  "short_name": "ElectionApp2019",
+  "name": "Applying thunk middleware for Redux",
   "icons": [
     {
       "src": "launcher-icon-2x.png",

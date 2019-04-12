@@ -10,7 +10,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-// const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const rootPath = path.resolve(__dirname, '..');
@@ -97,7 +97,7 @@ module.exports = {
           {
             loader: 'resolve-url-loader',
             options: {
-              sourceMap: true,
+              // sourceMap: true,
             },
           },
           {
@@ -120,6 +120,7 @@ module.exports = {
           {
             loader: 'sass-resources-loader',
             options: {
+              sourceMap: true,
               resources: [
                 path.resolve(rootPath, 'src/theme/scss/app/functions.scss'),
                 path.resolve(rootPath, 'src/theme/scss/app/variables.scss'),
@@ -157,7 +158,7 @@ module.exports = {
           {
             loader: 'resolve-url-loader',
             options: {
-              sourceMap: true,
+              // sourceMap: true,
             },
           },
           {
@@ -355,25 +356,25 @@ module.exports = {
       __DLLS__: false
     }),
 
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   template: path.join(rootPath, './server/pwa.js')
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(rootPath, './src/pwa.js')
+    }),
 
-    // new SWPrecacheWebpackPlugin({
-    //   cacheId: 'bootstrap-react-redux-webpack-ssr-four',
-    //   filename: 'service-worker.js',
-    //   maximumFileSizeToCacheInBytes: 8388608,
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'bootstrap-react-redux-webpack-ssr-four',
+      filename: 'service-worker.js',
+      maximumFileSizeToCacheInBytes: 8388608,
 
-    //   staticFileGlobs: [`${path.dirname(assetsPath)}/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}`],
-    //   stripPrefix: path.dirname(assetsPath),
+      staticFileGlobs: [`${path.dirname(assetsPath)}/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}`],
+      stripPrefix: path.dirname(assetsPath),
 
-    //   directoryIndex: '/',
-    //   verbose: true,
-    //   // clientsClaim: true,
-    //   // skipWaiting: false,
-    //   navigateFallback: '/dist/index.html'
-    // }),
+      directoryIndex: '/',
+      verbose: true,
+      // clientsClaim: true,
+      // skipWaiting: false,
+      navigateFallback: '/dist/index.html'
+    }),
 
     // new BundleAnalyzerPlugin({
     //   analyzerMode: 'static',

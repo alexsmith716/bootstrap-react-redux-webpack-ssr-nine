@@ -6,12 +6,12 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const config = require('../config/config');
-// const externals = require('./node-externals');
+const externals = require('./node-externals');
 
 // const loaderUtils = require('loader-utils').stringifyRequest;
 
 const rootPath = path.resolve(__dirname, '..');
-// const WriteFilePlugin = require('write-file-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 const generatedIdent = (name, localName, lr) => {
   const r = Buffer.from(lr).toString('base64');
@@ -41,17 +41,17 @@ const handler = (percentage, message, ...args) => {
 
 module.exports = {
 
-  // context: path.resolve(__dirname, '..'),
+  context: path.resolve(__dirname, '..'),
 
   name: 'server',
   target: 'node',
-  // externals,
+  externals,
   mode: 'development',
   // devtool: 'eval',  // generated code
   // devtool: false,
   devtool: 'source-map',
 
-  entry: path.resolve(__dirname, '../src/server.js'),
+  entry: './src/server.js',
 
   output: {
     path: path.resolve('./build/server'),
@@ -86,13 +86,13 @@ module.exports = {
                 }
               },
               importLoaders: 2,
-              sourceMap: true,
+              // sourceMap: true,
             }
           },
           {
             loader: 'resolve-url-loader',
             options: {
-              sourceMap: true,
+              // sourceMap: true,
               // debug: true,
             }
           },
@@ -116,6 +116,7 @@ module.exports = {
           {
             loader: 'sass-resources-loader',
             options: {
+              sourceMap: true,
               resources: [
                 path.resolve(rootPath, 'src/theme/scss/app/functions.scss'),
                 path.resolve(rootPath, 'src/theme/scss/app/variables.scss'),
@@ -144,13 +145,13 @@ module.exports = {
                 }
               },
               importLoaders: 2,
-              sourceMap: true,
+              // sourceMap: true,
             }
           },
           {
             loader: 'resolve-url-loader',
             options: {
-              sourceMap: true,
+              // sourceMap: true,
               // debug: true,
             }
           },
@@ -216,7 +217,7 @@ module.exports = {
   },
 
   plugins: [
-    // new WriteFilePlugin(),
+    new WriteFilePlugin(),
     // new webpack.ProgressPlugin(handler),
     // https://webpack.js.org/plugins/module-concatenation-plugin/
     // new webpack.optimize.ModuleConcatenationPlugin(),

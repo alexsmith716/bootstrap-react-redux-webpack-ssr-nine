@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
-import config from '../../config/config';
 
 const Html = ({ assets, store, content }) => {
 
@@ -23,16 +22,17 @@ const Html = ({ assets, store, content }) => {
         {helmet.link.toComponent()}
         {helmet.script.toComponent()}
 
+        <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover" />
+
+        <link rel="manifest" href="/manifest.json" />
+
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="application-name" content="Election App 2018!" />
+        <meta name="application-name" content="Election App 2019!" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="apple-mobile-web-app-title" content="Election App 2018!" />
+        <meta name="apple-mobile-web-app-title" content="Election App 2019!" />
         <meta name="theme-color" content="#1E90FF" />
-
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="manifest" href="/manifest.json" />
 
         {/* (>>>>>>> STYLES <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
         {assets.stylesheets 
@@ -53,7 +53,7 @@ const Html = ({ assets, store, content }) => {
 
 
         {/* (>>>>>>> CONTENT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
-        <div role="main" class="react-container" id="content" dangerouslySetInnerHTML={{ __html: content }} />
+        <div role="main" id="content" dangerouslySetInnerHTML={{ __html: content }} />
 
 
         {/* (>>>>>>> STORE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<) */}
