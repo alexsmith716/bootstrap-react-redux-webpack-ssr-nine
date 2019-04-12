@@ -127,17 +127,13 @@ const dest = document.getElementById('content');
   if (module.hot) {
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > MODULE.HOT! <<<<<<<<<<<<<<<<<');
     module.hot.accept('./routes', () => {
-      const nextRoutes = require('./routes').default;
+      // const nextRoutes = require('./routes').default;
+      const nextRoutes = require('./routes');
       console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > MODULE.HOT! > nextRoutes: ', nextRoutes);
-      hydrate(nextRoutes).catch(err => {
+      hydrate(nextRoutes.__esModule ? nextRoutes.default : nextRoutes).catch(err => {
+      // hydrate(nextRoutes).catch(err => {
         console.error('>>>>>>>>>>>>>>>>>>> Error on routes reload:', err);
       });
-      // const nextRoutes = require('./routes');
-      // console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > MODULE.HOT! > nextRoutes: ', nextRoutes);
-      // hydrate(nextRoutes.__esModule ? nextRoutes.default : nextRoutes).catch(err => {
-      //   console.error('Error on routes reload:', err);
-      //   console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > MODULE.HOT! > ERROR: ', err);
-      // });
     });
   } else {
     console.log('>>>>>>>>>>>>>>>>>>> CLIENT.JS > NO MODULE.HOT! <<<<<<<<<<<<<<');

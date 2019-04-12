@@ -48,7 +48,7 @@ class Counter extends Component {
           <div className="container-flex bg-color-ivory container-padding-border-radius-2">
             <div className="width-400">
 
-              <p>Counter Clicked: {counterX} times</p>
+              <p>Counter Clicked!!: {counterX} times</p>
 
                 <div className="form-row">
                   <div className="form-group col-md-6">

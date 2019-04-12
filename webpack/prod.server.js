@@ -84,16 +84,19 @@ module.exports = {
             }
           },
           {
+            loader: 'resolve-url-loader',
+            options: {
+              // sourceMap: true,
+            },
+          },
+          {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
               config: {
                 path: 'postcss.config.js'
               }
             }
-          },
-          {
-            loader: 'resolve-url-loader',
-            // options: {}
           },
           {
             loader: 'sass-loader',
@@ -106,6 +109,7 @@ module.exports = {
           {
             loader: 'sass-resources-loader',
             options: {
+              sourceMap: true,
               resources: [
                 path.resolve(rootPath, 'src/theme/scss/app/functions.scss'),
                 path.resolve(rootPath, 'src/theme/scss/app/variables.scss'),
@@ -133,12 +137,19 @@ module.exports = {
                   return generatedIdent(name, localName, loaderContext.resourcePath);
                 }
               },
-              importLoaders: 1
+              importLoaders: 2
             }
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              // sourceMap: true,
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
+              sourceMap: true,
               config: {
                 path: 'postcss.config.js'
               }
