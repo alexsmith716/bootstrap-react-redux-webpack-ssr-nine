@@ -2,10 +2,11 @@ ssl/
 node_modules/
 log/
 logs/
-ssl/
+
 yarn-debug.log
 yarn-error.log
 yarn.lock
+
 dist/
 build/analyzers/
 build/public/assets/

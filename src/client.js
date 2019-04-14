@@ -182,7 +182,7 @@ const dest = document.getElementById('content');
 
   if (!__DEVELOPMENT__ && 'serviceWorker' in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register('/dist/service-worker.js', { scope: '/' });
+      const registration = await navigator.serviceWorker.register('/dist/service-worker.js', { scope: '/dist/' });
       console.log('>>>>>>>>>>>>>>>>>>>>>>>> CLIENT.JS > !__DEVELOPMENT__ && serviceWorker in navigator YES!! <<<<<<<<<<<<<');
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;

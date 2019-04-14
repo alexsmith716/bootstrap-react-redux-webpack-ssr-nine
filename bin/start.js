@@ -1,10 +1,12 @@
 require('colors');
+// const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const http = require('http');
+// const https = require('https');
 const favicon = require('serve-favicon');
 // const mongoose = require('mongoose');
 const webpack = require('webpack');
@@ -45,8 +47,14 @@ process.on('rejectionHandled', promise => {
 //   useNewUrlParser: true
 // };
 
+// const httpsOptions = {
+//   key: fs.readFileSync(path.join(__dirname, '../ssl/.key')),
+//   cert: fs.readFileSync(path.join(__dirname, '../ssl/.crt'))
+// }
+
 const app = express();
 const server = http.createServer(app);
+// const server = https.createServer(httpsOptions, app);
 
 const normalizePort = val => {
   const parseIntPort = parseInt(val, 10);
@@ -139,7 +147,7 @@ server.on('listening', () => {
 // start socket and 'listen' for connections (requests)
 // method: 'app.listen(path, [callback])' <<< is identical to Node's 'http.Server.listen()'
 const done = () => !isBuilt
-  && server.listen(port, err => {
+  && server.listen(port, config.host, err => {
     isBuilt = true;
     console.log('>>>>>>>> BIN > START > STATS COMPILER HAS COMPLETED BUILD !! WAIT IS OVER !');
     if (err) {
