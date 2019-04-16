@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import Counter from '../../components/widgets/Counter/Counter';
+// import Planets from '../../components/d3/Planets/Planets';
+import LineChartA from '../../components/d3/LineChart/LineChartA';
 
 // --------------------------------------------------------------------------
 
@@ -43,6 +45,15 @@ class AboutTwo extends Component {
     const aboutImageOurCustomers = require('../../theme/images/about-500-300.png');
     const styles = require('./scss/AboutTwo.scss');
 
+    const data = [];
+
+    for (let i = 0; i < 10; i += 1){
+      const random = Math.floor(Math.random() * 100);
+      data.push(random);
+    }
+
+    console.log('>>>>>>>>>>>>>>>> AboutTwo > render() > data[]: ', data);
+
     return (
 
       <div className="container">
@@ -52,6 +63,39 @@ class AboutTwo extends Component {
         <h1 className={styles.uniqueColor}>About Two</h1>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis?</p>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  D3!
+                </h5>
+
+                <div className="cardBodyContainer">
+
+                  <div className="cardBodyContent">
+
+                    <LineChartA />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
 
