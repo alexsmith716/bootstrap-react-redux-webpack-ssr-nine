@@ -119,7 +119,6 @@ const webpackConfig = {
       {
         test: /\.(scss)$/,
         use: [
-          // ExtractCssChunks.loader,
           {
             loader:ExtractCssChunks.loader,
             options: {
@@ -187,7 +186,6 @@ const webpackConfig = {
       {
         test: /\.(css)$/,
         use: [
-          // ExtractCssChunks.loader,
           {
             loader:ExtractCssChunks.loader,
             options: {

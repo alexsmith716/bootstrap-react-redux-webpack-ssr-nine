@@ -25,9 +25,7 @@ class AboutOne extends Component {
 
     // this. = this..bind(this);
 
-    // this.state = {
-    //
-    // };
+    // this.state = {};
   }
 
   // static propTypes = {

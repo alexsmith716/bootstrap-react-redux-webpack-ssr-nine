@@ -10,13 +10,18 @@ import DropdownSelect from '../DropdownSelect/DropdownSelect';
 class FilterableTable extends Component {
 
   // constructor is passed object containing all props written on component jsx tag
+  // initializing state and binding methods
+  // allow the parent class's constructor to be called in instance class
+  // initialize the context
   constructor(props) {
 
     // give the parent of the component ability to handle the props
+    // instance access 'this.props'
     super(props);
 
     // object is created and appended as attribute of the component itself and named 'state'
 
+    // initialize local state (assign an object to 'this.state')
     this.state = {
       filterText: '',
       inStockOnly: false,
@@ -26,6 +31,7 @@ class FilterableTable extends Component {
       dropDownOptionSelected: ''
     };
 
+    // bind event handler method to an instance
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
     this.handleInStockChange = this.handleInStockChange.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -130,8 +136,8 @@ class FilterableTable extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log('>>>>>>>>>>>>>>>> FilterableTable > componentDidUpdate() <<<<<<<<<<<<<<: ', this.props.description);
-    const { error, isLoading, dropDownOptionSelected } = this.state;
-    if (this.state.externalData === null && !error && isLoading) {
+    const { error, isLoading, externalData, dropDownOptionSelected } = this.state;
+    if (externalData === null && !error && isLoading) {
       this.requestDataPromise(`${dropDownOptionSelected}`);
     }
   }
