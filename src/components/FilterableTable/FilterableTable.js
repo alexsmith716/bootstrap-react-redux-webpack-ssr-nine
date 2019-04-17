@@ -84,7 +84,7 @@ class FilterableTable extends Component {
         console.log('>>>>>>>>>>>>>>>> FilterableTable > requestDataPromise() > JSON > response.data: ', response.data);
         this._asyncRequest = null;
         // this.setState({ externalData: response.data, isLoading: false });
-        this.clearTimeoutCallbackID = setTimeout( () => this.setTimeoutCallback(response.data), 2000 );
+        setTimeout( () => this.setTimeoutCallback(response.data), 2000 );
       })
       .catch(error => {
         if (error.externalData) {
@@ -104,7 +104,7 @@ class FilterableTable extends Component {
   // async requestDataAsyncAwait(r) {
   //   try {
   //     const response = await axios.get(r);
-  //     this.clearTimeoutCallbackID = setTimeout( () => this.setTimeoutCallback(response.data), 5000 );
+  //     setTimeout( () => this.setTimeoutCallback(response.data), 5000 );
   //     console.log('>>>>>>>>>>>>>>>> AxiosComponentLoaderBasic > requestDataAsyncAwait() > json > SUCCESS: ', response.data);
   //   } catch (error) {
   //     console.log('>>>>>>>>>>>>>>>> AxiosComponentLoaderBasic > requestDataAsyncAwait() > json > ERROR: ', error);

@@ -82,9 +82,9 @@ class AboutTwo extends Component {
                   D3!
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <LineChartA />
 
@@ -115,9 +115,9 @@ class AboutTwo extends Component {
                   Most Basic Counter
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <Counter />
 
