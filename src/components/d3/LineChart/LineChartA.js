@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import * as d3 from 'd3';
+import { axiosData } from '../../../utils/axiosData';
 
 
 class LineChartA extends Component {
 
   constructor(props){
     super(props);
+
     this.state = {
       error: false,
       isLoading: true,
@@ -17,34 +19,33 @@ class LineChartA extends Component {
 
   componentDidMount() {
     console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() <<<<<<<<<<<<<<<<<<<<<<');
-    axios.get('/json-data/lineChart.json')
-      .then(response => {
-        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > JSON >>>>>> response1: ', response);
-        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > JSON > response.data: ', response.data);
-        this.setState({ error: null, isLoading: null, externalData: response.data })
-      })
-      .catch(error => {
-        if (error.externalData) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          console.log('>>>>>>>>>>>>>>>> LineChartA > requestDataPromise() > json > ERROR.response.data: ', error.response.data);
-          console.log('>>>>>>>>>>>>>>>> LineChartA > requestDataPromise() > json > ERROR.response.status: ', error.response.status);
-          console.log('>>>>>>>>>>>>>>>> LineChartA > requestDataPromise() > json > ERROR.response.headers: ', error.response.headers);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('>>>>>>>>>>>>>>>> LineChartA > requestDataPromise() > json > ERROR.message: ', error.message);
-        }
-        console.log('>>>>>>>>>>>>>>>> LineChartA > requestDataPromise() > json > ERROR.config: ', error.config);
-        this.setState({ error: true, isLoading: false, externalData: null });
-      });
+    axiosData().then(response => {
+      setTimeout( () => {
+        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.response.data: ', response.response.data);
+        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.error: ', response.error);
+        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.isLoading: ', response.isLoading);
+        this.setState({ error: response.error, isLoading: response.isLoading, externalData: response.response.data });
+      }, 2000 );
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { error, isLoading, externalData } = this.state;
-    this.renderLineChart(externalData);
-    console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() <<<<<<<<<<<<<<', externalData);
-    // if (externalData === null && !error && isLoading) {
-    //   this.requestDataPromise(`${dropDownOptionSelected}`);
+    // componentDidUpdate lifecycle is guaranteed to be invoked only once per update
+    // --------------------------------------------------------------------------------
+    // if (this.state.someStatefulValue !== prevState.someStatefulValue) {
+    //   this.props.onChange(this.state.someStatefulValue);
     // }
+    // if (this.props.isVisible !== prevProps.isVisible) {
+    //   logVisibleChange(this.props.isVisible);
+    // }
+    if (!this.state.error && this.state.isLoading === null) {
+      if (prevState.externalData) {
+        const payload = prevState.externalData.values.concat(this.state.externalData.values);
+        const elem = document.querySelector('#LineChart svg');
+        elem.parentNode.removeChild(elem);
+      }
+      this.renderLineChart(this.state.externalData);
+    }
   }
 
   renderLineChart(payload) {
@@ -215,12 +216,15 @@ class LineChartA extends Component {
   // };
 
   render() {
+
+    // const styles = require('./scss/LineChartA.scss');
+
     return (
       <div className="row justify-content-md-center">
         <div className="col-md-auto">
 
-          <div className="container-flex bg-color-ivory container-padding-border-radius-2">
-            <div className="width-400">
+          <div className="bg-color-ivory container-padding-border-radius-2">
+            <div className="display-flex-justify-direction-align-center">
 
               <p>D3 Line Chart</p>
 

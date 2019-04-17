@@ -14,20 +14,9 @@ import PropTypes from 'prop-types';
 //   </Fragment>
 // ))}
 
-// -----------------------------------------
-
 const DropdownSelect = props => {
 
   const { title, optionsArray, dropDownOptionSelected, onChange } = props;
-
-  console.log('>>>>>>>>>>>>>>>> DropdownSelect > PROP > title: ', {title});
-  console.log('>>>>>>>>>>>>>>>> DropdownSelect > PROP > dropDownOptionSelected: ', {dropDownOptionSelected});
-
-  // onChange={e => {
-  //   onChange(e.target.value);
-  // }}
-
-  // -------------------------------------------------------------
 
   return (
 

@@ -113,9 +113,9 @@ class AboutOne extends Component {
                   Filterable Product Table 1
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <FilterableTable optionsArray={dropDownOptions} description='Filterable Product Table 1' />
 
@@ -146,9 +146,9 @@ class AboutOne extends Component {
                   Filterable Product Table 2
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <FilterableTable optionsArray={dropDownOptions2} description='Filterable Product Table 2' />
 
@@ -179,9 +179,9 @@ class AboutOne extends Component {
                   Cats Form
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <CatsForm />
 
@@ -211,9 +211,9 @@ class AboutOne extends Component {
                   Making dynamic form inputs with React
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <IncorporationForm />
 
@@ -244,9 +244,9 @@ class AboutOne extends Component {
                   Cats Form
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <CatsForm />
 
@@ -277,9 +277,9 @@ class AboutOne extends Component {
                   Cats Form
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <CatsForm />
 
@@ -344,9 +344,9 @@ class AboutOne extends Component {
                   Lifting State Up 1
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <TemperatureCalculator multireducerKey="temperatureCalculator1"/>
 
@@ -377,9 +377,9 @@ class AboutOne extends Component {
                   Lifting State Up 2
                 </h5>
 
-                <div className="cardBodyContainer">
+                <div className="card-body-container">
 
-                  <div className="cardBodyContent">
+                  <div className="card-body-content">
 
                     <TemperatureCalculator multireducerKey="temperatureCalculator2"/>
 
