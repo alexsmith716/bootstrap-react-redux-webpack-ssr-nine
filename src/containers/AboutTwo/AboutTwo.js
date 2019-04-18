@@ -86,7 +86,7 @@ class AboutTwo extends Component {
 
                   <div className="card-body-content">
 
-                    <LineChartA />
+                    <LineChartA request={'/json-data/lineChart.json'}/>
 
                   </div>
 
