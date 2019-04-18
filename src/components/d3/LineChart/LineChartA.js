@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import LoadingTwo from '../../Loading/LoadingTwo';
 import axios from 'axios';
 import * as d3 from 'd3';
 import { axiosData } from '../../../utils/axiosClient';
@@ -14,9 +15,15 @@ class LineChartA extends Component {
       error: false,
       isLoading: true,
       externalData: null,
+      newData: null,
     };
     console.log('>>>>>>>>>>>>>>>> LineChartA > constructor(props) <<<<<<<<<<<<<<<<<<<<<<');
   }
+
+  static propTypes = {
+    request: PropTypes.string.isRequired,
+    description: PropTypes.string,
+  };
 
   // an option, since having 'super(props)' >>> 'this.props.request'
   // >> 'The constructor for a React component is called before it is mounted' <<
@@ -29,11 +36,11 @@ class LineChartA extends Component {
     console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() <<<<<<<<<<<<<<<<<<<<<<');
     axiosData(this.props.request).then(response => {
       setTimeout( () => {
-        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.response.data: ', response.response.data);
-        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.error: ', response.error);
-        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.isLoading: ', response.isLoading);
+        // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.response.data: ', response.response.data);
+        // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.error: ', response.error);
+        // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() > axiosData > response.isLoading: ', response.isLoading);
         this.setState({ error: response.error, isLoading: response.isLoading, externalData: response.response.data });
-      }, 2000 );
+      }, 3000 );
     });
   }
 
@@ -46,9 +53,12 @@ class LineChartA extends Component {
     // if (this.props.isVisible !== prevProps.isVisible) {
     //   logVisibleChange(this.props.isVisible);
     // }
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > externalData: ', this.state.externalData);
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > error: ', this.state.error);
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > isLoading: ', this.state.isLoading);
     if (!this.state.error && this.state.isLoading === null) {
       if (prevState.externalData) {
-        const payload = prevState.externalData.values.concat(this.state.externalData.values);
+        // const payload = prevState.externalData.values.concat(this.state.externalData.values);
         const elem = document.querySelector('#LineChart svg');
         elem.parentNode.removeChild(elem);
       }
@@ -56,11 +66,23 @@ class LineChartA extends Component {
     }
   }
 
+  componentWillUnmount() {
+    console.log('>>>>>>>>>>>>>>>> LineChartA > componentWillUnmount() <<<<<<<<<<<<<<<<<<<<<<');
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('>>>>>>>>>>>>>>>> LineChart > shouldComponentUpdate() <<<<<<<<<<<<<<<<<<<<<<');
+  // };
+
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('>>>>>>>>>>>>>>>> LineChart > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
+  // };
+
   renderLineChart(payload) {
     if(!payload) return;
     d3.selectAll('.dot').remove();
     let data = payload.values;
-    let width = 500;
+    let width = 400;
     let height = 300;
     let margin = 50;
     let duration = 250;
@@ -211,32 +233,52 @@ class LineChartA extends Component {
       .text('Values');
   }
 
-  componentWillUnmount() {
-    console.log('>>>>>>>>>>>>>>>> LineChartA > componentWillUnmount() <<<<<<<<<<<<<<<<<<<<<<');
-  }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('>>>>>>>>>>>>>>>> LineChart > shouldComponentUpdate() <<<<<<<<<<<<<<<<<<<<<<');
-  // };
-
-  // static getDerivedStateFromProps(props, state) {
-  //   console.log('>>>>>>>>>>>>>>>> LineChart > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
-  // };
-
   render() {
 
     // const styles = require('./scss/LineChartA.scss');
+    const { error, isLoading, externalData } = this.state;
+    const { description } = this.props;
+
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > render() > externalData: ', externalData);
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > render() > error: ', error);
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > render() > isLoading: ', isLoading);
 
     return (
+
       <div className="row justify-content-md-center">
         <div className="col-md-auto">
 
-          <div className="bg-color-ivory container-padding-border-radius-2">
-            <div className="display-flex-justify-direction-align-center">
+          <div className="container-flex bg-color-ivory container-padding-border-radius-2">
+            <div className="display-flex-justify-direction-align-center width-500">
 
-              <p>D3 Line Chart</p>
+              <p>{description}</p>
 
-              <div id="LineChart" style={{position:"relative"}}></div>
+              {/* (>>>>>>>>>>>>>>>>>>>>>> LOADING >>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+              {!error &&
+                isLoading && (
+
+                  <LoadingTwo text="LOADING" />
+
+                )}
+
+              {/* (>>>>>>>>>>>>>>>>>>>>>> ERROR >>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+              {error &&
+                !isLoading && (
+
+                  <div className="alert alert-danger text-center" role="alert">ERROR</div>
+
+                )}
+
+              {/* (>>>>>>>>>>>>>>>>>>>>>> DATA LOADED >>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+              {externalData !== null &&
+                !isLoading && (
+
+                  <div id="LineChart" style={{position:"relative"}}></div> 
+
+                )}
 
             </div>
           </div>
