@@ -78,6 +78,10 @@ class LineChartA extends Component {
   //   console.log('>>>>>>>>>>>>>>>> LineChart > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
   // };
 
+  // width='100%'
+  // viewBox='113 128 972 600'
+  // preserveAspectRatio='xMidYMid meet'
+
   renderLineChart(payload) {
     if(!payload) return;
     d3.selectAll('.dot').remove();
@@ -120,10 +124,13 @@ class LineChartA extends Component {
     let svg = d3
       .select('#LineChart')
       .append('svg')
-      .attr('width', width + margin + 'px')
-      .attr('height', height + margin + 'px')
-      .append('g')
-      .attr('transform', `translate(${margin}, ${margin})`);
+      .attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('viewBox', '0 0 300 300')
+      .classed('svg-content', true);
+      // .attr('width', width + margin + 'px')
+      // .attr('height', height + margin + 'px')
+      // .append('g')
+      // .attr('transform', `translate(${margin}, ${margin})`);
 
     /* Add line into SVG */
     let line = d3
@@ -276,7 +283,7 @@ class LineChartA extends Component {
               {externalData !== null &&
                 !isLoading && (
 
-                  <div id="LineChart" style={{position:"relative"}}></div> 
+                  <div id="LineChart" className="svg-container"></div>
 
                 )}
 
