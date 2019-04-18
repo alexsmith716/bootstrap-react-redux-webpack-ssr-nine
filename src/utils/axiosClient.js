@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export async function axiosData() {
-  const data = await axios.get('/json-data/lineChart.json')
+export async function axiosData(request) {
+  const data = await axios.get(request)
     .then(response => {
       return {error: null, isLoading: null, response: response};
     })
