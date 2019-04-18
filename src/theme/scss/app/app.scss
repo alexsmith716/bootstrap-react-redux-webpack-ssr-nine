@@ -188,6 +188,31 @@ hr.light {
   border-radius: calculate-rem(3px);
 }
 
+.line-chart {
+  position: 'relative';
+  backgroundColor: 'lightpink';
+  resize: 'horizontal';
+  overflow: 'hidden';
+  width: '1000px';
+  height: 'auto';
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
 .container-padding-border-radius-1 {
   padding: calculate-rem(10px);
   border: calculate-rem(1px) solid #009900;
