@@ -87,7 +87,7 @@ class LineChartA extends Component {
     d3.selectAll('.dot').remove();
     let data = payload.values;
     let width = 400;
-    let height = 300;
+    let height = 400;
     let margin = 50;
     let duration = 250;
 
@@ -125,7 +125,7 @@ class LineChartA extends Component {
       .select('#LineChart')
       .append('svg')
       .attr('preserveAspectRatio', 'xMinYMin meet')
-      .attr('viewBox', '0 0 300 300')
+      .attr('viewBox', '-20 -20 400 400')
       .classed('svg-content', true);
       // .attr('width', width + margin + 'px')
       // .attr('height', height + margin + 'px')
