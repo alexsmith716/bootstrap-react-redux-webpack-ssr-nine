@@ -13,6 +13,7 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+
 const config = require('../config/config');
 
 const clientConfigDev = require('../webpack/dev.client');
@@ -68,6 +69,9 @@ const normalizePort = val => {
   }
   return false;
 };
+
+// console.error('>>>>>>>> BIN > START > CONFIGGGGGGGGGGGGGGG2  Number({config}.port)1111:', Number(config.port));
+// console.error('>>>>>>>> BIN > START > CONFIGGGGGGGGGGGGGGG2  Number({config}.port)22222:', {config}.port);
 
 // const host = config.host || 'localhost';
 const portNum = Number(config.port);
@@ -153,11 +157,11 @@ const done = () => !isBuilt
     if (err) {
       console.error('>>>>>>>> BIN > START > ERROR:', err);
     }
-    console.info('>>>>>>>> BIN > START > Express server Running on Host:', config.host);
-    console.info('>>>>>>>> BIN > START > Express server Running on Port:', port);
+    // console.info('>>>>>>>> BIN > START > Express server Running on Host:', config.host);
+    // console.info('>>>>>>>> BIN > START > Express server Running on Port:', port);
   });
 
-if (config.port) {
+if (portNum) {
   console.log('>>>>>>>> BIN > START > __DEVELOPMENT__ ?: ', __DEVELOPMENT__);
   console.log('>>>>>>>> BIN > START > STATS COMPILER ATTEMPTING BUILD ! PLEASE WAIT ! ...');
 
@@ -168,10 +172,10 @@ if (config.port) {
     const clientCompiler = compiler.compilers[0];
     const devMiddleware = webpackDevMiddleware(compiler, serverOptions);
 
-    // console.error('>>>>>>>> BIN > START > WEBPACK COMPILE > DEV > compiler: ', compiler);
-    // console.error('>>>>>>>> BIN > START > WEBPACK COMPILE > DEV > devMiddleware: ', devMiddleware);
-    // compiler: 'MultiCompiler {}'
-    // devMiddleware: 'function middleware(req, res, next) {}'
+    // // console.error('>>>>>>>> BIN > START > WEBPACK COMPILE > DEV > compiler: ', compiler);
+    // // console.error('>>>>>>>> BIN > START > WEBPACK COMPILE > DEV > devMiddleware: ', devMiddleware);
+    // // compiler: 'MultiCompiler {}'
+    // // devMiddleware: 'function middleware(req, res, next) {}'
 
     app.use(devMiddleware);
     app.use(webpackHotMiddleware(clientCompiler));

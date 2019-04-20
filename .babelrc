@@ -1,16 +1,17 @@
 {
   "presets": [
+    "@babel/preset-react",
     ["@babel/preset-env", {
       "targets": {
         "browsers": ["last 2 versions", "IE >= 8"]
       }
-    }],
-    "@babel/preset-react"
+    }]
   ],
   "plugins": [
+    ["@babel/plugin-transform-runtime",{"corejs": {"version": 3,"proposals": true}}],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    "@babel/plugin-syntax-dynamic-import",
     "universal-import",
+    "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-syntax-import-meta",
     ["@babel/plugin-proposal-class-properties", { "loose": false }],
     "@babel/plugin-proposal-json-strings",
@@ -19,8 +20,7 @@
     "@babel/plugin-proposal-numeric-separator",
     "@babel/plugin-proposal-throw-expressions",
     "@babel/plugin-proposal-export-default-from",
-    "@babel/plugin-proposal-object-rest-spread",
-    ["@babel/plugin-transform-runtime",{"corejs": 2}]
+    "@babel/plugin-proposal-object-rest-spread"
   ],
   "env": {
     "development": {

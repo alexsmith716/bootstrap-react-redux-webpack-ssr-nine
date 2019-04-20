@@ -1,7 +1,8 @@
 import fs from 'fs';
-import config from '../config/config';
 import path from 'path';
 import httpProxy from 'http-proxy';
+
+const config = require('../config/config');
 
 // ------------------------------------------------------------------------+
 import Cookies from 'cookies';

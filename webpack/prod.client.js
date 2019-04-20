@@ -4,7 +4,7 @@ global.__SERVER__ = false;
 
 const path = require('path');
 const webpack = require('webpack');
-const config = require('../config/config');
+// const config = require('../config/config');
 
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
