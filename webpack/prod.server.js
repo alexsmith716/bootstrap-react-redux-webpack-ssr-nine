@@ -5,7 +5,7 @@ global.__SERVER__ = true;
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const config = require('../config/config');
+// const config = require('../config/config');
 const externals = require('./node-externals');
 
 const rootPath = path.resolve(__dirname, '..');

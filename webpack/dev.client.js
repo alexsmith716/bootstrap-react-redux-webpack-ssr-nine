@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const dllHelpers = require('./dllreferenceplugin');
-const config = require('../config/config');
+// const config = require('../config/config');
 
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');

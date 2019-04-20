@@ -11,6 +11,7 @@ import http from 'http';
 // import services from './services';
 // import channels from './channels';
 import apiConfig from '../config/config';
+// const apiConfig = require('../config/config');
 // import config from './config';
 
 process.on('unhandledRejection', (error, promise) => {
