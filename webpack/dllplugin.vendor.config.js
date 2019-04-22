@@ -25,7 +25,8 @@ module.exports = {
 
   entry: {
     vendor: [
-      '@babel/polyfill',
+      'core-js/stable',
+      'regenerator-runtime/runtime',
 
       '@babel/runtime-corejs3/core-js-stable/array/from.js',
       '@babel/runtime-corejs3/core-js-stable/instance/bind.js',
@@ -90,21 +91,14 @@ module.exports = {
       '@babel/runtime-corejs3/helpers/typeof.js',
       '@babel/runtime-corejs3/regenerator/index.js',
 
-      '@fortawesome/fontawesome-free',
-      'axios',
-      'final-form',
       'jquery',
-      'multireducer',
       'react',
       'react-dom',
-      'react-final-form',
       'react-helmet',
       'react-hot-loader',
       'react-redux',
       'react-router',
       'redux',
-      'serialize-javascript',
-      'socket.io-client'
     ]
   },
 

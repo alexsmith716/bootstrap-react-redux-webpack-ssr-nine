@@ -14,7 +14,10 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
-const config = require('../config/config');
+const config = {
+  host: 'localhost',
+  port: 3000
+};
 
 const clientConfigDev = require('../webpack/dev.client');
 const serverConfigDev = require('../webpack/dev.server');
@@ -70,12 +73,8 @@ const normalizePort = val => {
   return false;
 };
 
-// console.error('>>>>>>>> BIN > START > CONFIGGGGGGGGGGGGGGG2  Number({config}.port)1111:', Number(config.port));
-// console.error('>>>>>>>> BIN > START > CONFIGGGGGGGGGGGGGGG2  Number({config}.port)22222:', {config}.port);
-
-// const host = config.host || 'localhost';
+console.log('>>>>>>>> BIN > START > COMMON > CONFIG >>>>>>>>>>>>>>>>>>>>>>>>: ', config);
 const portNum = Number(config.port);
-// const port = normalizePort( __DEVELOPMENT__ ? portNum + 1 : portNum);
 const port = normalizePort(__DEVELOPMENT__ ? portNum : portNum);
 
 // https://github.com/webpack/webpack.js.org/blob/master/src/content/configuration/dev-server.md
@@ -148,6 +147,10 @@ server.on('listening', () => {
   // );
 });
 
+// https://webpack.js.org/api/node/
+// https://webpack.js.org/configuration/stats/
+// https://webpack.js.org/api/node/#multicompiler
+
 // start socket and 'listen' for connections (requests)
 // method: 'app.listen(path, [callback])' <<< is identical to Node's 'http.Server.listen()'
 const done = () => !isBuilt
@@ -157,8 +160,8 @@ const done = () => !isBuilt
     if (err) {
       console.error('>>>>>>>> BIN > START > ERROR:', err);
     }
-    // console.info('>>>>>>>> BIN > START > Express server Running on Host:', config.host);
-    // console.info('>>>>>>>> BIN > START > Express server Running on Port:', port);
+    console.info('>>>>>>>> BIN > START > Express server Running on Host:', config.host);
+    console.info('>>>>>>>> BIN > START > Express server Running on Port:', port);
   });
 
 if (portNum) {
@@ -169,7 +172,10 @@ if (portNum) {
 
   if (__DEVELOPMENT__) {
     const compiler = webpack([clientConfigDev, serverConfigDev]);
+
     const clientCompiler = compiler.compilers[0];
+    // const serverCompiler = compiler.compilers[1];
+
     const devMiddleware = webpackDevMiddleware(compiler, serverOptions);
 
     // // console.error('>>>>>>>> BIN > START > WEBPACK COMPILE > DEV > compiler: ', compiler);

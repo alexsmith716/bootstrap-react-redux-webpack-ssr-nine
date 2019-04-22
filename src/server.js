@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import httpProxy from 'http-proxy';
 
-const config = require('../config/config');
+import config from '../config/config';
 
 // ------------------------------------------------------------------------+
 import Cookies from 'cookies';
@@ -71,7 +71,14 @@ import Html from './helpers/Html';
 // import apiClient from './utils/apiClient';
 // import { createApp } from './app';
 
+console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG >>>>>>>>>>>>>>>>>>>>>>>>: ', config);
+
+console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG config.apiHost >>>>>>>>>>>>>>>>>>>>>>>>: ', config.apiHost);
+console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG config.apiPort >>>>>>>>>>>>>>>>>>>>>>>>: ', config.apiPort);
+
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
+
+console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG targetUrl >>>>>>>>>>>>>>>>>>>>>>>>: ', targetUrl);
 
 const proxy = httpProxy.createProxyServer({
   target: targetUrl,
