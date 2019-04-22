@@ -15,8 +15,8 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
 const config = {
-  host: 'localhost',
-  port: 3000
+  host: process.env.HOST || 'localhost',
+  port: process.env.PORT
 };
 
 const clientConfigDev = require('../webpack/dev.client');

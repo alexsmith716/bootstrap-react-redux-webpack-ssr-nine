@@ -70,17 +70,62 @@ class LineChartA extends Component {
     console.log('>>>>>>>>>>>>>>>> LineChartA > componentWillUnmount() <<<<<<<<<<<<<<<<<<<<<<');
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('>>>>>>>>>>>>>>>> LineChart > shouldComponentUpdate() <<<<<<<<<<<<<<<<<<<<<<');
-  // };
+  // invoked before rendering when new props or state are being received
+  // --------------------------------------------------------------------------------
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('>>>>>>>>>>>>>>>> LineChart > shouldComponentUpdate() > nextProps: ', nextProps);
+    return nextProps;
+  };
 
+  // invoked right before calling the render method, both on the initial mount and on subsequent updates
+  // --------------------------------------------------------------------------------
   // static getDerivedStateFromProps(props, state) {
   //   console.log('>>>>>>>>>>>>>>>> LineChart > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
   // };
 
-  // width='100%'
-  // viewBox='113 128 972 600'
-  // preserveAspectRatio='xMidYMid meet'
+  // ================================================================================
+
+  // https://www.w3.org/TR/SVG/coords.html
+  // https://css-tricks.com/scale-svg/
+
+  // All SVG content is drawn inside SVG viewports
+  // *** Note the term SVG viewport is distinct from the 'viewport' term used in CSS ***
+
+  // (D3) resize an SVG when window is resized
+  // --------------------------------------------------------------------------------
+
+  // 'viewBox' attribute:
+  // --------------------------------------------------------------------------------
+  // to dynamically resizing SVGs two basic attributes used: 'viewBox' and 'preserveAspectRatio'
+  // 'viewBox' attribute component of SVGs makes them scalable
+  // 'viewBox' defines the aspect ratio, the inner scaling of object lengths and coordinates,
+  //    and the axis coordinates (x and y) >>>> (where the SVG should originate) <<<<<
+
+  // 'preserveAspectRatio' attribute:
+  // --------------------------------------------------------------------------------
+  // 'preserveAspectRatio' attribute, determines if the SVG should scale when the aspect ratio defined in 'viewBox' doesn't match the ratio in the parent container
+  // so, 'preserveAspectRatio' requires that the 'viewBox' attribute also be set to function
+  // in most cases, this 'preserveAspectRatio' defined as: 
+  //    '<svg preserveAspectRatio="xMidYMid meet"></svg>'
+
+  // this forces uniform scaling for both the 'x' and 'y', aligning the midpoint of the SVG object with the midpoint of the container element
+
+  // Example viewBox values:
+
+  // * viewBox="0 0 100 100": 
+  //  Defines a coordinate system 100 units wide and 100 units high. 
+  //    In other words, if your SVG contains a circle centered in the graphic with radius of 50px, it would fill up the height or width of the SVG image, 
+  //    even if the image was displayed full screen. If your SVG contained a rectangle with height="1in", 
+  //    it would also nearly fill up the screen, because 1 inch = 96px in CSS, and all lengths will get scaled equally.
+
+  // * viewBox="5 0 90 100": 
+  //  Almost the same view, but cropped in by 5% on the left and right, so that the total width=90 units and the x-coordinate on the left=5.
+
+  // * viewBox="-50 -50 100 100": 
+  //  A view with the same scale, but now with the top-left corner given the coordinates (-50, -50). 
+  //    Which means that the bottom-right corner has the coordinates (+50, +50). 
+  //    Any shapes drawn at (100, 100) will be far offscreen. 
+  //    If you wanted to draw a circle that completely filled the image area, it would be centered at (0, 0).
 
   renderLineChart(payload) {
     if(!payload) return;
@@ -124,7 +169,7 @@ class LineChartA extends Component {
     let svg = d3
       .select('#LineChart')
       .append('svg')
-      .attr('preserveAspectRatio', 'xMinYMin meet')
+      .attr('preserveAspectRatio', 'xMinYMin meet') // 'xMinYMin' - Force uniform scaling | 'meet' - aspect ratio is preserved
       .attr('viewBox', '-20 -20 400 400')
       .classed('svg-content', true);
       // .attr('width', width + margin + 'px')
