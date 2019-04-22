@@ -293,12 +293,15 @@ const webpackConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
 
+    // https://webpack.js.org/plugins/define-plugin
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify('development') },
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
-      __DEVTOOLS__: true
+      __DEVTOOLS__: true,
     }),
 
     // new webpack.NamedModulesPlugin(),

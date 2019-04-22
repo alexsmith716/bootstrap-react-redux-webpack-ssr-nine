@@ -12,7 +12,9 @@ import qs from 'qs';
 
 import { Link } from 'react-router-dom';
 
-const config = require('../../../config/config');
+import config from '../../../config/config';
+
+console.log('>>>>>>>>>>>>>>>>> APP > ES > CONFIG >>>>>>>>>>>>>>>>>>>>>>>>: ', config);
 
 // import { withStore } from '../../../hoc';
 

@@ -1,5 +1,6 @@
 
-module.exports = function deepMerge() {
+// module.exports = function deepMerge() {
+export function deepMerge() {
 
   var extended = {};
   var deep = false;
@@ -10,21 +11,24 @@ module.exports = function deepMerge() {
     i++;
   }
 
-  var merge = function (obj) {
+  var mergeObject = function (obj) {
     for (var prop in obj) {
       if (obj.hasOwnProperty(prop)) {
         if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
           extended[prop] = deepMerge(extended[prop], obj[prop]);
+          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> extended[prop] 111111: ', extended[prop])
         } else {
           extended[prop] = obj[prop];
+          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> extended[prop] 111111: ', extended[prop])
         }
       }
     }
   };
 
   for (; i < arguments.length; i++) {
-    merge(arguments[i]);
+    mergeObject(arguments[i]);
   }
 
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> extended: ', extended)
   return extended;
 };
