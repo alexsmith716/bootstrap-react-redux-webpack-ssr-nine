@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LoadingTwo from '../../Loading/LoadingTwo';
 import axios from 'axios';
-import * as d3 from 'd3';
 import { axiosData } from '../../../utils/axiosClient';
+// import * as d3 from 'd3';
+// whats needed
+import { range, max, ticks, extent } from 'd3-array';
+import { selectAll, select } from 'd3-selection';
+import { scaleTime, scaleLinear, scaleOrdinal } from 'd3-scale';
+import { line } from 'd3-shape';
+import { axisBottom, axisLeft } from 'd3-axis';
+import { schemeCategory10 } from 'd3-scale-chromatic';
 
 
 class LineChartA extends Component {
@@ -45,6 +52,7 @@ class LineChartA extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() <<<<<<<<<<<<<<<<<<<<<<');
     // componentDidUpdate lifecycle is guaranteed to be invoked only once per update
     // --------------------------------------------------------------------------------
     // if (this.state.someStatefulValue !== prevState.someStatefulValue) {
@@ -94,9 +102,11 @@ class LineChartA extends Component {
   // (D3) resize an SVG when window is resized
   // --------------------------------------------------------------------------------
 
+  // to dynamically resizing SVGs two basic attributes used: 'viewBox' and 'preserveAspectRatio'
+  // --------------------------------------------------------------------------------
+
   // 'viewBox' attribute:
   // --------------------------------------------------------------------------------
-  // to dynamically resizing SVGs two basic attributes used: 'viewBox' and 'preserveAspectRatio'
   // 'viewBox' attribute component of SVGs makes them scalable
   // 'viewBox' defines the aspect ratio, the inner scaling of object lengths and coordinates,
   //    and the axis coordinates (x and y) >>>> (where the SVG should originate) <<<<<
@@ -129,7 +139,7 @@ class LineChartA extends Component {
 
   renderLineChart(payload) {
     if(!payload) return;
-    d3.selectAll('.dot').remove();
+    selectAll('.dot').remove();
     let data = payload.values;
     let width = 400;
     let height = 400;
@@ -153,21 +163,18 @@ class LineChartA extends Component {
     });
 
     /* Scale */
-    let xScale = d3
-      .scaleTime()
-      .domain(d3.extent(data, d => d.x))
+    let xScale = scaleTime()
+      .domain(extent(data, d => d.x))
       .range([0, width - margin]);
 
-    let yScale = d3
-      .scaleLinear()
-      .domain([0, d3.max(data, d => d.y)])
+    let yScale = scaleLinear()
+      .domain([0, max(data, d => d.y)])
       .range([height - margin, 0]);
 
-    let color = d3.scaleOrdinal(d3.schemeCategory10);
+    let color = scaleOrdinal(schemeCategory10);
 
     /* Add SVG */
-    let svg = d3
-      .select('#LineChart')
+    let svg = select('#LineChart')
       .append('svg')
       .attr('preserveAspectRatio', 'xMinYMin meet') // 'xMinYMin' - Force uniform scaling | 'meet' - aspect ratio is preserved
       .attr('viewBox', '-20 -20 400 400')
@@ -178,8 +185,7 @@ class LineChartA extends Component {
       // .attr('transform', `translate(${margin}, ${margin})`);
 
     /* Add line into SVG */
-    let line = d3
-      .line()
+    let addedLine = line()
       .x(d => xScale(d.x))
       .y(d => yScale(d.y));
 
@@ -193,23 +199,23 @@ class LineChartA extends Component {
       .attr('class', 'line-group')
       .append('path')
       .attr('class', 'line')
-      .attr('d', () => line(data))
+      .attr('d', () => addedLine(data))
       .style('stroke', (d, i) => color(i))
       .style('opacity', lineOpacity)
       .on('mouseover', function (d) {
-        d3.selectAll('.line').style('opacity', otherLinesOpacityHover);
-        d3.selectAll('.circle').style('opacity', circleOpacityOnLineHover);
-        d3.select(this)
-          .style('opacity', lineOpacityHover)
-          .style('stroke-width', lineStrokeHover)
-          .style('cursor', 'pointer');
+        selectAll('.line').style('opacity', otherLinesOpacityHover);
+        selectAll('.circle').style('opacity', circleOpacityOnLineHover);
+        select(this)
+        .style('opacity', lineOpacityHover)
+        .style('stroke-width', lineStrokeHover)
+        .style('cursor', 'pointer');
       })
       .on('mouseout', function (d) {
-        d3.selectAll('.line').style('opacity', lineOpacity);
-        d3.selectAll('.circle').style('opacity', circleOpacity);
-        d3.select(this)
-          .style('stroke-width', lineStroke)
-          .style('cursor', 'none');
+        selectAll('.line').style('opacity', lineOpacity);
+        selectAll('.circle').style('opacity', circleOpacity);
+        select(this)
+        .style('stroke-width', lineStroke)
+        .style('cursor', 'none');
       });
 
     /* Add circles in the line */
@@ -260,8 +266,8 @@ class LineChartA extends Component {
       });
 
     /* Add Axis into SVG */
-    let xAxis = d3.axisBottom(xScale).ticks(5);
-    let yAxis = d3.axisLeft(yScale).ticks(5);
+    let xAxis = axisBottom(xScale).ticks(5);
+    let yAxis = axisLeft(yScale).ticks(5);
 
     svg
       .append('g')
