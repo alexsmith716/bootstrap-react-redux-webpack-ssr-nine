@@ -12,7 +12,7 @@ export default function drawLineChartBasic(payload, containerTarget) {
   console.log('>>>>>>>>>>>>>>>> export default function drawLineChartBasic() > containerTarget: ', containerTarget);
 
   if(!payload) return;
-  selectAll('.dot').remove();
+  // selectAll('.dot').remove();
   let data = payload.values;
   console.log('>>>>>>>>>>>>>>>> export default function drawLineChartBasic() > DATA: ', data);
   let width = 400;
@@ -73,7 +73,7 @@ export default function drawLineChartBasic(payload, containerTarget) {
   //  3) procedurally create elements and add them to the DOM
 
   // ###########################################################################################################################
-  // Selection methods come in  two forms: select and selectAll: 
+  // Selection methods come in two forms: select and selectAll: 
   //  the former selects only the first matching element, while the latter selects all matching elements in document order.
   // ###########################################################################################################################
   //  The top-level selection methods, d3.select and d3.selectAll, query the entire document; 
