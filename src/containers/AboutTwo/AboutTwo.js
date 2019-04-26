@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-
 import Counter from '../../components/widgets/Counter/Counter';
 // import Planets from '../../components/d3/Planets/Planets';
 import LineChartA from '../../components/d3/LineChart/LineChartA';
+// import LineChartAA from '../../components/d3/LineChart/LineChartAA';
+// import LineChartB from '../../components/d3/LineChart/LineChartB';
 
 // --------------------------------------------------------------------------
 
@@ -14,29 +15,36 @@ class AboutTwo extends Component {
   //   super(props);
 
   //   this. = this..bind(this);
-
-  //   this.state = {};
   // }
 
   // static propTypes = {};
-
   // static defaultProps = {};
 
-  testSetTimeout(m) {
-    console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidMount() > async testSetTimeout: ', m);
-  }
+  // state = {};
 
   componentDidMount() {
-    console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidMount() <<<<<<<<<<<<<<');
-    // setTimeout( () => this.testSetTimeout('setTimeout Message from AboutTwo...'), 4000 );
+    console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidMount() <<<<<<<<<<<<<<<<<<<<<<');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidUpdate() <<<<<<<<<<<<<<<<<<<<<<');
   }
 
   componentWillUnmount() {
     console.log('>>>>>>>>>>>>>>>> AboutTwo > componentWillUnmount() <<<<<<<<<<<<<<');
   }
 
-  // static contextTypes = {
-  //   store: PropTypes.objectOf(PropTypes.any).isRequired
+    // invoked before rendering when new props or state are being received
+  // --------------------------------------------------------------------------------
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('>>>>>>>>>>>>>>>> AboutTwo > shouldComponentUpdate() > nextProps: ', nextProps);
+    return nextProps;
+  };
+
+  // invoked right before calling the render method, both on the initial mount and on subsequent updates
+  // --------------------------------------------------------------------------------
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('>>>>>>>>>>>>>>>> LineChart > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
   // };
 
   render() {
@@ -44,15 +52,6 @@ class AboutTwo extends Component {
     const aboutImageMain = require('../../theme/images/about-750-450.png');
     const aboutImageOurCustomers = require('../../theme/images/about-500-300.png');
     const styles = require('./scss/AboutTwo.scss');
-
-    const data = [];
-
-    for (let i = 0; i < 10; i += 1){
-      const random = Math.floor(Math.random() * 100);
-      data.push(random);
-    }
-
-    console.log('>>>>>>>>>>>>>>>> AboutTwo > render() > data[]: ', data);
 
     return (
 
@@ -79,14 +78,53 @@ class AboutTwo extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  D3!
+                  D3 Data visualization
                 </h5>
 
                 <div className="card-body-container">
 
                   <div className="card-body-content">
 
-                    <LineChartA request={'/json-data/lineChart.json'} description='D3 Line Chart' />
+                    <LineChartA
+                      request={'/json-data/lineChart1.json'}
+                      description='D3 LineChartA 1'
+                    />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  D3 Data visualization
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <LineChartA
+                      request={'/json-data/lineChart2.json'}
+                      description='D3 LineChartA 2'
+                    />
 
                   </div>
 

@@ -1,1 +1,16 @@
-// --
+@import '../../../sharedresources.scss';
+
+.lineChart {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  
+  .line {
+    stroke-width: 2;
+    fill: none;
+  }        
+  .axis path {
+    stroke: black;
+  }    
+}

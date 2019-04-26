@@ -17,22 +17,16 @@ import TemperatureCalculator from '../../components/widgets/LiftingStateUp/Tempe
 
 class AboutOne extends Component {
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    // thinking through react with next cool code change
-    // --------------------------------------------------------------------------
+  //   this. = this..bind(this);
+  // }
 
-    // this. = this..bind(this);
-
-    // this.state = {};
-  }
-
-  // static propTypes = {
-  //
-  // };
-
+  // static propTypes = {};
   // static defaultProps = {};
+
+  // state = {};
 
   componentDidMount() {
     console.log('>>>>>>>>>>>>>>>> AboutOne > componentDidMount() <<<<<<<<<<<<<<');

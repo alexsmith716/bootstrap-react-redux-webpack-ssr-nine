@@ -1,6 +1,7 @@
 import axios from 'axios';
+import config from '../../config/config';
 
-export async function axiosData(request) {
+export default async function axiosClient(request) {
   try {
     const response = await axios.get(request);
     return {error: null, isLoading: null, response: response};
