@@ -16,10 +16,8 @@ export function deepMerge() {
       if (obj.hasOwnProperty(prop)) {
         if (deep && Object.prototype.toString.call(obj[prop]) === '[object Object]') {
           extended[prop] = deepMerge(extended[prop], obj[prop]);
-          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> extended[prop] 111111: ', extended[prop])
         } else {
           extended[prop] = obj[prop];
-          console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> extended[prop] 111111: ', extended[prop])
         }
       }
     }
@@ -29,6 +27,5 @@ export function deepMerge() {
     mergeObject(arguments[i]);
   }
 
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>> extended: ', extended)
   return extended;
 };

@@ -73,9 +73,6 @@ import Html from './helpers/Html';
 
 console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG >>>>>>>>>>>>>>>>>>>>>>>>: ', config);
 
-console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG config.apiHost >>>>>>>>>>>>>>>>>>>>>>>>: ', config.apiHost);
-console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG config.apiPort >>>>>>>>>>>>>>>>>>>>>>>>: ', config.apiPort);
-
 const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 
 console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG targetUrl >>>>>>>>>>>>>>>>>>>>>>>>: ', targetUrl);
