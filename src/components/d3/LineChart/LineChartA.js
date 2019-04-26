@@ -104,6 +104,10 @@ class LineChartA extends Component {
     console.log('>>>>>>>>>>>>>>>> LineChartA > render() > isLoading: ', isLoading);
     console.log('>>>>>>>>>>>>>>>> LineChartA > render() > description: ', description);
 
+    // <div class="svg-container LineChartA__lineChart--dEEuc2Nzc">
+    //  <svg class="svg-content" preserveaspectratio="xMinYMin meet" viewbox="-20 -20 400 400"></svg>
+    // </div>
+
     return (
 
       <div className="row justify-content-md-center">
@@ -137,7 +141,7 @@ class LineChartA extends Component {
               {responseData !== null &&
                 !isLoading && (
 
-                  <div className="svg-container" ref={containerRef}></div>
+                  <div className={`svg-container`} ref={containerRef}></div>
 
                 )}
 

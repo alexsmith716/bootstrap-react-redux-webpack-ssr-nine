@@ -202,6 +202,13 @@ hr.light {
   position: absolute;
   top: 0;
   left: 0;
+  .line {
+    stroke-width: 2;
+    fill: #4F94CD;
+  }
+  .axis path {
+    stroke: black;
+  }
 }
 
 .container-padding-border-radius-1 {
