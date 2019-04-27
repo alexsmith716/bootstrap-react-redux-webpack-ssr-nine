@@ -8,13 +8,13 @@ import { schemeCategory10 } from 'd3-scale-chromatic';
 import { transition } from 'd3-transition';
 
 export default function drawLineChartBasic(payload, containerTarget) {
-  // console.log('>>>>>>>>>>>>>>>> export default function drawLineChartBasic() > payload: ', payload);
-  console.log('>>>>>>>>>>>>>>>> export default function drawLineChartBasic() > containerTarget: ', containerTarget);
+  // console.log('>>>>>>>>>>>>>>>> drawLineChartBasic() > payload: ', payload);
+  console.log('>>>>>>>>>>>>>>>> drawLineChartBasic() > containerTarget: ', containerTarget);
 
   if(!payload) return;
   // selectAll('.dot').remove();
   let data = payload.values;
-  console.log('>>>>>>>>>>>>>>>> export default function drawLineChartBasic() > DATA: ', data);
+  console.log('>>>>>>>>>>>>>>>> drawLineChartBasic() > DATA: ', data);
   let width = 400;
   let height = 400;
   let margin = 50;
@@ -22,7 +22,7 @@ export default function drawLineChartBasic(payload, containerTarget) {
 
   let lineOpacity = '0.25';
   let lineOpacityHover = '0.85';
-  let otherLinesOpacityHover = '0.1';
+  let otherLinesOpacityHover = '0.5';
   let lineStroke = '1.5px';
   let lineStrokeHover = '2.5px';
 
@@ -61,7 +61,7 @@ export default function drawLineChartBasic(payload, containerTarget) {
 
   let lines = svg.append('g').attr('class', 'lines');
 
-  console.log('>>>>>>>>>>>>>>>> export default function drawLineChartBasic() > LINES: ', lines);
+  console.log('>>>>>>>>>>>>>>>> drawLineChartBasic() > LINES: ', lines);
 
   // https://github.com/d3/d3/blob/master/API.md
   // https://github.com/d3/d3-selection/blob/master/README.md
@@ -96,17 +96,12 @@ export default function drawLineChartBasic(payload, containerTarget) {
 
   svg.select('.lines').selectAll('.line-group').selectAll('.line')
     .on('mouseover', function (d) {
-      // select('.line').style('opacity', otherLinesOpacityHover);
-      // select('.circle').style('opacity', circleOpacityOnLineHover);
       select(this)
-        .style('opacity', otherLinesOpacityHover)
         .style('opacity', lineOpacityHover)
         .style('stroke-width', lineStrokeHover)
         .style('cursor', 'pointer');
     })
     .on('mouseout', function (d) {
-      // select('.line').style('opacity', lineOpacity);
-      // select('.circle').style('opacity', circleOpacity);
       select(this)
         .style('opacity', lineOpacity)
         .style('stroke-width', lineStroke)
@@ -120,19 +115,11 @@ export default function drawLineChartBasic(payload, containerTarget) {
     .enter()
     .append('g')
     .attr('class', 'circle-group')
-    // .style("fill", (d, i) => color(i))
     .selectAll('circle')
     .data(data)
     .enter()
     .append('g')
     .attr('class', 'circle')
-    .append('circle')
-    .attr('cx', d => xScale(d.x))
-    .attr('cy', d => yScale(d.y))
-    .attr('r', circleRadius)
-    .style('opacity', circleOpacity);
-
-  svg.select('.lines').selectAll('.circle-group').selectAll('.circle')
     .on('mouseover', function (d) {
       select(this)
         .style('cursor', 'pointer')
@@ -149,9 +136,12 @@ export default function drawLineChartBasic(payload, containerTarget) {
         .duration(duration)
         .selectAll('.text')
         .remove();
-    });
-
-  svg.select('.lines').selectAll('.circle-group').selectAll('circle')
+    })
+    .append('circle')
+    .attr('cx', d => xScale(d.x))
+    .attr('cy', d => yScale(d.y))
+    .attr('r', circleRadius)
+    .style('opacity', circleOpacity)
     .on('mouseover', function (d) {
       select(this)
         .transition()
@@ -190,6 +180,6 @@ export default function drawLineChartBasic(payload, containerTarget) {
     .attr('fill', '#000')
     .text('Values');
 
-  console.log('>>>>>>>>>>>>>>>> export default function drawLineChartBasic() > return svg: ', svg);
+  console.log('>>>>>>>>>>>>>>>> drawLineChartBasic() > return svg: ', svg);
   return svg;
 }
