@@ -96,7 +96,6 @@ export default function drawLineChartBasic(payload, containerTarget) {
 
   svg.select('.lines').selectAll('.line-group').selectAll('.line')
     .on('mouseover', function (d) {
-      console.log('>>>>>>>>>>>>>>>> export default function drawLineChartBasic() > svg > mouseover > this: ', this);
       // select('.line').style('opacity', otherLinesOpacityHover);
       // select('.circle').style('opacity', circleOpacityOnLineHover);
       select(this)
@@ -112,6 +111,58 @@ export default function drawLineChartBasic(payload, containerTarget) {
         .style('opacity', lineOpacity)
         .style('stroke-width', lineStroke)
         .style('cursor', 'none');
+    });
+
+  /* Add circles in the line */
+  lines
+    .selectAll('circle-group')
+    .data(data)
+    .enter()
+    .append('g')
+    .attr('class', 'circle-group')
+    // .style("fill", (d, i) => color(i))
+    .selectAll('circle')
+    .data(data)
+    .enter()
+    .append('g')
+    .attr('class', 'circle')
+    .append('circle')
+    .attr('cx', d => xScale(d.x))
+    .attr('cy', d => yScale(d.y))
+    .attr('r', circleRadius)
+    .style('opacity', circleOpacity);
+
+  svg.select('.lines').selectAll('.circle-group').selectAll('.circle')
+    .on('mouseover', function (d) {
+      select(this)
+        .style('cursor', 'pointer')
+        .append('text')
+        .attr('class', 'text')
+        .text(`${d.y}`)
+        .attr('x', d => xScale(d.x) + 5)
+        .attr('y', d => yScale(d.y) - 10);
+    })
+    .on('mouseout', function (d) {
+      select(this)
+        .style('cursor', 'none')
+        .transition()
+        .duration(duration)
+        .selectAll('.text')
+        .remove();
+    });
+
+  svg.select('.lines').selectAll('.circle-group').selectAll('circle')
+    .on('mouseover', function (d) {
+      select(this)
+        .transition()
+        .duration(duration)
+        .attr('r', circleRadiusHover);
+    })
+    .on('mouseout', function (d) {
+      select(this)
+        .transition()
+        .duration(duration)
+        .attr('r', circleRadius);
     });
 
   /* Add Axis into SVG */
