@@ -19,6 +19,7 @@ class LineChartA extends Component {
       responseData: null,
       error: false,
       isLoading: true,
+      newData: null
     };
 
     this.containerRef = createRef();
@@ -57,19 +58,30 @@ class LineChartA extends Component {
     console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() <<<<<<<<<<<<<<<<<<<<<<');
     // componentDidUpdate lifecycle is guaranteed to be invoked only once per update
     // --------------------------------------------------------------------------------
+    // if (this.state.someStatefulValue !== prevState.someStatefulValue) {
+    //   this.props.onChange(this.state.someStatefulValue);
+    // }
+    // if (this.props.isVisible !== prevProps.isVisible) {
+    //   logVisibleChange(this.props.isVisible);
+    // }
     const containerTarget = this.containerRef.current;
     const { error, isLoading, responseData } = this.state;
-    console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > responseData: ', responseData);
     console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > error: ', error);
     console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > isLoading: ', isLoading);
+    console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > responseData: ', responseData);
     console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > containerTarget: ', containerTarget);
-    if (!error && isLoading === null) {
-      if (prevState.responseData) {
-        // const payload = prevState.responseData.values.concat(this.props.responseData.values);
-        // const elem = document.querySelector('#LineChartA svg');
-        // elem.parentNode.removeChild(elem);
+    if (!this.state.error && this.state.isLoading === null) {
+      // first render of inital data
+      if (responseData !== prevState.responseData) {
+        drawVisualization(responseData, containerTarget);
       }
-      drawVisualization(responseData, containerTarget);
+      // re-render of initial data and all the new/added data
+      if ( this.state.newData ) {
+        // const updatedData = prevState.responseData.values.concat(this.state.newData.values);
+        // const element = document.querySelector('#LineChartA svg');
+        // element.parentNode.removeChild(element);
+        // drawVisualization(updatedData, containerTarget);
+      }
     }
   }
 
