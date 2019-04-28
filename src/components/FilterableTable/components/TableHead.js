@@ -7,10 +7,7 @@ import TableRow from './TableRow';
 class TableHead extends Component {
 
   constructor(props) {
-
     super(props);
-
-    this.tableHeadIntervalChange = this.tableHeadIntervalChange.bind(this);
 
     // set initial render headingColor
     this.state = {

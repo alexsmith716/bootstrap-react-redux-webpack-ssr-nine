@@ -14,9 +14,6 @@ class AboutTwo extends Component {
   // constructor(props) {
   //   super(props);
 
-  //   this. = this..bind(this);
-  // }
-
   // static propTypes = {};
   // static defaultProps = {};
 
