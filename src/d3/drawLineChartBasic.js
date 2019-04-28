@@ -12,9 +12,11 @@ export default function drawLineChartBasic(payload, containerTarget) {
   console.log('>>>>>>>>>>>>>>>> drawLineChartBasic() > containerTarget: ', containerTarget);
 
   if(!payload) return;
-  // selectAll('.dot').remove();
-  let data = payload.values;
+
+  let data = payload;
+
   console.log('>>>>>>>>>>>>>>>> drawLineChartBasic() > DATA: ', data);
+
   let width = 400;
   let height = 400;
   let margin = 50;

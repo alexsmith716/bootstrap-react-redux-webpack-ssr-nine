@@ -6,11 +6,7 @@ import { Form, Field } from 'react-final-form';
 class SearchBar extends Component {
 
   constructor(props) {
-
     super(props);
-
-    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-    this.handleInStockChange = this.handleInStockChange.bind(this);
 
   }
 
