@@ -21,11 +21,23 @@ export default function rootReducer(history) {
     // event,
     device,
     counter,
-    temperatureCalculator: multireducer({
-      temperatureCalculator1: temperatureCalculator,
-      temperatureCalculator2: temperatureCalculator,
+    // counterCollection: multireducer({
+    //   AboutOne1: counter,
+    //   AboutOne2: counter,
+    //   AboutTwo1: counter,
+    //   AboutTwo2: counter,
+    // }),
+    temperatureCalculatorCollection: multireducer({
+      AboutOne1: temperatureCalculator,
+      AboutOne2: temperatureCalculator,
+      AboutTwo1: temperatureCalculator,
+      AboutTwo2: temperatureCalculator,
     }),
-    // auth,
+    // temperatureCalculator: multireducer({
+    //   temperatureCalculator1: temperatureCalculator,
+    //   temperatureCalculator2: temperatureCalculator,
+    // }),
+    // // auth,
     // notifs,
     // info,
     // online,

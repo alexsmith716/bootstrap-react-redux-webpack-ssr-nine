@@ -6,6 +6,7 @@ import Counter from '../../components/widgets/Counter/Counter';
 import LineChartA from '../../components/d3/LineChart/LineChartA';
 // import LineChartAA from '../../components/d3/LineChart/LineChartAA';
 // import LineChartB from '../../components/d3/LineChart/LineChartB';
+import TemperatureCalculator from '../../components/widgets/LiftingStateUp/TemperatureCalculator';
 
 // --------------------------------------------------------------------------
 
@@ -147,14 +148,80 @@ class AboutTwo extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Most Basic Counter
+                  Most Basic Counter 'AboutTwo1'
                 </h5>
 
                 <div className="card-body-container">
 
                   <div className="card-body-content">
 
-                    <Counter />
+                    <Counter as="AboutTwo1" />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Lifting State Up 'AboutTwo1'
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <TemperatureCalculator as="AboutTwo1" />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Lifting State Up 'AboutTwo2'
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <TemperatureCalculator as="AboutTwo2" />
 
                   </div>
 

@@ -10,6 +10,7 @@ import Clock from '../../components/widgets/Clock/Clock';
 import RandomBootstrapAlert from '../../components/widgets/RandomBootstrapAlert/RandomBootstrapAlert';
 import FilterableTable from '../../components/FilterableTable/FilterableTable';
 import TemperatureCalculator from '../../components/widgets/LiftingStateUp/TemperatureCalculator';
+import Counter from '../../components/widgets/Counter/Counter';
 
 // --------------------------------------------------------------------------
 
@@ -332,14 +333,14 @@ class AboutOne extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Lifting State Up 1
+                  Lifting State Up 'AboutOne1'
                 </h5>
 
                 <div className="card-body-container">
 
                   <div className="card-body-content">
 
-                    <TemperatureCalculator multireducerKey="temperatureCalculator1"/>
+                    <TemperatureCalculator as="AboutOne1" />
 
                   </div>
 
@@ -365,14 +366,14 @@ class AboutOne extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Lifting State Up 2
+                  Lifting State Up 'AboutOne2'
                 </h5>
 
                 <div className="card-body-container">
 
                   <div className="card-body-content">
 
-                    <TemperatureCalculator multireducerKey="temperatureCalculator2"/>
+                    <TemperatureCalculator as="AboutOne2" />
 
                   </div>
 
