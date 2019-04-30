@@ -1,13 +1,12 @@
 const CELSIUS_CHANGE = 'redux-example/counter/CELSIUS_CHANGE';
 const FAHRENHEIT_CHANGE = 'redux-example/counter/FAHRENHEIT_CHANGE';
 
-
 import initialState from '../initial-state';
 
 // specify the initial state
 export default function reducer(state = initialState.temperature_calculator, action) {
 
-  const v = {...state}
+  // const v = {...state}
 
   // handle actions
   switch (action.type) {

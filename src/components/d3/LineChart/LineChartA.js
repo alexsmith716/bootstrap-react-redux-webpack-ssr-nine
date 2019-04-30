@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import LoadingTwo from '../../Loading/LoadingTwo';
-import debounce from 'lodash.debounce';
+// import debounce from 'lodash.debounce';
 import drawVisualization from "../../../d3/drawLineChartBasic";
 
 // import axiosClient from '../../../../utils/axiosClient';
@@ -19,6 +19,14 @@ import axiosClientInstance from '../../../utils/axiosClientInstance';
 // OR:
 // if you aren’t using class fields syntax, you can use an arrow function in the callback
 
+// https://lodash.com/docs#debounce
+// https://css-tricks.com/debouncing-throttling-explained-examples/
+// _.debounce(func, [wait=0], [options={}])
+// Avoid costly calculations while the window size is in flux
+// Debounce: technique to control how many times a function is alowed to be executed over time
+// gives a layer of control between the event and the execution of the function
+// developer doesn't control how often DOM events are going to be emitted. It can vary.
+// Debounce technique allows grouping multiple sequential calls in a single one
 
 class LineChartA extends Component {
 
@@ -57,7 +65,7 @@ class LineChartA extends Component {
         console.log('>>>>>>>>>>>>>>>> LineChartA > handleDataRequest > axiosClientInstance > response.error: ', response.error);
         console.log('>>>>>>>>>>>>>>>> LineChartA > handleDataRequest > axiosClientInstance > response.isLoading: ', response.isLoading);
         this.setState({ error: response.error, isLoading: response.isLoading, responseData: response.response.data });
-      }, 3000 );
+      }, 250 );
     });
     console.log('>>>>>>>>>>>>>>>> LineChartA > handleDataRequest > axiosClientInstance > INSTANCE: ', aci);
   };
@@ -67,9 +75,12 @@ class LineChartA extends Component {
   // </div>
 
   handleUpdate = (e) => {
-    e.preventDefault();
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > handleUpdate > this is:', this);
+    // const { width, height } = this.containerRef.current.getBoundingClientRect();
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > getBoundingClientRect() > width:', width);
+    // console.log('>>>>>>>>>>>>>>>> LineChartA > getBoundingClientRect() > height:', height);
 
-    console.log('>>>>>>>>>>>>>>>> LineChartA > handleUpdate > this is:', this);
+    e.preventDefault();
 
     let xValue = this.inputXValueRef.current;
     let yValue = this.inputYValueRef.current;
@@ -78,16 +89,10 @@ class LineChartA extends Component {
     let y = parseInt(yValue.value);
     let formData = {x, y};
 
-    console.log('>>>>>>>>>>>>>>>> LineChartA > handleUpdate > xValue in: ', x);
-    console.log('>>>>>>>>>>>>>>>> LineChartA > handleUpdate > yValue in: ', y);
-
     this.setState({ newData: formData });
 
     this.inputXValueRef.current.value = '';
     this.inputYValueRef.current.value = '';
-
-    console.log('>>>>>>>>>>>>>>>> LineChartA > handleUpdate > xValue out: ', xValue.value);
-    console.log('>>>>>>>>>>>>>>>> LineChartA > handleUpdate > yValue out: ', yValue.value);
 
     // let x = new Date(xValue.value).toUTCString();
     // let y = parseInt(yValue.value);
@@ -124,19 +129,15 @@ class LineChartA extends Component {
     // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > newData: ', newData);
     // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > containerTarget: ', containerTarget);
     if (!error && isLoading === null) {
-      console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > 0000000');
       // first render of inital data
       if (responseData !== prevState.responseData) {
-        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > 111111111');
         drawVisualization(responseData.values, containerTarget);
       }
       // re-render of initial data and all 'newData'
       if (newData) {
-        console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > 22222222');
         const element = containerTarget.querySelector('svg');
         element.parentNode.removeChild(element);
         const updatedData = prevState.responseData.values.concat(newData);
-        // console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidUpdate() > updatedData: ', updatedData);
         drawVisualization(updatedData, containerTarget);
       }
     }

@@ -3,13 +3,10 @@ const DECREMENT_COUNTER = 'redux-example/counter/DECREMENT_COUNTER';
 
 import initialState from '../initial-state';
 
-// specify the initial state
 export default function reducer(state = initialState.counter, action) {
 
-  // handle actions
   switch (action.type) {
 
-    // don't mutate the state, return a created object "{counter: null}"
     case INCREMENT_COUNTER: {
       const { counter } = state;
       console.log('>>>>>>>>>>>>>>>>> MODULES > INCREMENT_COUNTER > counter:', counter);
@@ -26,7 +23,6 @@ export default function reducer(state = initialState.counter, action) {
       };
     }
 
-    // no matching action, just return the given state (default or not)
     default:
       return state;
   }

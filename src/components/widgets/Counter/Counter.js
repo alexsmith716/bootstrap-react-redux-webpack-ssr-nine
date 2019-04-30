@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'multireducer';
 import { connect } from 'react-redux';
 import * as counterActions from '../../../redux/modules/counter';
 
 @connect(
-  (state) => ({ counterX: state.counter.counter }),
+  (state) => ({ counter: state.counter.counter }),
   (dispatch) => bindActionCreators(counterActions, dispatch)
 )
+
+// @connect(
+//   (state, { as }) => ({ 
+//     counter: state.counterCollection[as].counter
+//   }),
+//   (dispatch, { as }) => bindActionCreators(counterActions, dispatch, as)
+// )
 
 class Counter extends Component {
 
   static propTypes = {
-    counterX: PropTypes.number.isRequired,
+    counter: PropTypes.number.isRequired,
     increment: PropTypes.func.isRequired,
     decrement: PropTypes.func.isRequired,
   };
@@ -36,9 +44,9 @@ class Counter extends Component {
   render() {
 
     // const styles = require('./scss/Counter.scss');
-    const { counterX, increment, decrement } = this.props;
+    const { counter, increment, decrement } = this.props;
 
-    console.log('>>>>>>>>>>>>>>>> Counter > render() > this.props.counter: ', counterX);
+    console.log('>>>>>>>>>>>>>>>> Counter > render() > this.props.counter: ', counter);
 
     return (
 
@@ -48,14 +56,14 @@ class Counter extends Component {
           <div className="container-flex bg-color-ivory container-padding-border-radius-2">
             <div className="width-400">
 
-              <p>Counter Clicked: {counterX} times</p>
+              <p>Counter Clicked: {counter} times</p>
 
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <button onClick={increment} className="btn btn-primary">increment counter</button>
+                    <button onClick={decrement} className="btn btn-primary">decrement counter</button>
                   </div>
                   <div className="form-group col-md-6">
-                    <button onClick={decrement} className="btn btn-primary">decrement counter</button>
+                    <button onClick={increment} className="btn btn-primary">increment counter</button>
                   </div>
                 </div>
 
