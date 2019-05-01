@@ -3,6 +3,13 @@ const DECREMENT_COUNTER = 'redux-example/counter/DECREMENT_COUNTER';
 
 import initialState from '../initial-state';
 
+// counterPreloadedState: {
+//   count: null
+// },
+// counterMultireducer: {
+//   count: 0
+// },
+
 export default function reducer(state = initialState.counterMultireducer, action) {
 
   switch (action.type) {

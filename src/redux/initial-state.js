@@ -8,13 +8,18 @@ export default {
     isMobile: null
   },
 
-  counterPreloadedState: {
-    count: null
+  counter: {
+    countPreloadedState: null,
+    countMultireducer: 0
   },
 
-  counterMultireducer: {
-    count: 0
-  },
+  // counterPreloadedState: {
+  //   count: null
+  // },
+
+  // counterMultireducer: {
+  //   count: 0
+  // },
 
   temperatureCalculator: {
     temperature: '',
