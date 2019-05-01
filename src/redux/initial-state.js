@@ -4,15 +4,19 @@ import { List } from 'immutable';
 
 export default {
 
-  device: {
+  devicePreloadedState: {
     isMobile: null
   },
 
-  counter: {
-    counter: null
+  counterPreloadedState: {
+    count: null
   },
 
-  temperature_calculator: {
+  counterMultireducer: {
+    count: 0
+  },
+
+  temperatureCalculator: {
     temperature: '',
     scale: 'c'
   },

@@ -3,15 +3,11 @@ const FAHRENHEIT_CHANGE = 'redux-example/counter/FAHRENHEIT_CHANGE';
 
 import initialState from '../initial-state';
 
-// specify the initial state
-export default function reducer(state = initialState.temperature_calculator, action) {
 
-  // const v = {...state}
+export default function reducer(state = initialState.temperatureCalculator, action) {
 
-  // handle actions
   switch (action.type) {
 
-    // don't mutate the state, use object spread operator to write "{temperature: '', scale: 'c'}"
     case CELSIUS_CHANGE: {
       return {
         ...state,
@@ -28,7 +24,6 @@ export default function reducer(state = initialState.temperature_calculator, act
       };
     }
 
-    // no matching action, just return the given state (default or not)
     default:
       return state;
   }
