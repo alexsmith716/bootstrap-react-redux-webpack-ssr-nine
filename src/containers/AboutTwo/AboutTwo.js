@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Counter from '../../components/widgets/Counter/Counter';
+import CounterPreloadedState from '../../components/widgets/Counter/CounterPreloadedState';
+import CounterMultireducer from '../../components/widgets/Counter/CounterMultireducer';
 // import Planets from '../../components/d3/Planets/Planets';
 import LineChartA from '../../components/d3/LineChart/LineChartA';
 // import LineChartAA from '../../components/d3/LineChart/LineChartAA';
@@ -148,14 +149,14 @@ class AboutTwo extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Most Basic Counter 'AboutTwo1'
+                  Most Basic Counter Preloaded State
                 </h5>
 
                 <div className="card-body-container">
 
                   <div className="card-body-content">
 
-                    <Counter as="AboutTwo1" />
+                    <CounterPreloadedState />
 
                   </div>
 
@@ -222,6 +223,72 @@ class AboutTwo extends Component {
                   <div className="card-body-content">
 
                     <TemperatureCalculator as="AboutTwo2" />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Most Basic Multireducer 'AboutTwo1'
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <CounterMultireducer as="AboutTwo1" />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Most Basic Multireducer 'AboutTwo2'
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <CounterMultireducer as="AboutTwo2" />
 
                   </div>
 

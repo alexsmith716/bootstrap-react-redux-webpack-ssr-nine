@@ -10,7 +10,7 @@ import Clock from '../../components/widgets/Clock/Clock';
 import RandomBootstrapAlert from '../../components/widgets/RandomBootstrapAlert/RandomBootstrapAlert';
 import FilterableTable from '../../components/FilterableTable/FilterableTable';
 import TemperatureCalculator from '../../components/widgets/LiftingStateUp/TemperatureCalculator';
-import Counter from '../../components/widgets/Counter/Counter';
+// import CounterPreloadedState from '../../components/widgets/Counter/CounterPreloadedState';
 
 // --------------------------------------------------------------------------
 

@@ -1,8 +1,9 @@
 import { connectRouter } from 'connected-react-router';
 import multireducer from 'multireducer';
 
-import device from './modules/device';
-import counter from './modules/counter';
+import devicePreloadedState from './modules/devicePreloadedState';
+import counterPreloadedState from './modules/counterPreloadedState';
+import counterMultireducer from './modules/counterMultireducer';
 import temperatureCalculator from './modules/temperatureCalculator';
 // import event from './modules/event/reducers';
 // import auth from './modules/auth';
@@ -19,24 +20,18 @@ export default function rootReducer(history) {
   return {
     router: connectRouter(history),
     // event,
-    device,
-    counter,
-    // counterCollection: multireducer({
-    //   AboutOne1: counter,
-    //   AboutOne2: counter,
-    //   AboutTwo1: counter,
-    //   AboutTwo2: counter,
-    // }),
+    devicePreloadedState,
+    counterPreloadedState,
+    counterCollection: multireducer({
+      AboutTwo1: counterMultireducer,
+      AboutTwo2: counterMultireducer,
+    }),
     temperatureCalculatorCollection: multireducer({
       AboutOne1: temperatureCalculator,
       AboutOne2: temperatureCalculator,
       AboutTwo1: temperatureCalculator,
       AboutTwo2: temperatureCalculator,
     }),
-    // temperatureCalculator: multireducer({
-    //   temperatureCalculator1: temperatureCalculator,
-    //   temperatureCalculator2: temperatureCalculator,
-    // }),
     // // auth,
     // notifs,
     // info,

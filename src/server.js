@@ -45,7 +45,7 @@ import ReactDOM from 'react-dom/server';
 // ----------------------------------
 import configureStore from './redux/configureStore';
 
-import initialStateHttp from './redux/initial-state-http';
+import initialStatePreloaded from './redux/initial-preloaded-state';
 // ----------------------------------
 
 // Device Detection Utils
@@ -191,9 +191,9 @@ export default ({ clientStats }) => async (req, res) => {
 
   console.log('>>>>>>>>>>>>>>>>>>> SERVER.JS > APP LOADER > history: ', history)
 
-  console.log('>>>>>>>>>>>>>>>> SERVER > initialStateHttp(req): ', initialStateHttp(req));
+  const preloadedState = initialStatePreloaded(req);
 
-  const preloadedState = initialStateHttp(req);
+  console.log('>>>>>>>>>>>>>>>> SERVER > preloadedState: ', preloadedState);
 
   const store = configureStore({history, preloadedState});
 
