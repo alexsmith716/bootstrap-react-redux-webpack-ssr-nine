@@ -11,6 +11,8 @@ import RandomBootstrapAlert from '../../components/widgets/RandomBootstrapAlert/
 import FilterableTable from '../../components/FilterableTable/FilterableTable';
 import TemperatureCalculator from '../../components/widgets/LiftingStateUp/TemperatureCalculator';
 // import CounterPreloadedState from '../../components/widgets/Counter/CounterPreloadedState';
+import CounterPreloadedState2 from '../../components/widgets/Counter/CounterPreloadedState2';
+import CounterMultireducer2 from '../../components/widgets/Counter/CounterMultireducer2';
 
 // --------------------------------------------------------------------------
 
@@ -86,6 +88,72 @@ class AboutOne extends Component {
         <h1 className={styles.uniqueColor}>About One</h1>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis?</p>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Most Basic CounterPreloadedState2
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <CounterPreloadedState2 />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Most Basic CounterMultireducer2 'AboutTwoMultireducer1'
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <CounterMultireducer2 as="AboutOneMultireducer1" />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
 

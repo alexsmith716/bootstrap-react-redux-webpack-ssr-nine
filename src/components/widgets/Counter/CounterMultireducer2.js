@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'multireducer';
 import { connect } from 'react-redux';
-import * as counterActions from '../../../redux/modules/counterMultireducer';
+import { incrementMultireducer, decrementMultireducer  } from '../../../redux/modules/counter';
 
 @connect(
-  (state, { as }) => ({  count: state.counterCollection[as].count }),
-  (dispatch, { as }) => bindActionCreators(counterActions, dispatch, as)
+  (state, { as }) => ({  count: state.counterCollection2[as].countMultireducer }),
+  (dispatch, { as }) => bindActionCreators({ incrementMultireducer, decrementMultireducer  }, dispatch, as)
 )
 
-class CounterMultireducer extends Component {
+class CounterMultireducer2 extends Component {
 
   static propTypes = {
     count: PropTypes.number.isRequired,
-    increment: PropTypes.func.isRequired,
-    decrement: PropTypes.func.isRequired,
+    incrementMultireducer: PropTypes.func.isRequired,
+    decrementMultireducer: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class CounterMultireducer extends Component {
   render() {
 
     // const styles = require('./scss/CounterMultireducer.scss');
-    const { count, increment, decrement } = this.props;
+    const { count, incrementMultireducer, decrementMultireducer } = this.props;
 
     // console.log('>>>>>>>>>>>>>>>> CounterMultireducer > render() > this.props.count: ', count);
 
@@ -52,10 +52,10 @@ class CounterMultireducer extends Component {
 
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <button onClick={decrement} className="btn btn-primary">decrement counter</button>
+                    <button onClick={decrementMultireducer} className="btn btn-primary">decrement counter</button>
                   </div>
                   <div className="form-group col-md-6">
-                    <button onClick={increment} className="btn btn-primary">increment counter</button>
+                    <button onClick={incrementMultireducer} className="btn btn-primary">increment counter</button>
                   </div>
                 </div>
 
@@ -68,4 +68,4 @@ class CounterMultireducer extends Component {
   }
 };
 
-export default CounterMultireducer;
+export default CounterMultireducer2;

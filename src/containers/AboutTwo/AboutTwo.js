@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import CounterPreloadedState from '../../components/widgets/Counter/CounterPreloadedState';
-import CounterMultireducer from '../../components/widgets/Counter/CounterMultireducer';
+// import CounterPreloadedState from '../../components/widgets/Counter/CounterPreloadedState';
+// import CounterMultireducer from '../../components/widgets/Counter/CounterMultireducer';
+import CounterPreloadedState2 from '../../components/widgets/Counter/CounterPreloadedState2';
+import CounterMultireducer2 from '../../components/widgets/Counter/CounterMultireducer2';
 // import Planets from '../../components/d3/Planets/Planets';
 import LineChartA from '../../components/d3/LineChart/LineChartA';
 // import LineChartAA from '../../components/d3/LineChart/LineChartAA';
@@ -149,39 +151,6 @@ class AboutTwo extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Most Basic Counter Preloaded State
-                </h5>
-
-                <div className="card-body-container">
-
-                  <div className="card-body-content">
-
-                    <CounterPreloadedState />
-
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
-
-        <div className="row">
-
-          <div className="col-lg-12 mb-4">
-
-            <div className="card h-100">
-
-              <h2 className="card-header text-center">
-                Thinking in React!
-              </h2>
-
-              <div className="card-body">
-
-                <h5 className="card-title text-center">
                   Lifting State Up 'AboutTwo1'
                 </h5>
 
@@ -248,14 +217,14 @@ class AboutTwo extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Most Basic Multireducer 'AboutTwo1'
+                  Most Basic CounterPreloadedState2
                 </h5>
 
                 <div className="card-body-container">
 
                   <div className="card-body-content">
 
-                    <CounterMultireducer as="AboutTwo1" />
+                    <CounterPreloadedState2 />
 
                   </div>
 
@@ -281,14 +250,80 @@ class AboutTwo extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Most Basic Multireducer 'AboutTwo2'
+                  Most Basic CounterMultireducer2 'AboutTwoMultireducer1'
                 </h5>
 
                 <div className="card-body-container">
 
                   <div className="card-body-content">
 
-                    <CounterMultireducer as="AboutTwo2" />
+                    <CounterMultireducer2 as="AboutTwoMultireducer1" />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Most Basic CounterMultireducer2 'AboutTwoMultireducer2'
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <CounterMultireducer2 as="AboutTwoMultireducer2" />
+
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* (>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>) */}
+
+        <div className="row">
+
+          <div className="col-lg-12 mb-4">
+
+            <div className="card h-100">
+
+              <h2 className="card-header text-center">
+                Thinking in React!
+              </h2>
+
+              <div className="card-body">
+
+                <h5 className="card-title text-center">
+                  Most Basic CounterMultireducer2 'AboutTwoMultireducer3'
+                </h5>
+
+                <div className="card-body-container">
+
+                  <div className="card-body-content">
+
+                    <CounterMultireducer2 as="AboutTwoMultireducer3" />
 
                   </div>
 
