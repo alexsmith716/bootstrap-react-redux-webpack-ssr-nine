@@ -1,7 +1,7 @@
 
 export default req => ({
 
-  devicePreloadedState: {
+  device: {
     isMobile: req.isMobile
   },
 

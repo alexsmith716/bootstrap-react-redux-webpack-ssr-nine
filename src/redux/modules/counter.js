@@ -13,34 +13,35 @@ import initialState from '../initial-state';
 
 export default function reducer(state = initialState.counter, action = {}) {
 
-  const { countPreloadedState } = state;
-  const { countMultireducer } = state;
+  // const { countPreloadedState } = state;
+  // const { countMultireducer } = state;
+  // { countPreloadedState: 78, countMultireducer: 0 }
 
   switch (action.type) {
 
     case INCREMENT_COUNTER_PRELOADED_STATE:
       return {
         // ...state,
-        countPreloadedState: countPreloadedState + 1
+        countPreloadedState: state.countPreloadedState + 1
       };
 
     case DECREMENT_COUNTER_PRELOADED_STATE:
       return {
         // ...state,
-        countPreloadedState: countPreloadedState - 1
+        countPreloadedState: state.countPreloadedState - 1
       };
 
     case INCREMENT_COUNTER_MULTIREDUCER: {
       return {
-        ...state,
-        countMultireducer: countMultireducer + 1
+        // ...state,
+        countMultireducer: state.countMultireducer + 1
       };
     }
 
     case DECREMENT_COUNTER_MULTIREDUCER:
       return {
-        ...state,
-        countMultireducer: countMultireducer - 1
+        // ...state,
+        countMultireducer: state.countMultireducer - 1
       };
 
     default:

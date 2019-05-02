@@ -137,7 +137,7 @@ class AboutOne extends Component {
               <div className="card-body">
 
                 <h5 className="card-title text-center">
-                  Most Basic CounterMultireducer2 'AboutTwoMultireducer1'
+                  Most Basic CounterMultireducer2 'AboutOneMultireducer1'
                 </h5>
 
                 <div className="card-body-container">
