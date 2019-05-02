@@ -4,7 +4,7 @@ import { List } from 'immutable';
 
 export default {
 
-  devicePreloadedState: {
+  device: {
     isMobile: null
   },
 
