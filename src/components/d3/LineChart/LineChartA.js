@@ -4,8 +4,8 @@ import LoadingTwo from '../../Loading/LoadingTwo';
 // import debounce from 'lodash.debounce';
 import drawVisualization from "../../../d3/drawLineChartBasic";
 
-// import axiosClient from '../../../../utils/axiosClient';
-import axiosClientInstance from '../../../utils/axiosClientInstance';
+import axiosClient from '../../../utils/axiosClient';
+// import axiosClientInstance from '../../../utils/axiosClientInstance';
 
 // Legacy API: String Refs 'this.refs.textInput': use either 'callback pattern' or 'createRef API'
 // https://reactjs.org/docs/refs-and-the-dom.html#callback-refs
@@ -59,15 +59,17 @@ class LineChartA extends Component {
 
   handleDataRequest = (req) => {
     console.log('>>>>>>>>>> AboutTwo > handleDataRequest() > req: ', req)
-    let aci = axiosClientInstance(req).then(response => {
+    // axiosClientInstance(req).then(response => {
+    axiosClient(req).then(response => {
       setTimeout( () => {
         console.log('>>>>>>>>>>>>>>>> LineChartA > handleDataRequest > axiosClientInstance > response.response: ', response.response);
         console.log('>>>>>>>>>>>>>>>> LineChartA > handleDataRequest > axiosClientInstance > response.error: ', response.error);
         console.log('>>>>>>>>>>>>>>>> LineChartA > handleDataRequest > axiosClientInstance > response.isLoading: ', response.isLoading);
         this.setState({ error: response.error, isLoading: response.isLoading, responseData: response.response.data });
       }, 250 );
+      // console.log('>>>>>>>>>>>>>>>> LineChartA > handleDataRequest > axiosClientInstance > response.response: ', response.response);
+      // this.setState({ error: response.error, isLoading: response.isLoading, responseData: response.response.data });
     });
-    console.log('>>>>>>>>>>>>>>>> LineChartA > handleDataRequest > axiosClientInstance > INSTANCE: ', aci);
   };
 
   // <div class="svg-container mb-4">
@@ -105,6 +107,7 @@ class LineChartA extends Component {
     // });
   };
 
+  // called after the first render
   componentDidMount() {
     console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidMount() <<<<<<<<<<<<<<<<<<<<<<');
     const { request } = this.props;
@@ -159,6 +162,16 @@ class LineChartA extends Component {
   // static getDerivedStateFromProps(props, state) {
   //   console.log('>>>>>>>>>>>>>>>> LineChart > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
   // };
+
+  componentDidCatch(error, info) {
+    // Example "componentStack":
+    //   in ComponentThatThrows (created by App)
+    //   in ErrorBoundary (created by App)
+    //   in div (created by App)
+    //   in App
+    // logComponentStackToMyService(info.componentStack);
+    console.log('>>>>>>>>>>>>>>>> LineChartA > componentDidCatch() > info.componentStack: ', info.componentStack);
+  }
 
   // ================================================================================
 

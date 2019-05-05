@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import httpProxy from 'http-proxy';
+// import httpProxy from 'http-proxy';
 
 import config from '../config/config';
 
@@ -73,15 +73,6 @@ import Html from './helpers/Html';
 
 console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG >>>>>>>>>>>>>>>>>>>>>>>>: ', config);
 
-const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
-
-console.log('>>>>>>>>>>>>>>>>> SERVER > ES > CONFIG targetUrl >>>>>>>>>>>>>>>>>>>>>>>>: ', targetUrl);
-
-const proxy = httpProxy.createProxyServer({
-  target: targetUrl,
-  // ws: true
-});
-
 const getRandomInt = (min, max) => (
   Math.floor(Math.random() * (max - min)) + min
 )
@@ -91,7 +82,7 @@ const getRandomInt = (min, max) => (
 
 // HOF is a function which returns a function
 // ---------------------------------------------------------------
-// const render = require('../build/server/server.js').default;
+// const render = require('../build/server/SERVER').default;
 // app.use(render({ clientStats }));
 // ---------------------------------------------------------------
 // app.use(function render({ clientStats }) {
@@ -115,30 +106,7 @@ export default ({ clientStats }) => async (req, res) => {
   console.log('>>>>>>>>>>>>>>>>> SERVER > req.isBot ?: ', req.isBot);
   console.log('>>>>>>>>>>>>>>>>> SERVER > req.isDesktop ?: ', req.isDesktop);
 
-  // progressive app manifest
-  // https://www.w3.org/TR/appmanifest/
-  if (req.url == '/manifest.json') {
-    console.log('>>>>>>>>>>>>>>>>> SERVER > manifest.json <<<<<<<<<<<<<<<<<<<<<<<');
-    return res.sendFile(path.join(__dirname, '..', 'build', 'static', 'manifest.json'));
-  }
-
-  // if (req.url == '/dist/service-worker.js') {
-  //   console.log('>>>>>>>>>>>>>>>>> SERVER > service-worker <<<<<<<<<<<<<<<<<<<<<<<');
-  //   res.setHeader('Service-Worker-Allowed', '/');
-  //   res.setHeader('Cache-Control', 'no-store');
-  //   return;
-  // }
-
-  // if (req.url == '/dlls/:dllName.js') {
-  //   console.log('>>>>>>>>>>>>>>>>> SERVER > /dlls/:dllName.js <<<<<<<<<<<<<<<<<<<<<<<');
-  //   return fs.access(
-  //     path.join(__dirname, '..', 'build', 'static', 'dist', 'dlls', `${req.params.dllName}.js`),
-  //     fs.constants.R_OK,
-  //     err => (err ? res.send(`console.log('No dll file found (${req.originalUrl})')`) : null)
-  //   );
-  // };
-
-  res.setHeader('X-Forwarded-For', req.ip);
+  // ----------------------------------
 
   console.log('>>>>>>>>>>>>>>>>> SERVER > REQUEST IN >>> <<<<<<<<<<<<<<<<<<<<<<<');
   // console.log('>>>>>>>>>>>>>>>>> SERVER > REQ.ip +++++++++++++: ', req.ip);
@@ -154,42 +122,12 @@ export default ({ clientStats }) => async (req, res) => {
 
   // ----------------------------------
 
-  // https://reactjs.org/docs/higher-order-components.html
-  // @feathersjs:
-  // HOC doesn’t modify the input component, nor does it use inheritance to copy its behavior
-  // HOC composes the original component by wrapping it in a container component
-  if (req.url == '/api') {
-    console.log('>>>>>>>>>>>>>>>>> SERVER > /API <<<<<<<<<<<<<<<<<<<<<<<');
-    proxy.web(req, res, { target: targetUrl });
-  }
-
-  if (req.url == '/ws') {
-    console.log('>>>>>>>>>>>>>>>>> SERVER > /WS <<<<<<<<<<<<<<<<<<<<<<<');
-    proxy.web(req, res, { target: `${targetUrl}/ws` });
-  }
-
-  proxy.on('error', (error, req, res) => {
-    if (error.code !== 'ECONNRESET') {
-      console.error('proxy error', error);
-    }
-    if (!res.headersSent) {
-      res.writeHead(500, { 'content-type': 'application/json' });
-    }
-    const json = {
-      error: 'proxy_error',
-      reason: error.message
-    };
-    res.end(JSON.stringify(json));
-  });
-
-  // ----------------------------------
-
-  console.log('>>>>>>>>>>>>>>>> SERVER > APP LOADER > SetUpComponent !! START !! <<<<<<<<<<<<<<<<<<<<<<<');
+  console.log('>>>>>>>>>>>>>>>>>>> SERVER > APP LOADER > SetUpComponent !! START !! <<<<<<<<<<<<<<<<<<<<<<<');
 
   // 'initialEntries': The initial URLs in the history stack
   const history = createMemoryHistory({ initialEntries: [req.originalUrl] });
 
-  console.log('>>>>>>>>>>>>>>>>>>> SERVER.JS > APP LOADER > history: ', history)
+  console.log('>>>>>>>>>>>>>>>>>>> SERVER > APP LOADER > history: ', history)
 
   const preloadedState = initialStatePreloaded(req);
 

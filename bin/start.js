@@ -1,11 +1,12 @@
+const fs = require('fs');
 require('colors');
-// const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const http = require('http');
+// const httpProxy = require('http-proxy');
 // const https = require('https');
 const favicon = require('serve-favicon');
 // const mongoose = require('mongoose');
@@ -42,6 +43,9 @@ process.on('rejectionHandled', promise => {
   unhandledRejections.delete(promise);
 });
 
+console.log('>>>>>>>>>>>>>>>>> START > __CLIENT__ ?: ', __CLIENT__);
+console.log('>>>>>>>>>>>>>>>>> START > __SERVER__ ?: ', __SERVER__);
+
 // const dbURL = config.mongoDBmongooseURL;
 //
 // const mongooseOptions = {
@@ -59,6 +63,92 @@ process.on('rejectionHandled', promise => {
 const app = express();
 const server = http.createServer(app);
 // const server = https.createServer(httpsOptions, app);
+
+// ---------------------------------------------------------------------
+
+// const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
+
+// const proxy = httpProxy.createProxyServer({
+//   target: targetUrl,
+//   ws: true
+// });
+
+// ---------------------------------------------------------------------
+
+app.use((req, res, next) => {
+  console.log('>>>>>>>>>>>>>>>>> START > REQUEST IN >>> <<<<<<<<<<<<<<<<<<<<<<<');
+  // console.log('>>>>>>>>>>>>>>>>> START > REQ.ip +++++++++++++: ', req.ip);
+  console.log('>>>>>>>>>>>>>>>>> START > REQ.method +++++++++++++++: ', req.method);
+  console.log('>>>>>>>>>>>>>>>>> START > REQ.url ++++++++++++++++++: ', req.url);
+  console.log('>>>>>>>>>>>>>>>>> START > REQ.path ++++++++++++++++++: ', req.path);
+  // console.log('>>>>>>>>>>>>>>>>> START > REQ.headers ++++++++++++++: ', req.headers);
+  // console.log('>>>>>>>>>>>>>>>>> START > REQ.cookies ++++++++++++++: ', req.cookies);
+  // console.log('>>>>>>>>>>>>>>>>> START > REQ.session ++++++++: ', req.session);
+  // console.log('>>>>>>>>>>>>>>>>> START > REQ.params +++++++++: ', req.params);
+  console.log('>>>>>>>>>>>>>>>>> START > REQ.originalUrl ++++: ', req.originalUrl);
+  console.log('>>>>>>>>>>>>>>>>> START > REQUEST IN <<< <<<<<<<<<<<<<<<<<<<<<<<');
+  return next();
+});
+
+app.use('/manifest.json', (req, res) => {
+  console.log('>>>>>>>>>>>>>>>>> START > app.use > manifest.json <<<<<<<<<<<<<<<<<<<<<<<');
+  res.sendFile(path.join(__dirname, '..', 'build', 'static', 'manifest.json'));
+});
+
+app.use('/dist/service-worker.js', (req, res, next) => {
+  console.log('>>>>>>>>>>>>>>>>> START > app.use > service-worker <<<<<<<<<<<<<<<<<<<<<<<');
+  res.setHeader('Service-Worker-Allowed', '/');
+  res.setHeader('Cache-Control', 'no-store');
+  return next();
+});
+
+app.use('/dlls/:dllName.js', (req, res, next) => {
+  console.log('>>>>>>>>>>>>>>>>> START > app.use > DLLs <<<<<<<<<<<<<<<<<<<<<<<');
+  /* eslint-disable */
+  fs.access(path.join(__dirname, '..', 'build', 'static', 'dlls', `${req.params.dllName}.js`), fs.constants.R_OK, err =>
+    err ? res.send(`NO DLL (${req.originalUrl})')`) : next()
+  );
+});
+
+// app.use((req, res, next) => {
+//   console.log('>>>>>>>>>>>>>>>>> START > app.use(res.setHeader(X-Forwarded-For) <<<<<<<<<<<<<<<<<<<<<<<');
+//   res.setHeader('X-Forwarded-For', req.ip);
+//   return next();
+// });
+
+// // Proxy to API server
+// app.use('/api', (req, res) => {
+//   console.log('>>>>>>>>>>>>>>>>> START > app.use(/api) <<<<<<<<<<<<<<<<<<<<<<<');
+//   proxy.web(req, res, { target: targetUrl });
+// });
+//
+// app.use('/ws', (req, res) => {
+//   console.log('>>>>>>>>>>>>>>>>> START > app.use(/ws) <<<<<<<<<<<<<<<<<<<<<<<');
+//   proxy.web(req, res, { target: `${targetUrl}/ws` });
+// });
+//
+// server.on('upgrade', (req, socket, head) => {
+//   console.log('>>>>>>>>>>>>>>>>> START > proxy.on(error) <<<<<<<<<<<<<<<<<<<<<<<');
+//   proxy.ws(req, socket, head);
+// });
+//
+// proxy.on('error', (error, req, res) => {
+//   console.log('>>>>>>>>>>>>>>>>> START > proxy.on(error) <<<<<<<<<<<<<<<<<<<<<<<');
+//   if (error.code !== 'ECONNRESET') {
+//     console.error('proxy error', error);
+//   }
+//   if (!res.headersSent) {
+//     res.writeHead(500, { 'content-type': 'application/json' });
+//   }
+//
+//   const json = {
+//     error: 'proxy_error',
+//     reason: error.message
+//   };
+//   res.end(JSON.stringify(json));
+// });
+
+// ---------------------------------------------------------------------
 
 const normalizePort = val => {
   const parseIntPort = parseInt(val, 10);
@@ -85,9 +175,12 @@ const port = normalizePort(__DEVELOPMENT__ ? portNum : portNum);
 // https://github.com/webpack/webpack-dev-server
 // https://github.com/webpack-contrib/webpack-hot-middleware
 
+// logLevel: 'silent',
+// hot: true,
 // watchOptions: {
 //   aggregateTimeout: 300,
-//   poll: true
+//   ignored: /node_modules/,
+//   poll: false
 // },
 
 const { publicPath } = clientConfigDev.output;
@@ -153,8 +246,9 @@ server.on('listening', () => {
 
 // start socket and 'listen' for connections (requests)
 // method: 'app.listen(path, [callback])' <<< is identical to Node's 'http.Server.listen()'
-const done = () => !isBuilt
-  && server.listen(port, config.host, err => {
+const done = () =>
+  !isBuilt &&
+  server.listen(port, config.host, err => {
     isBuilt = true;
     console.log('>>>>>>>> BIN > START > STATS COMPILER HAS COMPLETED BUILD !! WAIT IS OVER !');
     if (err) {
