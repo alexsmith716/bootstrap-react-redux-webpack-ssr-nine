@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NProgress from 'nprogress';
 
+// https://github.com/danilowoz/react-content-loader
 
 class Loading extends Component {
 

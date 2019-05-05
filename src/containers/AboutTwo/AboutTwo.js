@@ -23,6 +23,7 @@ class AboutTwo extends Component {
 
   // state = {};
 
+  // called after the first render
   componentDidMount() {
     console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidMount() <<<<<<<<<<<<<<<<<<<<<<');
   }
@@ -45,8 +46,18 @@ class AboutTwo extends Component {
   // invoked right before calling the render method, both on the initial mount and on subsequent updates
   // --------------------------------------------------------------------------------
   // static getDerivedStateFromProps(props, state) {
-  //   console.log('>>>>>>>>>>>>>>>> LineChart > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
+  //   console.log('>>>>>>>>>>>>>>>> AboutTwo > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
   // };
+
+  componentDidCatch(error, info) {
+    // Example "componentStack":
+    //   in ComponentThatThrows (created by App)
+    //   in ErrorBoundary (created by App)
+    //   in div (created by App)
+    //   in App
+    // logComponentStackToMyService(info.componentStack);
+    console.log('>>>>>>>>>>>>>>>> AboutTwo > componentDidCatch() > info.componentStack: ', info.componentStack);
+  }
 
   render() {
 

@@ -128,6 +128,7 @@ class FilterableTable extends Component {
     return null;
   }
 
+  // called after the first render
   componentDidMount() {
     console.log('>>>>>>>>>>>>>>>> FilterableTable > componentDidMount() <<<<<<<<<<<<<<: ', this.props.description);
     // this.requestDataPromise(this.props.requestURL);
@@ -144,6 +145,29 @@ class FilterableTable extends Component {
 
   componentWillUnmount() {
     console.log('>>>>>>>>>>>>>>>> FilterableTable > componentWillUnmount() <<<<<<<<<<<<<<');
+  }
+
+  // invoked before rendering when new props or state are being received
+  // --------------------------------------------------------------------------------
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('>>>>>>>>>>>>>>>> FilterableTable > shouldComponentUpdate() > nextProps: ', nextProps);
+    return nextProps;
+  };
+
+  // invoked right before calling the render method, both on the initial mount and on subsequent updates
+  // --------------------------------------------------------------------------------
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('>>>>>>>>>>>>>>>> FilterableTable > getDerivedStateFromProps() <<<<<<<<<<<<<<<<<<<<<<');
+  // };
+
+  componentDidCatch(error, info) {
+    // Example "componentStack":
+    //   in ComponentThatThrows (created by App)
+    //   in ErrorBoundary (created by App)
+    //   in div (created by App)
+    //   in App
+    // logComponentStackToMyService(info.componentStack);
+    console.log('>>>>>>>>>>>>>>>> FilterableTable > componentDidCatch() > info.componentStack: ', info.componentStack);
   }
 
   render() {

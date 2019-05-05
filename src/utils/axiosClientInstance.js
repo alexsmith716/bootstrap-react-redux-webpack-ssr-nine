@@ -7,6 +7,8 @@ import config from '../../config/config';
 // headers: { 'Access-Control-Allow-Origin': '*' }
 // res.header( 'Access-Control-Allow-Origin', '*' );
 
+// axios returns a JSON response
+
 export default async function axiosClientInstance(request) {
 
   // const options = {
